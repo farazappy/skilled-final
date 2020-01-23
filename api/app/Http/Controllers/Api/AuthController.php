@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\User;
 
 use GuzzleHttp\Client;
@@ -88,5 +88,18 @@ class AuthController extends Controller
                 'user' => $user,
     		]
     	]);	
+    }
+    public function getCompanies() {
+        $companies = DB::table('users')->where('role', 3)->get(); //select * from users where role=3;
+        return response()->json([
+            'companies' => $companies
+        ]);
+    }
+    public function getQuestions($level)
+    {
+        $questions = DB::table('questions')->where('level', $level)->get(); //select * from questions where level = $level;
+        return response()->json([
+            'questions' => $questions
+        ]);
     }
 }

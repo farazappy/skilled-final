@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/me', function (Request $request) {
 
 Route::post('/auth/register', 'Api\\AuthController@register');
 Route::post('/auth/login', 'Api\\AuthController@login');
+Route::get('/companies', 'Api\\AuthController@getCompanies');
+Route::get('/question/{level}', 'Api\\AuthController@getQuestions');

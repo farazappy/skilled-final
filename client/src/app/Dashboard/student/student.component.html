@@ -1,1 +1,24 @@
-<p>student works!</p>
+<p style="text-align: center;">Hey {{ user.name }}, Welcome!</p>
+<ul style="text-align: center;">
+    <li *ngFor="let number of [1,2,3,4,5]" style="display: inline-flex; border: 1px solid black; padding: 10px;">Level {{number}}</li>
+</ul>
+<div class="row">
+    <div class="col-md 6" style="display: inline-flex;">
+        <div class="card" style="width: 18rem;">
+            <img src="" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">Take test to upgrade your level</h5>
+                <p class="card-text">Aptitude: 40%, Technical: 40%, Verbal: 20%</p>
+                <a href="student/exam" class="btn btn-primary">Start Test</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">Apply in the companies</h5>
+                <p class="card-text">Find your suitable job</p>
+                <a href="student/search-job" class="btn btn-primary">Start Finding Your Job</a>
+            </div>
+        </div>
+    </div>
+</div>

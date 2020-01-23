@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './Dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { ExamComponent } from './Dashboard/exam/exam.component';
+import { SearchJobComponent } from './Dashboard/search-job/search-job.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { TokenInterceptorService } from './token-interceptor.service';
     InstituteComponent,
     CompanyComponent,
     UnemployedComponent,
-    DashboardComponent
+    DashboardComponent,
+    ExamComponent,
+    SearchJobComponent
   ],
   imports: [
     BrowserModule,
