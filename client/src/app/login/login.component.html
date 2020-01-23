@@ -1,0 +1,29 @@
+<div class="container">
+  <form (submit)="loginUser()">
+    <!-- <div class="form-group">
+      <label for="exampleFormControlSelect1">Select your role</label>
+      <select class="form-control" id="exampleFormControlSelect1">
+        <option autofocus disabled>Select your role</option>
+        <option value="student">Student</option>
+        <option value="institute">Institute</option>
+        <option value="company">Company</option>
+        <option value="unemployed">Unemployed</option>
+      </select>
+    </div> -->
+    <div class="form-group">
+      <label for="email">Enter your email id</label>
+      <input [(ngModel)]="loginData.email" type="email" name="email" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="password">Enter your password</label>
+      <input [(ngModel)]="loginData.password" type="password" name="password" class="form-control">
+    </div>
+    <div class="form-group">
+      <button type="submit" name="submit" [ngClass]="{'disabled': isLoading}" class="form-control btn btn-success">
+        <i class="fa fa-spinner fa-spin" *ngIf="isLoading"></i>
+        <span *ngIf="!isLoading">Login</span>
+        <span *ngIf="isLoading"> Loading</span>
+      </button>
+    </div>
+  </form>
+</div>
