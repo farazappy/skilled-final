@@ -6,7 +6,7 @@ import { CompanyComponent } from './Dashboard/company/company.component';
 import { InstituteComponent } from './Dashboard/institute/institute.component';
 import { StudentComponent } from './Dashboard/student/student.component';
 import { UnemployedComponent } from './Dashboard/unemployed/unemployed.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './Dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 const routes: Routes = [
 	{ path: 'login', component: LoginComponent },
