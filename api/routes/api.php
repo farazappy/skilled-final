@@ -21,3 +21,4 @@ Route::post('/auth/register', 'Api\\AuthController@register');
 Route::post('/auth/login', 'Api\\AuthController@login');
 Route::get('/companies', 'Api\\AuthController@getCompanies');
 Route::get('/question/{level}', 'Api\\AuthController@getQuestions');
+Route::get('/profile/{userId}', 'Api\\AuthController@getUser');
