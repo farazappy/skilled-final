@@ -102,4 +102,10 @@ class AuthController extends Controller
             'questions' => $questions
         ]);
     }
+    public function getUser($userId) {
+        $user = DB::table('users')->where('id', $userId)->get(['name','email','phone','institution','skills','trade_lic_no','ugc_no','qualification','interested_in','address','role']);
+        return response()->json([
+            'user' => $user
+        ]);
+    }
 }
