@@ -1,18 +1,32 @@
-<div style="display: inline-flex;">
-    <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Apply For Job</a>
+<!-- Header -->
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+    style="min-height: 600px; background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-default opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+            <div class="col-lg-12 col-md-10">
+                <h1 class="display-2 text-white">Searching for jobs?</h1>
+                <p class="text-white mt-0 mb-5">Here you can see the company profiles</p>
+            </div>
         </div>
     </div>
-    <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col-xl-12 order-xl-1">
+            <div style="display: inline-flex;">
+                <div class="card" style="width: 18rem;" *ngFor="let company of companies">
+                    <img src="" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ company.name }}</h5>
+                        <p class="card-text">Address: {{ company.address }}</p>
+                        <a href="#" class="btn btn-primary">Apply For Job</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

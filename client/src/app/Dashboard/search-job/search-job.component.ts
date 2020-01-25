@@ -7,16 +7,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-job.component.css']
 })
 export class SearchJobComponent implements OnInit {
-  companyDetails;
-  constructor(private companyService: CompanyService, private router:Router) { }
-  ngOnInit() {
-    this.companyService.getCompanies().subscribe(
-      data => {
-        console.log(data)
-        this.companyDetails = data['companies'];
-      },
-      err => {
-        console.log(err);
-      });
+
+  companies = null;
+
+  constructor(private companyService: CompanyService, private router: Router) { }
+
+  ngOnInit () {
+    this.companyService.getCompanies()
+      .subscribe(
+        res => {
+          this.companies = res.companies;
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 }
