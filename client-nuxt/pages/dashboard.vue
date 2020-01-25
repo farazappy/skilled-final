@@ -5,7 +5,7 @@
         grid-list-xl
     >
         <v-layout wrap>
-            <v-flex
+            <!-- <v-flex
                 md12
                 sm12
                 lg4
@@ -89,7 +89,7 @@
                         <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
                     </template>
                 </material-chart-card>
-            </v-flex>
+            </v-flex> -->
             <v-flex
                 sm6
                 xs12
@@ -98,11 +98,9 @@
             >
                 <material-stats-card
                     color="green"
-                    icon="mdi-store"
-                    title="Revenue"
-                    value="$34,245"
-                    sub-icon="mdi-calendar"
-                    sub-text="Last 24 Hours"
+                    icon="verified_user"
+                    title="Level"
+                    value="2"
                 />
             </v-flex>
             <v-flex
@@ -113,14 +111,9 @@
             >
                 <material-stats-card
                     color="orange"
-                    icon="mdi-content-copy"
-                    title="Used Space"
-                    value="49/50"
-                    small-value="GB"
-                    sub-icon="mdi-alert"
-                    sub-icon-color="error"
-                    sub-text="Get More Space..."
-                    sub-text-color="text-primary"
+                    icon="assignment_ind"
+                    title="Jobs applied for"
+                    value="3"
                 />
             </v-flex>
             <v-flex
@@ -131,11 +124,9 @@
             >
                 <material-stats-card
                     color="red"
-                    icon="mdi-information-outline"
-                    title="Fixed Issues"
+                    icon="assignment_turned_in"
+                    title="Tests taken"
                     value="75"
-                    sub-icon="mdi-tag"
-                    sub-text="Tracked from Github"
                 />
             </v-flex>
             <v-flex
@@ -158,9 +149,9 @@
                 lg6
             >
                 <material-card
-                    color="orange"
-                    title="Employee Stats"
-                    text="New employees on 15th September, 2016"
+                    color="purple"
+                    title="Test Stats"
+                    text="Last test given on 23rd January, 2020"
                 >
                     <v-data-table
                         :headers="headers"
@@ -180,7 +171,6 @@
                             slot="items"
                             slot-scope="{ index, item }"
                         >
-                            <td>{{ index + 1 }}</td>
                             <td>{{ item.name }}</td>
                             <td class="text-xs-right">{{ item.salary }}</td>
                             <td class="text-xs-right">{{ item.country }}</td>
@@ -449,30 +439,25 @@ export default {
             headers: [
                 {
                     sortable: false,
-                    text: 'ID',
-                    value: 'id'
-                },
-                {
-                    sortable: false,
-                    text: 'Name',
+                    text: 'Test name',
                     value: 'name'
                 },
                 {
                     sortable: false,
-                    text: 'Salary',
-                    value: 'salary',
+                    text: 'Performance',
+                    value: 'performance',
                     align: 'right'
                 },
                 {
                     sortable: false,
-                    text: 'Country',
-                    value: 'country',
+                    text: 'Time taken',
+                    value: 'Time taken',
                     align: 'right'
                 },
                 {
                     sortable: false,
-                    text: 'City',
-                    value: 'city',
+                    text: 'Result',
+                    value: 'result',
                     align: 'right'
                 }
             ],
