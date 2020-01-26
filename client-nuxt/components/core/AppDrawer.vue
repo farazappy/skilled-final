@@ -29,9 +29,14 @@
                         >
                             <v-img :src="logo" />
                         </v-list-tile-avatar>
-                        <v-list-tile-title class="title">
-                            Hey, {{ user.name }}
-                        </v-list-tile-title>
+                        <v-list-tile-content>
+                            <v-list-item-title class="title">
+                                Hey, {{ user.name }}
+                            </v-list-item-title>
+                            <v-list-item-subtitle>
+                                {{ user.role.name }}
+                            </v-list-item-subtitle>
+                        </v-list-tile-content>
                     </v-list-tile>
                 </v-list>
                 <v-divider />
