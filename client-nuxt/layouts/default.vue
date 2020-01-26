@@ -1,22 +1,29 @@
 <template>
-  <v-app v-show="!isLoading">
-    <v-fade-transition mode="out-in">
-      <nuxt />
-    </v-fade-transition>
-  </v-app>
+    <v-app v-show="!isLoading">
+        <core-notification />
+        <v-fade-transition mode="out-in">
+            <nuxt />
+        </v-fade-transition>
+    </v-app>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        isLoading: true
-      }
+import coreNotification from '~/components/core/AppNotification';
+
+export default {
+    components: {
+        coreNotification
     },
-    mounted() {
-      this.$nextTick(function() {
-        this.isLoading = false
-      });
+    data () {
+        return {
+            isLoading: true,
+            lhs: true
+        }
+    },
+    mounted () {
+        this.$nextTick(function () {
+            this.isLoading = false
+        });
     }
-  }
+}
 </script>

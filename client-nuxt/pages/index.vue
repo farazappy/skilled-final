@@ -76,7 +76,7 @@
                                     <v-card-text>
                                         <v-form>
                                             <v-select
-                                                :items="roles"
+                                                :items="computedRoles"
                                                 label="Select Role"
                                                 solo
                                                 v-model="registerForm.role"
@@ -128,14 +128,16 @@
                                                     name="qualification"
                                                     label="Qualifications"
                                                 ></v-text-field>
-                                                <v-text-field
-                                                    type="text"
-                                                    v-model="registerForm.interesets"
-                                                    v-if="registerForm.role == 4"
-                                                    prepend-icon="note_add"
-                                                    name="interesets"
-                                                    label="Interests"
-                                                ></v-text-field>
+                                                <div v-if="registerForm.role == 4">
+                                                    <label>Tick the things that you think you can</label>
+                                                    <v-checkbox
+                                                        v-for="(interest, index) in interests"
+                                                        v-model="registerForm.interests"
+                                                        :label="interest.name"
+                                                        :value="interest.id"
+                                                        :key="index"
+                                                    ></v-checkbox>
+                                                </div>
                                                 <v-text-field
                                                     type="text"
                                                     v-model="registerForm.trade_lic_no"
@@ -143,7 +145,8 @@
                                                     prepend-icon="verified_user"
                                                     name="trade_lic_no"
                                                     label="Trade License Number"
-                                                ></v-text-field>
+                                                >
+                                                </v-text-field>
                                                 <v-text-field
                                                     type="text"
                                                     v-model="registerForm.ugc_no"
@@ -152,15 +155,22 @@
                                                     name="ugc_no"
                                                     label="UGC Number"
                                                 ></v-text-field>
+                                                <v-textarea
+                                                    v-model="registerForm.address"
+                                                    prepend-icon="person_pin"
+                                                    name="address"
+                                                    label="Address"
+                                                >
+                                                </v-textarea>
                                                 <v-text-field
-                                                    type="text"
+                                                    type="password"
                                                     v-model="registerForm.password"
                                                     prepend-icon="lock"
                                                     name="password"
                                                     label="Password"
                                                 ></v-text-field>
                                                 <v-text-field
-                                                    type="text"
+                                                    type="password"
                                                     v-model="registerForm.password_confirmation"
                                                     prepend-icon="lock"
                                                     name="password_confirmation"
@@ -250,12 +260,7 @@ export default {
             isLoading: false,
             successSnackbar: false,
             errorSnackbar: false,
-            roles: [
-                { text: 'Student', value: 1 },
-                { text: 'Institute', value: 2 },
-                { text: 'Company', value: 3 },
-                { text: 'Unemployed', value: 4 }
-            ],
+            roles: [],
             registerForm: {
                 role: null,
                 name: null,
@@ -264,9 +269,10 @@ export default {
                 institution: null,
                 skills: null,
                 qualification: null,
-                intresets: null,
+                interests: [],
                 trade_lic_no: null,
                 ugc_no: null,
+                address: null,
                 password: null,
                 password_confirmation: null
             },
@@ -274,6 +280,7 @@ export default {
                 email: null,
                 password: null,
             },
+            interests: [],
             tab: null,
         }
     },
@@ -281,21 +288,27 @@ export default {
         roleChanged () {
             for (let key in this.registerForm)
                 if (key !== 'role')
-                    this.registerForm[key] = null
+                    if (key == 'interests')
+                        this.registerForm[key] = []
+                    else
+                        this.registerForm[key] = null
         },
-        registerSubmit () {
+        async registerSubmit () {
             this.isLoading = true
-            this.$axios
+            await this.$axios
                 .post('auth/register', this.registerForm)
                 .then((res) => {
                     this.isLoading = false
                     this.successSnackbar = true
-                    roleChanged()
+                    this.loginForm.email = this.registerForm.email
+                    this.loginForm.password = this.registerForm.password
+                    this.loginSubmit()
+                    this.roleChanged()
                 })
                 .catch((err) => {
                     this.isLoading = false
                     this.errorSnackbar = true
-                    this.serverErrors = err.response.data
+                    console.log(err)
                 })
         },
         async loginSubmit () {
@@ -308,16 +321,37 @@ export default {
                     this.isLoading = false
                     this.loginForm.email = ''
                     this.loginForm.password = ''
-                    this.successSnackbar = true
-                    this.$router.push({
-                        path: '/dashboard' // @todo redirect intended
+                    this.$store.dispatch('notification/setNotification', {
+                        type: "Success!",
+                        color: "success",
+                        message: `Welcome back ${this.user.name}!`
                     })
+                    // this.$router.push({
+                    //     path: `/dashboard/${this.user.role.slug}` // @todo redirect intended
+                    // })
                 })
                 .catch((err) => {
                     this.isLoading = false
                     this.errorSnackbar = true
+                    console.log(err)
                 })
         },
+    },
+    computed: {
+        computedRoles () {
+            this.roles.forEach((r, i) => {
+                r.text = r.name;
+                r.value = r.id;
+            })
+            return this.roles
+        }
+    },
+    async asyncData ({ params, app }) {
+        const response = await app.$axios.$get('auth/register/generic');
+        return {
+            interests: response.interests,
+            roles: response.roles
+        }
     }
 }
 </script>

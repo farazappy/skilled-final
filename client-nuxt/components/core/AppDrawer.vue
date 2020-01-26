@@ -23,15 +23,14 @@
                         avatar
                         to="/"
                     >
-                        <v-list-tile-avatar color="white">
-                            <v-img
-                                :src="logo"
-                                height="34"
-                                contain
-                            />
+                        <v-list-tile-avatar
+                            color="white"
+                            size="60"
+                        >
+                            <v-img :src="logo" />
                         </v-list-tile-avatar>
                         <v-list-tile-title class="title">
-                            SkillED
+                            Hey, {{ user.name }}
                         </v-list-tile-title>
                     </v-list-tile>
                 </v-list>
@@ -57,6 +56,17 @@
                         </v-list-tile-action>
                         <v-list-tile-title v-text="link.text" />
                     </v-list-tile>
+                    <v-list-tile
+                        avatar
+                        :active-class="color"
+                        class="v-list-item"
+                        @click.native="logout"
+                    >
+                        <v-list-tile-action>
+                            <v-icon>mdi-logout</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-title>Logout</v-list-tile-title>
+                    </v-list-tile>
                 </v-list>
             </v-layout>
         </v-img>
@@ -70,7 +80,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
     data () {
         return {
-            logo: '/vuetifylogo.png',
+            logo: '/user.png',
             links: [
                 {
                     to: '/dashboard',
@@ -127,6 +137,15 @@ export default {
 
         onResponsiveInverted () {
             this.responsive = window.innerWidth < 991;
+        },
+
+        logout () {
+            this.$auth.logout()
+            this.$store.dispatch('notification/setNotification', {
+                type: "Success!",
+                color: "success",
+                message: "You have been logged out successfully!"
+            })
         }
     }
 }

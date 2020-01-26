@@ -44,6 +44,7 @@ export default {
     { src: '~/plugins/chartist', mode: 'client' },
 
     './plugins/mixins/user',
+    './plugins/mixins/notification',
   ],
 
   /*

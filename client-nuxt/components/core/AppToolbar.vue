@@ -75,15 +75,14 @@
                         <v-icon left>mdi-account-circle</v-icon> {{ user.name }}
                     </v-btn>
                 </nuxt-link>
-                <nuxt-link
+                <button
                     v-ripple
                     class="toolbar-items"
-                    to="/"
                     title="Logout"
-                    @click.native="logout"
+                    @click="logout()"
                 >
                     <v-icon color="tertiary">mdi-logout</v-icon>
-                </nuxt-link>
+                </button>
             </v-flex>
         </v-toolbar-items>
     </v-toolbar>
@@ -134,6 +133,14 @@ export default {
                 this.responsive = false
                 this.responsiveInput = true
             }
+        },
+        logout () {
+            this.$auth.logout()
+            this.$store.dispatch('notification/setNotification', {
+                type: "Success!",
+                color: "success",
+                message: "You have been logged out successfully!"
+            })
         }
     },
     mounted () {

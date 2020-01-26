@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 use App\User;
+use App\Role;
+use App\Interest;
 
 use GuzzleHttp\Client;
 
@@ -33,13 +36,18 @@ class AuthController extends Controller
             'institution' => $request->institution,
             'password' => Hash::make($request->password),
             'skills' => $request->skills,
-            'role' => $request->role,
+            'role_id' => $request->role,
             'trade_lic_no' => $request->trade_lic_no,
             'ugc_no' => $request->ugc_no,
             'qualification' => $request->qualification,
-            'interested_in' => $request->interested_in,
             'address' => $request->address,
         ]);
+
+        if ($request->role == 4 && $request->interests) {
+            foreach ($request->interests as $interest) 
+                $user->interests()->attach($interest);
+            
+        }
 
         //$user->notify(new VerifyAccount());
 
@@ -103,9 +111,18 @@ class AuthController extends Controller
         ]);
     }
     public function getUser($userId) {
-        $user = DB::table('users')->where('id', $userId)->get(['name','email','phone','institution','skills','trade_lic_no','ugc_no','qualification','interested_in','address','role']);
+        $user = User::with('role')->findOrFail($userId);
         return response()->json([
             'user' => $user
+        ]);
+    }
+    public function generic() {
+        $roles = Role::all();
+        $interests = Interest::all();
+
+        return response()->json([
+            'roles' => $roles,
+            'interests' => $interests
         ]);
     }
 }

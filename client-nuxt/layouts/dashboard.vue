@@ -1,34 +1,38 @@
 <template>
-  <v-app>
-    <core-filter />
+    <v-app>
+        <core-notification />
 
-    <core-toolbar />
+        <core-filter />
 
-    <core-drawer />
+        <core-toolbar />
 
-    <core-view />
-  </v-app>
+        <core-drawer />
+
+        <core-view />
+    </v-app>
 </template>
 
 <script>
-  import coreFilter from '~/components/core/AppFilter';
-  import coreToolbar from '~/components/core/AppToolbar';
-  import coreDrawer from '~/components/core/AppDrawer';
-  import coreView from '~/components/core/AppView';
+import coreFilter from '~/components/core/AppFilter';
+import coreToolbar from '~/components/core/AppToolbar';
+import coreDrawer from '~/components/core/AppDrawer';
+import coreView from '~/components/core/AppView';
+import coreNotification from '~/components/core/AppNotification';
 
-  export default {
+export default {
     components: {
-      coreFilter,
-      coreToolbar,
-      coreDrawer,
-      coreView
+        coreFilter,
+        coreToolbar,
+        coreDrawer,
+        coreView,
+        coreNotification
     }
-  }
+}
 </script>
 
 <style lang="scss">
-  /* Remove in 1.2 */
-  .v-datatable thead th.column.sortable i {
+/* Remove in 1.2 */
+.v-datatable thead th.column.sortable i {
     vertical-align: unset;
-  }
+}
 </style>
