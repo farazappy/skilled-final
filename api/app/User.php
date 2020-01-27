@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function interests() {
         return $this->belongsToMany('App\Interest');
     }
+
+    public function tests() {
+        return $this->hasMany('App\Test');
+    }
 }

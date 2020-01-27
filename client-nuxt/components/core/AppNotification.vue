@@ -3,7 +3,6 @@
         :color="color"
         v-model="show"
         top="top"
-        left="left"
         dark
     >
         <v-icon

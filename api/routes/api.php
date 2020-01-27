@@ -24,5 +24,6 @@ Route::get('/companies', 'Api\\AuthController@getCompanies');
 Route::get('/question/{level}', 'Api\\AuthController@getQuestions');
 Route::get('/profile/{userId}', 'Api\\AuthController@getUser');
 Route::get('/subjects', 'Api\\AuthController@getSubjects');
-Route::middleware('auth:api')->get('/tests', 'Api\\AuthController@getMyTestsWithSubjects');
+Route::middleware('auth:api')->get('/auth/tests', 'Api\\AuthController@getMyTestsWithSubjects');
+Route::middleware('auth:api')->post('/auth/tests/create', 'Api\\AuthController@createTest');
 

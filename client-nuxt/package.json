@@ -16,13 +16,13 @@
     "@nuxtjs/auth": "^4.8.5",
     "@nuxtjs/axios": "^5.5.3",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.8.0",
+    "nuxt": "^2.11.0",
     "vue-chartist": "^2.2.0",
     "vuetify": "^1.5.14",
     "vuetify-loader": "^1.2.2"
   },
   "devDependencies": {
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "nodemon": "^1.19.1",
     "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
