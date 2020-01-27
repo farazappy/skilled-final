@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jan 27, 2020 at 12:23 AM
--- Server version: 5.7.23
--- PHP Version: 7.2.10
+-- Host: localhost:3306
+-- Generation Time: Jan 27, 2020 at 08:24 PM
+-- Server version: 5.7.28-0ubuntu0.18.04.4
+-- PHP Version: 7.3.13-1+ubuntu18.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `skilledapi`
+-- Database: `skilled`
 --
 
 -- --------------------------------------------------------
@@ -28,15 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `failed_jobs`
 --
 
-DROP TABLE IF EXISTS `failed_jobs`;
-CREATE TABLE IF NOT EXISTS `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -45,15 +41,13 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- Table structure for table `interests`
 --
 
-DROP TABLE IF EXISTS `interests`;
-CREATE TABLE IF NOT EXISTS `interests` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `interests` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `interests`
@@ -82,15 +76,13 @@ INSERT INTO `interests` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUE
 -- Table structure for table `interest_user`
 --
 
-DROP TABLE IF EXISTS `interest_user`;
-CREATE TABLE IF NOT EXISTS `interest_user` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `interest_user` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `interest_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `interest_user`
@@ -110,13 +102,11 @@ INSERT INTO `interest_user` (`id`, `user_id`, `interest_id`, `created_at`, `upda
 -- Table structure for table `migrations`
 --
 
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -137,7 +127,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2020_01_25_181507_change_role_column_name', 3),
 (13, '2020_01_26_075044_create_interests_table', 4),
 (14, '2020_01_26_080113_make_interest_user_table', 4),
-(15, '2020_01_26_083306_drop_interests_from_users_table', 5);
+(15, '2020_01_26_083306_drop_interests_from_users_table', 5),
+(16, '2020_01_27_063334_create_tests_table', 6),
+(17, '2020_01_27_063854_create_subjects_table', 6);
 
 -- --------------------------------------------------------
 
@@ -145,8 +137,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `oauth_access_tokens`
 --
 
-DROP TABLE IF EXISTS `oauth_access_tokens`;
-CREATE TABLE IF NOT EXISTS `oauth_access_tokens` (
+CREATE TABLE `oauth_access_tokens` (
   `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   `client_id` int(10) UNSIGNED NOT NULL,
@@ -155,9 +146,7 @@ CREATE TABLE IF NOT EXISTS `oauth_access_tokens` (
   `revoked` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `expires_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `oauth_access_tokens_user_id_index` (`user_id`)
+  `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -174,6 +163,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('1f091f03332375231bdf98b9df3d84e85c589bd45428b87884bf35a4b4b01405bc0bc94b73874d50', 13, 3, 'password', '[]', 0, '2020-01-26 08:27:11', '2020-01-26 08:27:11', '2021-01-26 13:57:11'),
 ('2142706fb93329111399c5fbdf7af00a7e0385a8ae29117ccf7fbf09b982c612bc07f5aa618c6d5d', 13, 3, 'password', '[]', 0, '2020-01-26 08:18:26', '2020-01-26 08:18:26', '2021-01-26 13:48:26'),
 ('219645541254ef5ec7807c6af128972157b04337836d40279bdb7fea16235128f86146d3d2833ac5', 1, 3, 'password', '[]', 0, '2020-01-23 10:06:24', '2020-01-23 10:06:24', '2021-01-23 15:36:24'),
+('21ce56c432f6c88ba12e7f1819b946b70c2f41ba9ac608516abb02756e88601d33f06d94c13b09fa', 14, 3, 'password', '[]', 0, '2020-01-27 01:33:42', '2020-01-27 01:33:42', '2021-01-27 07:03:42'),
 ('2345806d215fa6f00cef956fa45b51c92aa2c768442932c5436ac8149106201973e9d304abe83825', 1, 3, 'password', '[]', 0, '2020-01-24 10:37:46', '2020-01-24 10:37:46', '2021-01-24 16:07:46'),
 ('23500367f64ebb1c2ebae2dd18012837fed9b7402ed290f6cb8a32f6bb8193405e3b674c396080e6', 13, 3, 'password', '[]', 0, '2020-01-26 08:20:35', '2020-01-26 08:20:35', '2021-01-26 13:50:35'),
 ('245dd194e258c7e5931e64eebf2f58c7e90c32ababe90b72bdc44ac8f47594f4ea63f1fcd90ce6d3', 13, 3, 'password', '[]', 0, '2020-01-26 08:19:21', '2020-01-26 08:19:21', '2021-01-26 13:49:21'),
@@ -194,12 +184,16 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('53a8e5380988934653760ebdcd9be5b2c7c297b3bed79bc92ad87c21d17e469a1cc75a6891db4c01', 13, 3, 'password', '[]', 0, '2020-01-26 04:55:59', '2020-01-26 04:55:59', '2021-01-26 10:25:59'),
 ('53e80b1b4de6214c550bfee56992505a7fa8c2e15ba578a928d527c7a3ec645ff741793b87b4450d', 1, 3, 'password', '[]', 0, '2020-01-23 09:40:08', '2020-01-23 09:40:08', '2021-01-23 15:10:08'),
 ('5491692f6bac38b4ea791b1cfbb322d8742f30131a3452161278be1649dd70aaf601a78a8d54bb87', 1, 3, 'password', '[]', 0, '2020-01-25 01:44:49', '2020-01-25 01:44:49', '2021-01-25 07:14:49'),
+('5b37f30fc1b26f824c502c0959e31a2b5d6ff4448b753bb985db445ff610bc793f55a86ca3fda7f1', 2, 3, 'password', '[]', 0, '2020-01-27 05:05:17', '2020-01-27 05:05:17', '2021-01-27 10:35:17'),
+('5c61ae6bb9258c5214b0e4f9072e54fc39533d2132392054c92ce9b8265f9cff16d47dcf7e7a8ca2', 13, 3, 'password', '[]', 0, '2020-01-27 01:00:18', '2020-01-27 01:00:18', '2021-01-27 06:30:18'),
 ('640aedf836eff7ebc08fef8e8b672447872919379708c06ee41eb0a3b6de4ee5235c73c4753d5c8e', 13, 3, 'password', '[]', 0, '2020-01-26 03:50:32', '2020-01-26 03:50:32', '2021-01-26 09:20:32'),
 ('6784da6f1ffb5a8b73f9b9d1fd774c4d454d8e86c3f07bafaa11ac87dfac50d904c9675f8493ac46', 13, 3, 'password', '[]', 0, '2020-01-26 04:51:34', '2020-01-26 04:51:34', '2021-01-26 10:21:34'),
 ('72a29f094ea94117ca8e9f57046958c9b30b5d9f30b3b65102a0f43af38c96370a07411060fcefe3', 13, 3, 'password', '[]', 0, '2020-01-26 08:37:16', '2020-01-26 08:37:16', '2021-01-26 14:07:16'),
+('72d673e7f25442f52d8b0fba4018f9a62c1b9bd76320e98d03e916f23f17987e04b349a8ff646aac', 2, 3, 'password', '[]', 0, '2020-01-27 02:03:18', '2020-01-27 02:03:18', '2021-01-27 07:33:18'),
 ('75b43ce64f3ed69a2d7af78cd78297c5635b6257018a55caacd4953b29e7b855ce782f766140eb55', 1, 3, 'password', '[]', 0, '2020-01-23 09:32:05', '2020-01-23 09:32:05', '2021-01-23 15:02:05'),
 ('7be6b2db756ed56ff35937708ed0ec20dc50e1a4249f2b287087eca9c0c3072f7d041e1c648eb6e0', 12, 3, 'password', '[]', 0, '2020-01-26 03:49:26', '2020-01-26 03:49:26', '2021-01-26 09:19:26'),
 ('7f816dcb3961646736449d8f3ce2d3c00a353f7c9ead4cbc0857a8fa178a61b65f7842209c8af1f4', 12, 3, 'password', '[]', 0, '2020-01-26 03:49:27', '2020-01-26 03:49:27', '2021-01-26 09:19:27'),
+('813b0618e199dde096e8377b7574ef7802284fdcaef29ad4509c3d22a2cdd048df9ebfe5331430f0', 8, 3, 'password', '[]', 0, '2020-01-27 01:02:01', '2020-01-27 01:02:01', '2021-01-27 06:32:01'),
 ('8a517629a2bdfd803cd211017207a3a653f595dc4eda130c1410429e9520ba98900fe830adf14610', 13, 3, 'password', '[]', 0, '2020-01-26 08:13:23', '2020-01-26 08:13:23', '2021-01-26 13:43:23'),
 ('8ad0ac406fbbf0980eea1a98b45c93c05ee313700ae3a44ab5de2f1ed7882d4bec6102421ee8ea9d', 11, 3, 'password', '[]', 0, '2020-01-26 03:47:05', '2020-01-26 03:47:05', '2021-01-26 09:17:05'),
 ('8eca47abdc82bee550dd6431df4ed726bd32922eeae54c6900bf4c9ac095fe9b40ed116ecf5bebf6', 13, 3, 'password', '[]', 0, '2020-01-26 08:49:28', '2020-01-26 08:49:28', '2021-01-26 14:19:28'),
@@ -211,7 +205,9 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('a4495f6e822bb8cc8a85542a1a713ff0076a4af1ee4b786ceccbed6bbd9d2a258c91ee61cd3f90f4', 1, 3, 'password', '[]', 0, '2020-01-24 10:39:39', '2020-01-24 10:39:39', '2021-01-24 16:09:39'),
 ('b1086ad3d187431ba9903e18f13b5a11152133197f9936f7b509d5cf21eff6ae98a23278c132aaa1', 13, 3, 'password', '[]', 0, '2020-01-26 08:29:00', '2020-01-26 08:29:00', '2021-01-26 13:59:00'),
 ('b61e93321c50d2ca02a83e9dc689ad2a99f90ed532a5bf35e3c95ccdbb49db6596f346ab6aafffdd', 9, 3, 'password', '[]', 0, '2020-01-26 03:44:38', '2020-01-26 03:44:38', '2021-01-26 09:14:38'),
+('b8259c2dbbde9c539f3b9b4114a8d6b0355454f0c621ff7ebe331203254213a26de2c2caa6e2f002', 14, 3, 'password', '[]', 0, '2020-01-27 01:32:46', '2020-01-27 01:32:46', '2021-01-27 07:02:46'),
 ('ba2ce8625e8046d6ec4f1d72ba81ce0c2415034f493e9466137efa8759fb8860c68bc7abbb87bc74', 1, 3, 'password', '[]', 0, '2020-01-25 01:42:51', '2020-01-25 01:42:51', '2021-01-25 07:12:51'),
+('c5a0b32b2e04ec5442f85010285ff1ab631034b55dd025c312d21ab22cf052a945fb3ee3704b8233', 14, 3, 'password', '[]', 0, '2020-01-27 01:32:45', '2020-01-27 01:32:45', '2021-01-27 07:02:45'),
 ('c5b4defae1b5a4d8bd883b5f34d2996f5b6e174404a10fa636f0cf9259cc537fed35d641fb51f925', 1, 3, 'password', '[]', 0, '2020-01-24 10:16:27', '2020-01-24 10:16:27', '2021-01-24 15:46:27'),
 ('d6d21defec540bbf9988f44d88597a5dcf13808ac71f667fb1b6f16e7b926941e8d7011935ad5ef7', 1, 3, 'password', '[]', 0, '2020-01-24 10:29:23', '2020-01-24 10:29:23', '2021-01-24 15:59:23'),
 ('da7eb795aa1b8a48f5192ffca1846156ead757a33d64e3d35a32114eb10c83ffa1891741b1944ece', 1, 3, 'password', '[]', 0, '2020-01-24 10:32:30', '2020-01-24 10:32:30', '2021-01-24 16:02:30'),
@@ -231,15 +227,13 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 -- Table structure for table `oauth_auth_codes`
 --
 
-DROP TABLE IF EXISTS `oauth_auth_codes`;
-CREATE TABLE IF NOT EXISTS `oauth_auth_codes` (
+CREATE TABLE `oauth_auth_codes` (
   `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `client_id` int(10) UNSIGNED NOT NULL,
   `scopes` text COLLATE utf8mb4_unicode_ci,
   `revoked` tinyint(1) NOT NULL,
-  `expires_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -248,9 +242,8 @@ CREATE TABLE IF NOT EXISTS `oauth_auth_codes` (
 -- Table structure for table `oauth_clients`
 --
 
-DROP TABLE IF EXISTS `oauth_clients`;
-CREATE TABLE IF NOT EXISTS `oauth_clients` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oauth_clients` (
+  `id` int(10) UNSIGNED NOT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   `name` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `secret` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -259,10 +252,8 @@ CREATE TABLE IF NOT EXISTS `oauth_clients` (
   `password_client` tinyint(1) NOT NULL,
   `revoked` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `oauth_clients_user_id_index` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `oauth_clients`
@@ -280,15 +271,12 @@ INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `redirect`, `per
 -- Table structure for table `oauth_personal_access_clients`
 --
 
-DROP TABLE IF EXISTS `oauth_personal_access_clients`;
-CREATE TABLE IF NOT EXISTS `oauth_personal_access_clients` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oauth_personal_access_clients` (
+  `id` int(10) UNSIGNED NOT NULL,
   `client_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `oauth_personal_access_clients_client_id_index` (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `oauth_personal_access_clients`
@@ -304,14 +292,11 @@ INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `u
 -- Table structure for table `oauth_refresh_tokens`
 --
 
-DROP TABLE IF EXISTS `oauth_refresh_tokens`;
-CREATE TABLE IF NOT EXISTS `oauth_refresh_tokens` (
+CREATE TABLE `oauth_refresh_tokens` (
   `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `access_token_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `revoked` tinyint(1) NOT NULL,
-  `expires_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`)
+  `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -320,12 +305,10 @@ CREATE TABLE IF NOT EXISTS `oauth_refresh_tokens` (
 -- Table structure for table `password_resets`
 --
 
-DROP TABLE IF EXISTS `password_resets`;
-CREATE TABLE IF NOT EXISTS `password_resets` (
+CREATE TABLE `password_resets` (
   `email` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  KEY `password_resets_email_index` (`email`)
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -334,9 +317,8 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 -- Table structure for table `questions`
 --
 
-DROP TABLE IF EXISTS `questions`;
-CREATE TABLE IF NOT EXISTS `questions` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `questions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `level` int(11) NOT NULL,
   `name` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `option1` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -345,9 +327,8 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `option4` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `correct` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `questions`
@@ -365,15 +346,13 @@ INSERT INTO `questions` (`id`, `level`, `name`, `option1`, `option2`, `option3`,
 -- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `roles`
@@ -388,12 +367,52 @@ INSERT INTO `roles` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subjects`
+--
+
+CREATE TABLE `subjects` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
+(1, 'Aptitude', 'aptitude', NULL, NULL),
+(2, 'Verbal Ability', 'verbal-ability', NULL, NULL),
+(3, 'Reasoning', 'reasoning', NULL, NULL),
+(4, 'Technical Aptitude', 'technical-aptitude', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tests`
+--
+
+CREATE TABLE `tests` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `people_attempted` int(11) NOT NULL,
+  `level` int(11) NOT NULL DEFAULT '1',
+  `subject_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -408,10 +427,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `role_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -421,9 +438,167 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `phone`, `insti
 (1, 'Supriyo Das', 'supriyo15998@gmail.com', NULL, '7890122334', 'GNIT', 'HTML, CSS', NULL, NULL, NULL, 'basuduakdada', '$2y$10$KM8FDG6YKJgTphfVJvp01uXNcORJnLqnrRJN8hh7NJJZbgCbxF1Ti', NULL, '2020-01-23 09:32:05', '2020-01-23 09:32:05', 1),
 (2, 'The BugLabs', 'thebuglabs@gmail.com', NULL, '7417417414', NULL, NULL, 'ufua21312', NULL, NULL, 'ahbda', '$2y$10$NPwKYe4FCzmpbJBD3IEfdOQWbLixEfXXLFre7OPy6smgYZfi078Si', NULL, '2020-01-23 09:38:23', '2020-01-23 09:38:23', 3),
 (8, 'Sandipan Sau', 'sandipan08@gmail.com', NULL, '8617556459', NULL, 'Hau hau', NULL, NULL, 'B.Tech in Computer Science', 'Khorgopur, Bagnan', '$2y$10$sD9mIgUUo/ZOUgfAqT2RKuiH91JWzKdwemPFdsEBYRmN6xwygYDMy', NULL, '2020-01-26 03:42:54', '2020-01-26 03:42:54', 4),
-(13, 'Faraz Ali', 'farazappy@gmail.com', NULL, '7044728852', 'Gurunanak Institute Of Technology', 'Coding', NULL, NULL, NULL, '25\nLower Range', '$2y$10$kziY53.PcaCRfDuUWOdeeO998/D0Cnm8AVQOPrBSfUqJKVMzoQf0q', NULL, '2020-01-26 03:50:31', '2020-01-26 03:50:31', 1);
-COMMIT;
+(13, 'Faraz Ali', 'farazappy@gmail.com', NULL, '7044728852', 'Gurunanak Institute Of Technology', 'Coding', NULL, NULL, NULL, '25\nLower Range', '$2y$10$kziY53.PcaCRfDuUWOdeeO998/D0Cnm8AVQOPrBSfUqJKVMzoQf0q', NULL, '2020-01-26 03:50:31', '2020-01-26 03:50:31', 1),
+(14, 'Guru Nanak Institute of Technology', 'admin@gnit.ac.in', NULL, '8520852025', NULL, NULL, NULL, 'C6166', NULL, '157/F, Nilgunj Road, Sodepur, Kolkata-700114', '$2y$10$oYVikBZOy4zUYBqw/vK/Puu.D9rYpzMB25EpeNiCehJQ12aMN4JQC', NULL, '2020-01-27 01:32:45', '2020-01-27 01:32:45', 2);
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `interests`
+--
+ALTER TABLE `interests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `interest_user`
+--
+ALTER TABLE `interest_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `oauth_access_tokens`
+--
+ALTER TABLE `oauth_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_access_tokens_user_id_index` (`user_id`);
+
+--
+-- Indexes for table `oauth_auth_codes`
+--
+ALTER TABLE `oauth_auth_codes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `oauth_clients`
+--
+ALTER TABLE `oauth_clients`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_clients_user_id_index` (`user_id`);
+
+--
+-- Indexes for table `oauth_personal_access_clients`
+--
+ALTER TABLE `oauth_personal_access_clients`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_personal_access_clients_client_id_index` (`client_id`);
+
+--
+-- Indexes for table `oauth_refresh_tokens`
+--
+ALTER TABLE `oauth_refresh_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tests`
+--
+ALTER TABLE `tests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `interests`
+--
+ALTER TABLE `interests`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+--
+-- AUTO_INCREMENT for table `interest_user`
+--
+ALTER TABLE `interest_user`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `oauth_clients`
+--
+ALTER TABLE `oauth_clients`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `oauth_personal_access_clients`
+--
+ALTER TABLE `oauth_personal_access_clients`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `tests`
+--
+ALTER TABLE `tests`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
