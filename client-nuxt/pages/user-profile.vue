@@ -152,12 +152,6 @@
     layout: 'dashboard',
     components: {
       materialCard
-    },
-    computed: {
-      ...mapGetters({
-        user: 'user/getUser',
-        fullname: 'user/getFullname',
-      })
     }
   }
 </script>
