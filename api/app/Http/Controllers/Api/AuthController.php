@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Role;
 use App\Interest;
-
+use App\Subject;
+use App\Test;
 use GuzzleHttp\Client;
 
 
@@ -123,6 +124,17 @@ class AuthController extends Controller
         return response()->json([
             'roles' => $roles,
             'interests' => $interests
+        ]);
+    }
+    public function getMyTestsWithSubjects(Request $request) {
+        $tests = Test::with('subject')->where('user_id', $request->user()->id)->get();
+        return response()->json([
+            'tests' => $tests
+        ]);
+    }
+    public function getSubjects() {
+        return response()->json([
+            'subjects' => Subject::all()
         ]);
     }
 }
