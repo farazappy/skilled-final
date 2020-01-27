@@ -41,13 +41,6 @@
                 </v-list>
                 <v-divider />
                 <v-list dense>
-                    <v-list-tile v-if="responsive">
-                        <v-text-field
-                            class="purple-input search-input"
-                            label="Search..."
-                            color="purple"
-                        />
-                    </v-list-tile>
                     <v-list-tile
                         v-for="(link, i) in links"
                         :key="i"
@@ -55,6 +48,7 @@
                         :active-class="color"
                         avatar
                         class="v-list-item"
+                        v-if="link.showIf === user.role.slug || link.showIf === 'all'"
                     >
                         <v-list-tile-action>
                             <v-icon>{{ link.icon }}</v-icon>
@@ -90,22 +84,32 @@ export default {
                 {
                     to: '/dashboard',
                     icon: 'mdi-view-dashboard',
-                    text: 'Dashboard'
+                    text: 'Dashboard',
+                    showIf: 'all'
                 },
                 {
                     to: '/my-profile',
                     icon: 'mdi-account',
-                    text: 'My Profile'
+                    text: 'My Profile',
+                    showIf: 'all'
                 },
                 {
                     to: '/students/exam',
                     icon: 'post_add',
-                    text: 'Exam'
+                    text: 'Exam',
+                    showIf: 'student'
                 },
                 {
                     to: '/search/jobs',
                     icon: 'search',
-                    text: 'Search for Jobs'
+                    text: 'Search for Jobs',
+                    showIf: 'student'
+                },
+                {
+                    to: '/company/my-tests',
+                    icon: 'assignment',
+                    text: "My Tests",
+                    showIf: 'company'
                 }
             ],
             responsive: true
