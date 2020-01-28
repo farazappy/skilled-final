@@ -225,7 +225,6 @@
         <v-snackbar
             color="error"
             top="top"
-            left="left"
             v-model="errorSnackbar"
             dark
         >

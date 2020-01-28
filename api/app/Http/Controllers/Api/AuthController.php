@@ -137,4 +137,17 @@ class AuthController extends Controller
             'subjects' => Subject::all()
         ]);
     }
+    public function createTest(Request $request) {
+        $user = User::findOrFail($request->user()->id);
+        $test = $user->tests()->create($request->all());
+        foreach ($request->testQuestions as $testQuestion) {
+            $test->questions()->create($testQuestion);
+        }
+
+        $tests = Test::with('subject')->where('user_id', $request->user()->id)->get();
+
+        return response()->json([
+            'tests' => $tests
+        ]);
+    }
 }
