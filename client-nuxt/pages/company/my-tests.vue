@@ -248,7 +248,7 @@
                                                 required
                                             ></v-text-field>
                                             <v-text-field
-                                                v-model="testForm.testQuestions[n-1].optione1"
+                                                v-model="testForm.testQuestions[n-1].option1"
                                                 label="Answer Option 1"
                                                 required
                                             ></v-text-field>
@@ -288,6 +288,8 @@
                                     <v-btn
                                         class="mx-0 font-weight-light"
                                         color="success"
+                                        :loading="isLoading"
+                                        :disabled="isLoading"
                                         @click="submitTestForm"
                                     >
                                         Publish test
@@ -313,12 +315,14 @@ export default {
     },
     data () {
         return {
+            isLoading: false,
             tests: [],
             subjects: [],
             testForm: {
                 name: '',
                 subject_id: '',
                 level: '',
+                people_attempted: 0,
                 testQuestions: [
                     {
                         name: '',
@@ -444,12 +448,25 @@ export default {
     },
     methods: {
         async submitTestForm () {
-            await this.$axios.$post('/auth/tests/create')
+            this.isLoading = true
+            await this.$axios.$post('/auth/tests/create', this.testForm)
                 .then(res => {
+                    this.isLoading = false
                     console.log(res);
                     this.tests = res.tests
+                    this.$store.dispatch('notification/setNotification', {
+                        type: "Success!",
+                        color: "success",
+                        message: `Test published successfully!`
+                    })
                 })
                 .catch(err => {
+                    this.$store.dispatch('notification/setNotification', {
+                        type: "Error!",
+                        color: "error",
+                        message: `Please fix the errors!`
+                    })
+                    this.isLoading = false
                     console.log(err);
                 })
         }

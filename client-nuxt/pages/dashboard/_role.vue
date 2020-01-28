@@ -100,7 +100,8 @@
                     color="green"
                     icon="verified_user"
                     title="Level"
-                    value="2"
+                    value={levelsugg}
+                    
                 />
             </v-flex>
             <v-flex
