@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 27, 2020 at 08:24 PM
+-- Generation Time: Jan 28, 2020 at 04:35 PM
 -- Server version: 5.7.28-0ubuntu0.18.04.4
 -- PHP Version: 7.3.13-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -129,7 +129,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2020_01_26_080113_make_interest_user_table', 4),
 (15, '2020_01_26_083306_drop_interests_from_users_table', 5),
 (16, '2020_01_27_063334_create_tests_table', 6),
-(17, '2020_01_27_063854_create_subjects_table', 6);
+(17, '2020_01_27_063854_create_subjects_table', 6),
+(18, '2020_01_27_190716_delete_level_from_questions', 7),
+(19, '2020_01_28_083640_update_questions_table', 8);
 
 -- --------------------------------------------------------
 
@@ -171,6 +173,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('2a7874f2670155d7867c1df09d63f775c00f6e2ef9988879eeb00810e567964db151f2b7cba1af48', 1, 3, 'password', '[]', 0, '2020-01-23 09:38:37', '2020-01-23 09:38:37', '2021-01-23 15:08:37'),
 ('2cb1215da0d5eb5f5bdd9a9e42636ab28b14aaf0e534eeb9f5e7f2d769d1c4f24a5eaa5b59a60b88', 13, 3, 'password', '[]', 0, '2020-01-26 04:54:34', '2020-01-26 04:54:34', '2021-01-26 10:24:34'),
 ('2e6002c845d4289cc6b8916b220ce4d71a825a3760b05235dffdd5054d21be52cf86fadc3e080d8a', 1, 3, 'password', '[]', 0, '2020-01-25 08:19:35', '2020-01-25 08:19:35', '2021-01-25 13:49:35'),
+('301d68f5545277cf02277b0c1b01384727a600c6631ebdadfff6631310929a291ae1df26621a251a', 2, 3, 'password', '[]', 0, '2020-01-28 00:32:38', '2020-01-28 00:32:38', '2021-01-28 06:02:38'),
 ('341b80ad7b3b130a2a5c2e252267c6216744897061c748363c0ab3a98cafffcd0d55279b55e720a9', 7, 3, 'password', '[]', 0, '2020-01-26 03:37:47', '2020-01-26 03:37:47', '2021-01-26 09:07:47'),
 ('34a6487b03e9c760b6dc07eac66cbcfcd88169399c7e86707a77b1ec433224280efa542b1f5ca8c8', 8, 3, 'password', '[]', 0, '2020-01-26 03:42:54', '2020-01-26 03:42:54', '2021-01-26 09:12:54'),
 ('34ba0c73289f84717f2cd8170c6ed3acede8250390c1a9202b317c89c96e64d95afcf44f30cb7073', 1, 3, 'password', '[]', 0, '2020-01-25 01:46:47', '2020-01-25 01:46:47', '2021-01-25 07:16:47'),
@@ -180,6 +183,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('42d5419ed33d14f0f43a27313f2488fbfabda48cfeae2846d86269d9037e8db8c1f08ca10671e85e', 11, 3, 'password', '[]', 0, '2020-01-26 03:47:05', '2020-01-26 03:47:05', '2021-01-26 09:17:05'),
 ('44a0fe3735871e78c4769d1baf0bd615ee0fbff5b7fcf3fcd0fd146d0a61f48a2ccf251a62b8d81d', 2, 3, 'password', '[]', 0, '2020-01-23 09:38:24', '2020-01-23 09:38:24', '2021-01-23 15:08:24'),
 ('47350b17bcb22fd61e601e4bd569fd0a8aa598da4abf2bd0f0cf9d44140a245dc4b8ae301b81e047', 13, 3, 'password', '[]', 0, '2020-01-26 08:45:43', '2020-01-26 08:45:43', '2021-01-26 14:15:43'),
+('4b1ddced45baae373bc460ff70061066cb398d15f20929ea89ffc6ec66a024df5b040db786f76ff8', 2, 3, 'password', '[]', 0, '2020-01-27 09:49:30', '2020-01-27 09:49:30', '2021-01-27 15:19:30'),
 ('4e6da8a5d8bd1ec92340cf221023c415cf457ad0a0126001f84fc14ed1563de7433f73253774abbe', 13, 3, 'password', '[]', 0, '2020-01-26 08:29:45', '2020-01-26 08:29:45', '2021-01-26 13:59:45'),
 ('53a8e5380988934653760ebdcd9be5b2c7c297b3bed79bc92ad87c21d17e469a1cc75a6891db4c01', 13, 3, 'password', '[]', 0, '2020-01-26 04:55:59', '2020-01-26 04:55:59', '2021-01-26 10:25:59'),
 ('53e80b1b4de6214c550bfee56992505a7fa8c2e15ba578a928d527c7a3ec645ff741793b87b4450d', 1, 3, 'password', '[]', 0, '2020-01-23 09:40:08', '2020-01-23 09:40:08', '2021-01-23 15:10:08'),
@@ -200,6 +204,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('94243f8aa3335fa8e354bdcf2be1be8bea9e6747cf59e6306ed408866917a7ac26982f262512fa6f', 1, 3, 'password', '[]', 0, '2020-01-25 01:49:30', '2020-01-25 01:49:30', '2021-01-25 07:19:30'),
 ('95bfc15e237095af1a85f150753f373826605e9a78f1f96e45ae34861727c68b65fb4ae6ba822e8a', 13, 3, 'password', '[]', 0, '2020-01-26 04:46:55', '2020-01-26 04:46:55', '2021-01-26 10:16:55'),
 ('96dc6d62ce7ef4d8f148285c02bb205c82374d2cc80b8ce6dbd8ad80b4ce2d571ff4afbecfb3e059', 13, 3, 'password', '[]', 0, '2020-01-26 08:23:47', '2020-01-26 08:23:47', '2021-01-26 13:53:47'),
+('9a94a2b2db063b08dc166af1250a0af82ecdf336b3be270c404bc3a9a719cfc4ab92aa340c6856ad', 1, 3, 'password', '[]', 0, '2020-01-28 04:18:31', '2020-01-28 04:18:31', '2021-01-28 09:48:31'),
 ('a2754c567852ad32dd53f9560aee71c56f78960ab91fd6ae39aa55d98764454db3c3ff0a7c4aea58', 1, 3, 'password', '[]', 0, '2020-01-25 01:44:46', '2020-01-25 01:44:46', '2021-01-25 07:14:46'),
 ('a3b343e33fa7e9c7077e5e8e65df6c7e8efeff2913e36eeaebbacbcdfd2f9d215b38ba1fa466fd10', 10, 3, 'password', '[]', 0, '2020-01-26 03:45:49', '2020-01-26 03:45:49', '2021-01-26 09:15:49'),
 ('a4495f6e822bb8cc8a85542a1a713ff0076a4af1ee4b786ceccbed6bbd9d2a258c91ee61cd3f90f4', 1, 3, 'password', '[]', 0, '2020-01-24 10:39:39', '2020-01-24 10:39:39', '2021-01-24 16:09:39'),
@@ -207,10 +212,12 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('b61e93321c50d2ca02a83e9dc689ad2a99f90ed532a5bf35e3c95ccdbb49db6596f346ab6aafffdd', 9, 3, 'password', '[]', 0, '2020-01-26 03:44:38', '2020-01-26 03:44:38', '2021-01-26 09:14:38'),
 ('b8259c2dbbde9c539f3b9b4114a8d6b0355454f0c621ff7ebe331203254213a26de2c2caa6e2f002', 14, 3, 'password', '[]', 0, '2020-01-27 01:32:46', '2020-01-27 01:32:46', '2021-01-27 07:02:46'),
 ('ba2ce8625e8046d6ec4f1d72ba81ce0c2415034f493e9466137efa8759fb8860c68bc7abbb87bc74', 1, 3, 'password', '[]', 0, '2020-01-25 01:42:51', '2020-01-25 01:42:51', '2021-01-25 07:12:51'),
+('bd5504fc409dd460c80fd435b10ec6fea99d28b3e293c6610bcff08704cab00df9615e71133f1006', 8, 3, 'password', '[]', 0, '2020-01-28 00:19:59', '2020-01-28 00:19:59', '2021-01-28 05:49:59'),
 ('c5a0b32b2e04ec5442f85010285ff1ab631034b55dd025c312d21ab22cf052a945fb3ee3704b8233', 14, 3, 'password', '[]', 0, '2020-01-27 01:32:45', '2020-01-27 01:32:45', '2021-01-27 07:02:45'),
 ('c5b4defae1b5a4d8bd883b5f34d2996f5b6e174404a10fa636f0cf9259cc537fed35d641fb51f925', 1, 3, 'password', '[]', 0, '2020-01-24 10:16:27', '2020-01-24 10:16:27', '2021-01-24 15:46:27'),
 ('d6d21defec540bbf9988f44d88597a5dcf13808ac71f667fb1b6f16e7b926941e8d7011935ad5ef7', 1, 3, 'password', '[]', 0, '2020-01-24 10:29:23', '2020-01-24 10:29:23', '2021-01-24 15:59:23'),
 ('da7eb795aa1b8a48f5192ffca1846156ead757a33d64e3d35a32114eb10c83ffa1891741b1944ece', 1, 3, 'password', '[]', 0, '2020-01-24 10:32:30', '2020-01-24 10:32:30', '2021-01-24 16:02:30'),
+('df8e7c460925203a568d5ddbbde550a88846680686706954e8ae1abde60f446bc88530e652c3023a', 2, 3, 'password', '[]', 0, '2020-01-28 01:20:49', '2020-01-28 01:20:49', '2021-01-28 06:50:49'),
 ('e0e95fe4b09c30c78f5b12071d1ec4ac78987b6e2c7a339f50ee912850d771912963dea20010562c', 13, 3, 'password', '[]', 0, '2020-01-26 08:40:33', '2020-01-26 08:40:33', '2021-01-26 14:10:33'),
 ('e59e295d5e443714e83e14ece5e1b8c6e093c6988a0d4e14549016a12de8cfea7f4ab2eba30fc426', 13, 3, 'password', '[]', 0, '2020-01-26 13:20:44', '2020-01-26 13:20:44', '2021-01-26 18:50:44'),
 ('ed77d2a3d094f70c9587f2968c61fffbf367ef14dac0a0c34f19d728e3125d0d8749132041a7459a', 13, 3, 'password', '[]', 0, '2020-01-26 13:03:29', '2020-01-26 13:03:29', '2021-01-26 18:33:29'),
@@ -319,26 +326,52 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `questions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `level` int(11) NOT NULL,
-  `name` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `option1` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `option2` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `option3` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `option4` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `correct` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `test_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`id`, `level`, `name`, `option1`, `option2`, `option3`, `option4`, `correct`, `created_at`, `updated_at`) VALUES
-(1, 1, 'What does the following declaration means?\r\nint (*a)[10];', 'a is the array of pointers to 10 integers', 'a is the array of 10 integer', 'a is the pointer to an array of 10 integers', 'a is an pointer to array', 'C', NULL, NULL),
-(2, 1, 'Which is the valid keyword in JAVA?', 'string', 'interface', 'float', 'unsigned', 'B', NULL, NULL),
-(3, 2, 'Which of the following would compile without error?', 'int a = Math.abs(-5);', 'int b = Math.abs(5);', 'int c = Math.abs(5.5F);', 'int d = Math.abs(5L);', 'A', NULL, NULL),
-(4, 2, 'Which of the following symbols is not used in an ERD?', 'Rectangle', 'Oval', 'Diamond', 'Circle', 'D', NULL, NULL);
+INSERT INTO `questions` (`id`, `name`, `option1`, `option2`, `option3`, `option4`, `correct`, `created_at`, `updated_at`, `test_id`) VALUES
+(1, 'Look at this series: 12, 11, 13, 12, 14, 13, … What number should come next?', '10', '16', '13', '15', '4', '2020-01-28 03:28:53', '2020-01-28 03:28:53', 1),
+(2, 'P, Q, R, S, T, U, V and W are sitting round the circle and are facing the center: P is second to the right of T who is the neighbor of R and V. S is not the neighbor of P. V is the neighbor of U. Q is not between S and W. W is not between U and S. Which one is immediate right to the V if the position of S and U are interchanged?', 'I', 'U', 'T', 'None Of These', '3', '2020-01-28 03:28:53', '2020-01-28 03:28:53', 1),
+(3, '3.	Below given a series of some five numbers :  446 362 576 495 241 Answer the following questions based on these numbers:   If the middle digit in all the numbers are removed, then which of the following number will be minimum?', '446', '241', '362', '495', '2', '2020-01-28 03:28:53', '2020-01-28 03:28:53', 1),
+(4, '4.	In each of the following questions find out the alternative which will replace the question mark.  Meager: Adequate :: Condign : ?', 'Ache', 'Prolific', 'Far', 'Immoral', '4', '2020-01-28 03:28:53', '2020-01-28 03:28:53', 1),
+(5, '5.	 Pointing to a man, a woman said, \"His mother is the only daughter of my mother.\" How is the woman related to the man ?', 'Mother', 'Grandfather', 'sister', 'None Of these', '1', '2020-01-28 03:28:54', '2020-01-28 03:28:54', 1),
+(6, '6.	Five persons F,M,K,J,E are sitting in a straight row, not necessarily in the same order. M do not sit in the middle and is the immediate left of J. F and J occupy the extreme positions. K sits between F and E.    If the position of K and J are interchanged, which of the following option denotes the first two people?', 'EJ', 'FJ', 'FK', 'ME', '2', '2020-01-28 03:28:54', '2020-01-28 03:28:54', 1),
+(7, '7.If P denotes +, Q denotes *, R denotes / and S denotes -, then 18 Q 12 P 4 R 5 S 6 = ?', '63', '210.8', '33', 'None Of These', '2', '2020-01-28 03:28:54', '2020-01-28 03:28:54', 1),
+(8, '8.D lives between B and F. E and A live on successive floors. B lives in the top most floor. There is exactly one person between C and E. There are exactly two people between F and G.  Who lives in the seventh floor?', 'D', 'A', 'B', 'F', '3', '2020-01-28 03:28:54', '2020-01-28 03:28:54', 1),
+(9, '9.Five girls are sitting on a bench to be photographed. Seema is to the left of Rani and to the right of Bindu. Mary is to the right of Rani. Reeta is between Rani and Mary.   Who are at the corners in the photograph?', 'Rani and Bindu', 'Seema and Mary', 'None of these', 'Bindu and Mary', '4', '2020-01-28 03:28:54', '2020-01-28 03:28:54', 1),
+(10, 'A factory worker has five children. No one else in the factory has five children', 'All workers in the factory have five children each.', 'Everybody in the factory has children.', 'Some of the factory workers have more than five children.', 'Only one worker in the factory has exactly five children.', '4', '2020-01-28 03:28:54', '2020-01-28 03:28:54', 1),
+(11, 'Find the next number in the the below series 11, 39, 69, 101, _____', '134', '133', '135', 'None Of These', '3', '2020-01-28 03:57:43', '2020-01-28 03:57:43', 2),
+(12, '2.	A train covers a distance of 12 km in 10 minutes .If it takes 6 seconds to pass a telegraph post,then the length of the train is:', '140m', '120m', '100m', '200m', '2', '2020-01-28 03:57:43', '2020-01-28 03:57:43', 2),
+(13, '3.	What would be the amount to be paid on the principal of 5000 Rs. at the end of 2 years at compound interest at the rate of 9 % per annum?', '5980.5', '5990.5', '5950.5', '5940.5', '4', '2020-01-28 03:57:43', '2020-01-28 03:57:43', 2),
+(14, '4.	A toy is in the form of a cylinder, find the lateral surface area if the radius and height of toy is given to be 7 and 10 cm respectively.', '440', '420', '460', '480', '1', '2020-01-28 03:57:43', '2020-01-28 03:57:43', 2),
+(15, '5.	Can you find the answer for the below equation 97 / 382 - 375 * 378 + 371', '-141374.75', '-141372.75', '-141378.75', '-141381.75', '3', '2020-01-28 03:57:43', '2020-01-28 03:57:43', 2),
+(16, '6.	A man is 24 years older than his son. In two years, his age will be twice the age of his son. The present age of his son is:', '14years', '22 years', '20 years', 'None of these', '2', '2020-01-28 03:57:44', '2020-01-28 03:57:44', 2),
+(17, '7.	 In the below given sequence, what should be the Missing number?  133, 108, 83, X , 33, 8', '58', '60', '56', '57', '1', '2020-01-28 03:57:44', '2020-01-28 03:57:44', 2),
+(18, '8.	An accurate clock shows 9 \'o\' clock in the morning. Through how many degrees will the hour hand rotate when the clock shows 3 \'o\' clock in the afternoon?', '120 Degree', '180 Degree', '150 Degree', 'None of these', '2', '2020-01-28 03:57:44', '2020-01-28 03:57:44', 2),
+(19, '9.	What annual payment will discharge a debt of Rs.1025 due in 2 years at the rate of 5% compound interest?', 'Rs.560', 'Rs.551.25', 'Rs.560.75', 'Rs.550', '2', '2020-01-28 03:57:45', '2020-01-28 03:57:45', 2),
+(20, '10.	The difference b/w two parallel sides of a trapezium is 8 cm and the perpendicular distance b/w them is 38 cm. Find the lengths of the parallel sides, if the area of the trapezium is 950 cm 2 .', '32 and 28', '29 and 21', '32 and 18', 'None of These', '2', '2020-01-28 03:57:45', '2020-01-28 03:57:45', 2),
+(21, 'She lived ____ the expectations.', 'as per', 'up to', 'on', 'v', '2', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
+(22, 'A mother who always (1) connives on the (2) mistakes of her kids (3) is their worst enemy. (4) No Error (5).', '1', '2', '3', '4', '2', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
+(23, 'A month after colleges opened......  A. 35% seats reserved under OBC B. in private colleges C. for the next academic year D. remain vacant', 'CBDA', 'CADB', 'ADBC', 'BADC', '2', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
+(24, 'To cry wolf', 'to speak loudly', 'to eat like a wolf', 'to get afraid', 'to give a false alarm', '4', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
+(25, 'In each of the sentences given below a word is printed in bold. Below it four choices are given. Pick up the one which is most nearly the same in meaning as the word printer in bold and can replaces it without altering the meaning of the sentence. He was wanted at the outset of his career.', 'end', 'beginning', 'entrance', 'middle', '2', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
+(26, 'He was very tired as he is working since 6 O\' clock in the morning.', 'he was working', 'he had been working', 'he has been working', 'he will be working', '3', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
+(27, 'Her selection in the crew surprised Peter.', 'Her selection in the crew was a big surprise.', 'Peter was surprised at her selection in the crew.', 'Her selection was a surprise.', 'Peter was surprised at her selection of the crew.', '2', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
+(28, '....... Indus River is the longest river in India.', 'The', 'An', 'A', 'None Of These', '1', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
+(29, 'Liquid: Liter', 'Hot: Cold', 'Movie: Entertainment', 'Winter: Cold', 'Weight: Kilogram', '4', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
+(30, 'On looking at the cloudless sky, Peter said, \"It won\'t rain today.\"', 'at', 'cloudless', 'sky', 'today', '2', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3);
 
 -- --------------------------------------------------------
 
@@ -386,7 +419,8 @@ INSERT INTO `subjects` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
 (1, 'Aptitude', 'aptitude', NULL, NULL),
 (2, 'Verbal Ability', 'verbal-ability', NULL, NULL),
 (3, 'Reasoning', 'reasoning', NULL, NULL),
-(4, 'Technical Aptitude', 'technical-aptitude', NULL, NULL);
+(4, 'Technical Aptitude', 'technical-aptitude', NULL, NULL),
+(5, 'Logical Reasoning', 'logical-reasoning', '2020-01-28 02:47:26', '2020-01-28 02:47:26');
 
 -- --------------------------------------------------------
 
@@ -404,6 +438,15 @@ CREATE TABLE `tests` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tests`
+--
+
+INSERT INTO `tests` (`id`, `user_id`, `name`, `people_attempted`, `level`, `subject_id`, `created_at`, `updated_at`) VALUES
+(1, 2, 'logical Test', 0, 1, 5, '2020-01-28 03:28:53', '2020-01-28 03:28:53'),
+(2, 2, 'Banibandana', 0, 1, 1, '2020-01-28 03:57:42', '2020-01-28 03:57:42'),
+(3, 2, 'Hello Smart', 0, 1, 2, '2020-01-28 04:32:06', '2020-01-28 04:32:06');
 
 -- --------------------------------------------------------
 
@@ -563,7 +606,7 @@ ALTER TABLE `interest_user`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `oauth_clients`
 --
@@ -578,7 +621,7 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `roles`
 --
@@ -588,12 +631,12 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --

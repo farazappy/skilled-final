@@ -142,6 +142,7 @@ class AuthController extends Controller
         $test = $user->tests()->create($request->all());
         foreach ($request->testQuestions as $testQuestion) {
             $test->questions()->create($testQuestion);
+            //dd($testQuestion);
         }
 
         $tests = Test::with('subject')->where('user_id', $request->user()->id)->get();
