@@ -112,7 +112,7 @@ class AuthController extends Controller
         ]);
     }
     public function getUser($userId) {
-        $user = User::with('role')->findOrFail($userId);
+        $user = User::with('role')->with('interests')->findOrFail($userId);
         return response()->json([
             'user' => $user
         ]);
@@ -149,6 +149,15 @@ class AuthController extends Controller
 
         return response()->json([
             'tests' => $tests
+        ]);
+    }
+    public function allProfiles() {
+        $students = User::with('role')->where('role_id', 1)->get();
+        $youths = User::with('role')->where('role_id', 4)->get();
+
+        return response()->json([
+            'students' => $students,
+            'youths' => $youths
         ]);
     }
 }

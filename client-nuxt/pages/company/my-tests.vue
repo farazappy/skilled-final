@@ -15,6 +15,7 @@
                     raised
                     dark
                 >
+
                     <v-card-title class="headline">Tests published by you</v-card-title>
                 </v-card>
                 <material-card
@@ -24,7 +25,7 @@
                 >
                     <v-flex slot="header">
                         <v-tabs
-                            v-model="subjects.length"
+                            v-model="tab"
                             color="transparent"
                             slider-color="white"
                         >
@@ -43,141 +44,35 @@
                         </v-tabs>
                     </v-flex>
 
-                    <v-tabs-items v-model="tabs">
+                    <v-tabs-items v-model="tab">
                         <v-tab-item
-                            v-for="n in subjects.length"
-                            :key="n"
+                            v-for="subject in subjects"
+                            :key="subject.id"
                         >
-                            <v-list three-line>
-                                <v-list-tile @click="complete(0)">
-                                    <v-list-tile-action>
-                                        <v-checkbox
-                                            :value="list[0]"
-                                            color="green"
-                                        />
-                                    </v-list-tile-action>
-                                    <v-list-tile-title>
-                                        Sign contract for "What are conference organized afraid of?" {{ n }}
-                                    </v-list-tile-title>
-                                    <div class="d-flex">
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="success"
-                                                icon
-                                            >
-                                                <v-icon color="primary">mdi-pencil</v-icon>
-                                            </v-btn>
-                                            <span>Edit</span>
-                                        </v-tooltip>
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="danger"
-                                                icon
-                                            >
-                                                <v-icon color="error">mdi-close</v-icon>
-                                            </v-btn>
-                                            <span>Close</span>
-                                        </v-tooltip>
-
-                                    </div>
-                                </v-list-tile>
-                                <v-divider />
-                                <v-list-tile @click="complete(1)">
-                                    <v-list-tile-action>
-                                        <v-checkbox
-                                            :value="list[1]"
-                                            color="success"
-                                        />
-                                    </v-list-tile-action>
-                                    <v-list-tile-title>
-                                        Lines From Great Russian Literature? Or E-mails From My Boss?
-                                    </v-list-tile-title>
-                                    <div class="d-flex">
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="success"
-                                                icon
-                                            >
-                                                <v-icon color="primary">mdi-pencil</v-icon>
-                                            </v-btn>
-                                            <span>Edit</span>
-                                        </v-tooltip>
-
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="danger"
-                                                icon
-                                            >
-                                                <v-icon color="error">mdi-close</v-icon>
-                                            </v-btn>
-                                            <span>Close</span>
-                                        </v-tooltip>
-                                    </div>
-                                </v-list-tile>
-                                <v-divider />
-                                <v-list-tile @click="complete(2)">
-                                    <v-list-tile-action>
-                                        <v-checkbox
-                                            :value="list[2]"
-                                            color="success"
-                                        />
-                                    </v-list-tile-action>
-                                    <v-list-tile-title>
-                                        Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                    </v-list-tile-title>
-                                    <div class="d-flex">
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="success"
-                                                icon
-                                            >
-                                                <v-icon color="primary">mdi-pencil</v-icon>
-                                            </v-btn>
-                                            <span>Edit</span>
-                                        </v-tooltip>
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="danger"
-                                                icon
-                                            >
-                                                <v-icon color="error">mdi-close</v-icon>
-                                            </v-btn>
-                                            <span>Close</span>
-                                        </v-tooltip>
-
-                                    </div>
-                                </v-list-tile>
-                            </v-list>
+                            <v-data-table
+                                :headers="headers"
+                                :items="computedTests[subject.id]"
+                                hide-actions
+                            >
+                                <template
+                                    slot="headerCell"
+                                    slot-scope="{ header }"
+                                >
+                                    <span
+                                        class="font-weight-light text-warning text--darken-3"
+                                        v-text="header.text"
+                                    />
+                                </template>
+                                <template
+                                    slot="items"
+                                    slot-scope="{ index, item }"
+                                >
+                                    <td>{{ item.name }}</td>
+                                    <td class="text-xs-right">{{ item.people_attempted }}</td>
+                                    <td class="text-xs-right">{{ new Date(item.created_at).toDateString() }}</td>
+                                    <td class="text-xs-right">Level {{ item.level }}</td>
+                                </template>
+                            </v-data-table>
                         </v-tab-item>
                     </v-tabs-items>
                 </material-card>
@@ -198,6 +93,7 @@
                     title="Publish A New Test"
                     text="FIll up the form below to publish a new test"
                 >
+
                     <v-form @submit.prevent="submitTestForm()">
                         <v-container py-0>
                             <v-layout wrap>
@@ -424,7 +320,33 @@ export default {
                 {
                     text: 'Level 4', value: 4
                 }
-            ]
+            ],
+            tab: null,
+            headers: [
+                {
+                    sortable: false,
+                    text: 'Test Name',
+                    value: 'name'
+                },
+                {
+                    sortable: false,
+                    text: 'Students Attempted ',
+                    value: 'students-attempted',
+                    align: 'right'
+                },
+                {
+                    sortable: false,
+                    text: 'Published on',
+                    value: 'published-on',
+                    align: 'right'
+                },
+                {
+                    sortable: false,
+                    text: 'Level',
+                    value: 'level',
+                    align: 'right'
+                }
+            ],
         }
     },
     async asyncData ({ params, app }) {
@@ -444,6 +366,14 @@ export default {
                 s.value = s.id;
             })
             return this.subjects
+        },
+        computedTests () {
+            const testsArray = [];
+            this.subjects.forEach((s) => {
+                testsArray[s.id] = this.tests.filter(t => t.subject.id === s.id)
+            })
+            console.log(testsArray);
+            return testsArray
         }
     },
     methods: {

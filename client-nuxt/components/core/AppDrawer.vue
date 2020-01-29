@@ -110,6 +110,12 @@ export default {
                     icon: 'assignment',
                     text: "My Tests",
                     showIf: 'company'
+                },
+                {
+                    to: '/company/hire',
+                    icon: 'person_add',
+                    text: 'Hire',
+                    showIf: 'company'
                 }
             ],
             responsive: true
