@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 28, 2020 at 04:35 PM
--- Server version: 5.7.28-0ubuntu0.18.04.4
+-- Generation Time: Jan 30, 2020 at 06:45 PM
+-- Server version: 5.7.29-0ubuntu0.18.04.1
 -- PHP Version: 7.3.13-1+ubuntu18.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -94,7 +94,37 @@ INSERT INTO `interest_user` (`id`, `user_id`, `interest_id`, `created_at`, `upda
 (12, 8, 6, NULL, NULL),
 (11, 8, 4, NULL, NULL),
 (10, 8, 3, NULL, NULL),
-(9, 8, 1, NULL, NULL);
+(9, 8, 1, NULL, NULL),
+(15, 15, 1, NULL, NULL),
+(16, 15, 2, NULL, NULL),
+(17, 15, 4, NULL, NULL),
+(18, 15, 3, NULL, NULL),
+(19, 15, 5, NULL, NULL),
+(20, 15, 6, NULL, NULL),
+(21, 15, 7, NULL, NULL),
+(22, 15, 8, NULL, NULL),
+(23, 15, 9, NULL, NULL),
+(24, 15, 10, NULL, NULL),
+(25, 15, 11, NULL, NULL),
+(26, 15, 12, NULL, NULL),
+(27, 15, 13, NULL, NULL),
+(28, 15, 14, NULL, NULL),
+(29, 15, 15, NULL, NULL),
+(30, 16, 1, NULL, NULL),
+(31, 16, 2, NULL, NULL),
+(32, 16, 3, NULL, NULL),
+(33, 16, 4, NULL, NULL),
+(34, 16, 5, NULL, NULL),
+(35, 16, 6, NULL, NULL),
+(36, 16, 7, NULL, NULL),
+(37, 16, 8, NULL, NULL),
+(38, 16, 9, NULL, NULL),
+(39, 16, 10, NULL, NULL),
+(40, 16, 11, NULL, NULL),
+(41, 16, 12, NULL, NULL),
+(42, 16, 13, NULL, NULL),
+(43, 16, 14, NULL, NULL),
+(44, 16, 15, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,7 +161,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2020_01_27_063334_create_tests_table', 6),
 (17, '2020_01_27_063854_create_subjects_table', 6),
 (18, '2020_01_27_190716_delete_level_from_questions', 7),
-(19, '2020_01_28_083640_update_questions_table', 8);
+(19, '2020_01_28_083640_update_questions_table', 8),
+(20, '2020_01_30_082724_create_professions_table', 9),
+(21, '2020_01_30_090421_add_level_to_users', 9);
 
 -- --------------------------------------------------------
 
@@ -156,7 +188,9 @@ CREATE TABLE `oauth_access_tokens` (
 --
 
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
+('018221dd28540d053011e472b0465deecac861181ee81c270badca2eccd7f18f464317e40ae16bf2', 15, 5, 'password', '[]', 0, '2020-01-30 04:38:35', '2020-01-30 04:38:35', '2021-01-30 10:08:35'),
 ('05d6e61ef3c8d07010dbd8d8f1ef235d76b6bd3b589b2e2d1f5410dfd64f511386c273174c8b3e6a', 13, 3, 'password', '[]', 0, '2020-01-26 08:30:11', '2020-01-26 08:30:11', '2021-01-26 14:00:11'),
+('0fecbb1ee40d336dbd33e62b352acf922126de39d6247723b5799a17b8a70be8abde6574ec36c223', 2, 5, 'password', '[]', 0, '2020-01-28 13:12:43', '2020-01-28 13:12:43', '2021-01-28 18:42:43'),
 ('122a8cea51b3d36d3ebe923896ccbd0ee56a2294b43dd2d8f2a334459261c4c9a4b7269425f3bfb1', 13, 3, 'password', '[]', 0, '2020-01-26 08:16:14', '2020-01-26 08:16:14', '2021-01-26 13:46:14'),
 ('16c1e5a746b7acc35b9b77483cd7af6659f908af7706df1c21a712800648bf682b275734b4caffb0', 13, 3, 'password', '[]', 0, '2020-01-26 04:47:58', '2020-01-26 04:47:58', '2021-01-26 10:17:58'),
 ('1a87ab5912eeec19f6334138a6d20957f2853f741382f5d8210620544ad0800df2b4d442f727b992', 13, 3, 'password', '[]', 0, '2020-01-26 08:43:30', '2020-01-26 08:43:30', '2021-01-26 14:13:30'),
@@ -171,6 +205,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('245dd194e258c7e5931e64eebf2f58c7e90c32ababe90b72bdc44ac8f47594f4ea63f1fcd90ce6d3', 13, 3, 'password', '[]', 0, '2020-01-26 08:19:21', '2020-01-26 08:19:21', '2021-01-26 13:49:21'),
 ('2a4e822540ec64ca458690af97edabe8dba240b3bdb344f30535bd81887fee77d07ca173cc3dc48d', 2, 3, 'password', '[]', 0, '2020-01-23 09:39:45', '2020-01-23 09:39:45', '2021-01-23 15:09:45'),
 ('2a7874f2670155d7867c1df09d63f775c00f6e2ef9988879eeb00810e567964db151f2b7cba1af48', 1, 3, 'password', '[]', 0, '2020-01-23 09:38:37', '2020-01-23 09:38:37', '2021-01-23 15:08:37'),
+('2b8e57f3d9a7e9baa29b8c70434d2f1c62edd04584f874eff4a6e6da18e63ec9cfac4f5d2e854243', 16, 5, 'password', '[]', 0, '2020-01-30 04:42:02', '2020-01-30 04:42:02', '2021-01-30 10:12:02'),
 ('2cb1215da0d5eb5f5bdd9a9e42636ab28b14aaf0e534eeb9f5e7f2d769d1c4f24a5eaa5b59a60b88', 13, 3, 'password', '[]', 0, '2020-01-26 04:54:34', '2020-01-26 04:54:34', '2021-01-26 10:24:34'),
 ('2e6002c845d4289cc6b8916b220ce4d71a825a3760b05235dffdd5054d21be52cf86fadc3e080d8a', 1, 3, 'password', '[]', 0, '2020-01-25 08:19:35', '2020-01-25 08:19:35', '2021-01-25 13:49:35'),
 ('301d68f5545277cf02277b0c1b01384727a600c6631ebdadfff6631310929a291ae1df26621a251a', 2, 3, 'password', '[]', 0, '2020-01-28 00:32:38', '2020-01-28 00:32:38', '2021-01-28 06:02:38'),
@@ -190,6 +225,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('5491692f6bac38b4ea791b1cfbb322d8742f30131a3452161278be1649dd70aaf601a78a8d54bb87', 1, 3, 'password', '[]', 0, '2020-01-25 01:44:49', '2020-01-25 01:44:49', '2021-01-25 07:14:49'),
 ('5b37f30fc1b26f824c502c0959e31a2b5d6ff4448b753bb985db445ff610bc793f55a86ca3fda7f1', 2, 3, 'password', '[]', 0, '2020-01-27 05:05:17', '2020-01-27 05:05:17', '2021-01-27 10:35:17'),
 ('5c61ae6bb9258c5214b0e4f9072e54fc39533d2132392054c92ce9b8265f9cff16d47dcf7e7a8ca2', 13, 3, 'password', '[]', 0, '2020-01-27 01:00:18', '2020-01-27 01:00:18', '2021-01-27 06:30:18'),
+('6181717d50c97b34d6d78b16001aaeb9ed585fb49ded0f7de833e4fdc90ad495901f131e565a8687', 2, 5, 'password', '[]', 0, '2020-01-29 13:56:00', '2020-01-29 13:56:00', '2021-01-29 19:26:00'),
 ('640aedf836eff7ebc08fef8e8b672447872919379708c06ee41eb0a3b6de4ee5235c73c4753d5c8e', 13, 3, 'password', '[]', 0, '2020-01-26 03:50:32', '2020-01-26 03:50:32', '2021-01-26 09:20:32'),
 ('6784da6f1ffb5a8b73f9b9d1fd774c4d454d8e86c3f07bafaa11ac87dfac50d904c9675f8493ac46', 13, 3, 'password', '[]', 0, '2020-01-26 04:51:34', '2020-01-26 04:51:34', '2021-01-26 10:21:34'),
 ('72a29f094ea94117ca8e9f57046958c9b30b5d9f30b3b65102a0f43af38c96370a07411060fcefe3', 13, 3, 'password', '[]', 0, '2020-01-26 08:37:16', '2020-01-26 08:37:16', '2021-01-26 14:07:16'),
@@ -198,9 +234,11 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('7be6b2db756ed56ff35937708ed0ec20dc50e1a4249f2b287087eca9c0c3072f7d041e1c648eb6e0', 12, 3, 'password', '[]', 0, '2020-01-26 03:49:26', '2020-01-26 03:49:26', '2021-01-26 09:19:26'),
 ('7f816dcb3961646736449d8f3ce2d3c00a353f7c9ead4cbc0857a8fa178a61b65f7842209c8af1f4', 12, 3, 'password', '[]', 0, '2020-01-26 03:49:27', '2020-01-26 03:49:27', '2021-01-26 09:19:27'),
 ('813b0618e199dde096e8377b7574ef7802284fdcaef29ad4509c3d22a2cdd048df9ebfe5331430f0', 8, 3, 'password', '[]', 0, '2020-01-27 01:02:01', '2020-01-27 01:02:01', '2021-01-27 06:32:01'),
+('8709bc2d3146f41bcc68a1b09c80875b2ecf2eff51d67f7a439177733082a57f5b5c9f184121c0f9', 2, 5, 'password', '[]', 0, '2020-01-28 10:14:40', '2020-01-28 10:14:40', '2021-01-28 15:44:40'),
 ('8a517629a2bdfd803cd211017207a3a653f595dc4eda130c1410429e9520ba98900fe830adf14610', 13, 3, 'password', '[]', 0, '2020-01-26 08:13:23', '2020-01-26 08:13:23', '2021-01-26 13:43:23'),
 ('8ad0ac406fbbf0980eea1a98b45c93c05ee313700ae3a44ab5de2f1ed7882d4bec6102421ee8ea9d', 11, 3, 'password', '[]', 0, '2020-01-26 03:47:05', '2020-01-26 03:47:05', '2021-01-26 09:17:05'),
 ('8eca47abdc82bee550dd6431df4ed726bd32922eeae54c6900bf4c9ac095fe9b40ed116ecf5bebf6', 13, 3, 'password', '[]', 0, '2020-01-26 08:49:28', '2020-01-26 08:49:28', '2021-01-26 14:19:28'),
+('9370dcc434f5ba185773a3ab5fc3d6f8181b3c796d853b98089c75c5945ab6d48dee173403e617a1', 1, 5, 'password', '[]', 0, '2020-01-29 07:41:15', '2020-01-29 07:41:15', '2021-01-29 13:11:15'),
 ('94243f8aa3335fa8e354bdcf2be1be8bea9e6747cf59e6306ed408866917a7ac26982f262512fa6f', 1, 3, 'password', '[]', 0, '2020-01-25 01:49:30', '2020-01-25 01:49:30', '2021-01-25 07:19:30'),
 ('95bfc15e237095af1a85f150753f373826605e9a78f1f96e45ae34861727c68b65fb4ae6ba822e8a', 13, 3, 'password', '[]', 0, '2020-01-26 04:46:55', '2020-01-26 04:46:55', '2021-01-26 10:16:55'),
 ('96dc6d62ce7ef4d8f148285c02bb205c82374d2cc80b8ce6dbd8ad80b4ce2d571ff4afbecfb3e059', 13, 3, 'password', '[]', 0, '2020-01-26 08:23:47', '2020-01-26 08:23:47', '2021-01-26 13:53:47'),
@@ -208,6 +246,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('a2754c567852ad32dd53f9560aee71c56f78960ab91fd6ae39aa55d98764454db3c3ff0a7c4aea58', 1, 3, 'password', '[]', 0, '2020-01-25 01:44:46', '2020-01-25 01:44:46', '2021-01-25 07:14:46'),
 ('a3b343e33fa7e9c7077e5e8e65df6c7e8efeff2913e36eeaebbacbcdfd2f9d215b38ba1fa466fd10', 10, 3, 'password', '[]', 0, '2020-01-26 03:45:49', '2020-01-26 03:45:49', '2021-01-26 09:15:49'),
 ('a4495f6e822bb8cc8a85542a1a713ff0076a4af1ee4b786ceccbed6bbd9d2a258c91ee61cd3f90f4', 1, 3, 'password', '[]', 0, '2020-01-24 10:39:39', '2020-01-24 10:39:39', '2021-01-24 16:09:39'),
+('affe69da3d439ecdab42f37b662d878bd9114dfea3200d7188f7c12f42204ddc8ae86eea712491c7', 16, 5, 'password', '[]', 0, '2020-01-30 04:42:01', '2020-01-30 04:42:01', '2021-01-30 10:12:01'),
 ('b1086ad3d187431ba9903e18f13b5a11152133197f9936f7b509d5cf21eff6ae98a23278c132aaa1', 13, 3, 'password', '[]', 0, '2020-01-26 08:29:00', '2020-01-26 08:29:00', '2021-01-26 13:59:00'),
 ('b61e93321c50d2ca02a83e9dc689ad2a99f90ed532a5bf35e3c95ccdbb49db6596f346ab6aafffdd', 9, 3, 'password', '[]', 0, '2020-01-26 03:44:38', '2020-01-26 03:44:38', '2021-01-26 09:14:38'),
 ('b8259c2dbbde9c539f3b9b4114a8d6b0355454f0c621ff7ebe331203254213a26de2c2caa6e2f002', 14, 3, 'password', '[]', 0, '2020-01-27 01:32:46', '2020-01-27 01:32:46', '2021-01-27 07:02:46'),
@@ -215,12 +254,15 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('bd5504fc409dd460c80fd435b10ec6fea99d28b3e293c6610bcff08704cab00df9615e71133f1006', 8, 3, 'password', '[]', 0, '2020-01-28 00:19:59', '2020-01-28 00:19:59', '2021-01-28 05:49:59'),
 ('c5a0b32b2e04ec5442f85010285ff1ab631034b55dd025c312d21ab22cf052a945fb3ee3704b8233', 14, 3, 'password', '[]', 0, '2020-01-27 01:32:45', '2020-01-27 01:32:45', '2021-01-27 07:02:45'),
 ('c5b4defae1b5a4d8bd883b5f34d2996f5b6e174404a10fa636f0cf9259cc537fed35d641fb51f925', 1, 3, 'password', '[]', 0, '2020-01-24 10:16:27', '2020-01-24 10:16:27', '2021-01-24 15:46:27'),
+('cb82a7ba76ea6b42de441cb968d0f1d1b9f13c9e94055a49019a5894a4c3a0c87c32709fb9f5b0c3', 2, 5, 'password', '[]', 0, '2020-01-28 13:21:16', '2020-01-28 13:21:16', '2021-01-28 18:51:16'),
+('d1dc2ff4e322836ceb6a830ca4fc90a3fa1e3b28ee2897618a39d59c10d49741f8cce99d4d0c854e', 2, 5, 'password', '[]', 0, '2020-01-30 04:44:19', '2020-01-30 04:44:19', '2021-01-30 10:14:19'),
 ('d6d21defec540bbf9988f44d88597a5dcf13808ac71f667fb1b6f16e7b926941e8d7011935ad5ef7', 1, 3, 'password', '[]', 0, '2020-01-24 10:29:23', '2020-01-24 10:29:23', '2021-01-24 15:59:23'),
 ('da7eb795aa1b8a48f5192ffca1846156ead757a33d64e3d35a32114eb10c83ffa1891741b1944ece', 1, 3, 'password', '[]', 0, '2020-01-24 10:32:30', '2020-01-24 10:32:30', '2021-01-24 16:02:30'),
 ('df8e7c460925203a568d5ddbbde550a88846680686706954e8ae1abde60f446bc88530e652c3023a', 2, 3, 'password', '[]', 0, '2020-01-28 01:20:49', '2020-01-28 01:20:49', '2021-01-28 06:50:49'),
 ('e0e95fe4b09c30c78f5b12071d1ec4ac78987b6e2c7a339f50ee912850d771912963dea20010562c', 13, 3, 'password', '[]', 0, '2020-01-26 08:40:33', '2020-01-26 08:40:33', '2021-01-26 14:10:33'),
 ('e59e295d5e443714e83e14ece5e1b8c6e093c6988a0d4e14549016a12de8cfea7f4ab2eba30fc426', 13, 3, 'password', '[]', 0, '2020-01-26 13:20:44', '2020-01-26 13:20:44', '2021-01-26 18:50:44'),
 ('ed77d2a3d094f70c9587f2968c61fffbf367ef14dac0a0c34f19d728e3125d0d8749132041a7459a', 13, 3, 'password', '[]', 0, '2020-01-26 13:03:29', '2020-01-26 13:03:29', '2021-01-26 18:33:29'),
+('ef697bdc10abb145f96cbd3abf1a548b648b3099874982333eb6148c66f3e804bf76cbf783069e24', 15, 5, 'password', '[]', 0, '2020-01-30 04:38:36', '2020-01-30 04:38:36', '2021-01-30 10:08:36'),
 ('f0323dd2d79919df23e95b6778a521ad668da860990e033ac2f0091c9dec27e7d2076e7e29e52394', 13, 3, 'password', '[]', 0, '2020-01-26 08:16:56', '2020-01-26 08:16:56', '2021-01-26 13:46:56'),
 ('f2468864457a9ce8949e9a29c1b54d41592678ece1ef13cd3f34fa19f8281f280d39a2270d854bbc', 1, 3, 'password', '[]', 0, '2020-01-24 09:16:03', '2020-01-24 09:16:03', '2021-01-24 14:46:03'),
 ('f93e5d9de4506a94a5ba7b250977ee7503963899e6adc34b5c183acb1fcabc1156e2a8b30055dd35', 13, 3, 'password', '[]', 0, '2020-01-26 08:37:37', '2020-01-26 08:37:37', '2021-01-26 14:07:37'),
@@ -270,7 +312,9 @@ INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `redirect`, `per
 (1, NULL, 'Laravel Personal Access Client', '4g3MfVa7PbCTXPDpfmeCqpDMRVB8xahxCeCvXaNv', 'http://localhost', 1, 0, 0, '2020-01-23 09:30:46', '2020-01-23 09:30:46'),
 (2, NULL, 'Laravel Password Grant Client', 'ENGD3dFIRPiuDTLMBN3fydDRnuLQuoZ0g6zjimdi', 'http://localhost', 0, 1, 0, '2020-01-23 09:30:46', '2020-01-23 09:30:46'),
 (3, NULL, 'Laravel Personal Access Client', 'hgrw63akWsw7Pa176hnIbFMIuyFmoU1BYYF9w2x5', 'http://localhost', 1, 0, 0, '2020-01-23 09:30:48', '2020-01-23 09:30:48'),
-(4, NULL, 'Laravel Password Grant Client', 'lZVO9bUook6NpS5FYN8LVUVu2kCFX5jTFpuXnOif', 'http://localhost', 0, 1, 0, '2020-01-23 09:30:49', '2020-01-23 09:30:49');
+(4, NULL, 'Laravel Password Grant Client', 'lZVO9bUook6NpS5FYN8LVUVu2kCFX5jTFpuXnOif', 'http://localhost', 0, 1, 0, '2020-01-23 09:30:49', '2020-01-23 09:30:49'),
+(5, NULL, 'Laravel Personal Access Client', 'DiJ5z3fquaFXx9SxY55eQblHZeZJFN1l3BaFfr7P', 'http://localhost', 1, 0, 0, '2020-01-28 10:11:29', '2020-01-28 10:11:29'),
+(6, NULL, 'Laravel Password Grant Client', 'CZaGJrgN3GjcoWdSFqlU0vN8zVatP6fADdFqioz0', 'http://localhost', 0, 1, 0, '2020-01-28 10:11:29', '2020-01-28 10:11:29');
 
 -- --------------------------------------------------------
 
@@ -291,7 +335,8 @@ CREATE TABLE `oauth_personal_access_clients` (
 
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
 (1, 1, '2020-01-23 09:30:46', '2020-01-23 09:30:46'),
-(2, 3, '2020-01-23 09:30:49', '2020-01-23 09:30:49');
+(2, 3, '2020-01-23 09:30:49', '2020-01-23 09:30:49'),
+(3, 5, '2020-01-28 10:11:29', '2020-01-28 10:11:29');
 
 -- --------------------------------------------------------
 
@@ -317,6 +362,31 @@ CREATE TABLE `password_resets` (
   `token` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `professions`
+--
+
+CREATE TABLE `professions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `professions`
+--
+
+INSERT INTO `professions` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
+(1, 'Gardening', 'gardening', '2020-01-30 03:39:59', '2020-01-30 03:39:59'),
+(2, 'Makeup', 'makeup', '2020-01-30 03:40:18', '2020-01-30 03:40:18'),
+(3, 'Tailoring', 'tailoring', '2020-01-30 03:40:48', '2020-01-30 03:40:48'),
+(4, 'Plumbing', 'plumbing', '2020-01-30 03:41:08', '2020-01-30 03:41:08'),
+(5, 'Electrician', 'electrician', '2020-01-30 03:41:31', '2020-01-30 03:41:31');
 
 -- --------------------------------------------------------
 
@@ -470,19 +540,22 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `role_id` int(11) NOT NULL
+  `role_id` int(11) NOT NULL,
+  `level` int(11) DEFAULT NULL,
+  `profession_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `phone`, `institution`, `skills`, `trade_lic_no`, `ugc_no`, `qualification`, `address`, `password`, `remember_token`, `created_at`, `updated_at`, `role_id`) VALUES
-(1, 'Supriyo Das', 'supriyo15998@gmail.com', NULL, '7890122334', 'GNIT', 'HTML, CSS', NULL, NULL, NULL, 'basuduakdada', '$2y$10$KM8FDG6YKJgTphfVJvp01uXNcORJnLqnrRJN8hh7NJJZbgCbxF1Ti', NULL, '2020-01-23 09:32:05', '2020-01-23 09:32:05', 1),
-(2, 'The BugLabs', 'thebuglabs@gmail.com', NULL, '7417417414', NULL, NULL, 'ufua21312', NULL, NULL, 'ahbda', '$2y$10$NPwKYe4FCzmpbJBD3IEfdOQWbLixEfXXLFre7OPy6smgYZfi078Si', NULL, '2020-01-23 09:38:23', '2020-01-23 09:38:23', 3),
-(8, 'Sandipan Sau', 'sandipan08@gmail.com', NULL, '8617556459', NULL, 'Hau hau', NULL, NULL, 'B.Tech in Computer Science', 'Khorgopur, Bagnan', '$2y$10$sD9mIgUUo/ZOUgfAqT2RKuiH91JWzKdwemPFdsEBYRmN6xwygYDMy', NULL, '2020-01-26 03:42:54', '2020-01-26 03:42:54', 4),
-(13, 'Faraz Ali', 'farazappy@gmail.com', NULL, '7044728852', 'Gurunanak Institute Of Technology', 'Coding', NULL, NULL, NULL, '25\nLower Range', '$2y$10$kziY53.PcaCRfDuUWOdeeO998/D0Cnm8AVQOPrBSfUqJKVMzoQf0q', NULL, '2020-01-26 03:50:31', '2020-01-26 03:50:31', 1),
-(14, 'Guru Nanak Institute of Technology', 'admin@gnit.ac.in', NULL, '8520852025', NULL, NULL, NULL, 'C6166', NULL, '157/F, Nilgunj Road, Sodepur, Kolkata-700114', '$2y$10$oYVikBZOy4zUYBqw/vK/Puu.D9rYpzMB25EpeNiCehJQ12aMN4JQC', NULL, '2020-01-27 01:32:45', '2020-01-27 01:32:45', 2);
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `phone`, `institution`, `skills`, `trade_lic_no`, `ugc_no`, `qualification`, `address`, `password`, `remember_token`, `created_at`, `updated_at`, `role_id`, `level`, `profession_id`) VALUES
+(1, 'Supriyo Das', 'supriyo15998@gmail.com', NULL, '7890122334', 'GNIT', 'HTML, CSS', NULL, NULL, NULL, 'basuduakdada', '$2y$10$KM8FDG6YKJgTphfVJvp01uXNcORJnLqnrRJN8hh7NJJZbgCbxF1Ti', NULL, '2020-01-23 09:32:05', '2020-01-23 09:32:05', 1, NULL, NULL),
+(2, 'The BugLabs', 'thebuglabs@gmail.com', NULL, '7417417414', NULL, NULL, 'ufua21312', NULL, NULL, 'ahbda', '$2y$10$NPwKYe4FCzmpbJBD3IEfdOQWbLixEfXXLFre7OPy6smgYZfi078Si', NULL, '2020-01-23 09:38:23', '2020-01-23 09:38:23', 3, NULL, NULL),
+(8, 'Sandipan Sau', 'sandipan08@gmail.com', NULL, '8617556459', NULL, 'Hau hau', NULL, NULL, 'B.Tech in Computer Science', 'Khorgopur, Bagnan', '$2y$10$sD9mIgUUo/ZOUgfAqT2RKuiH91JWzKdwemPFdsEBYRmN6xwygYDMy', NULL, '2020-01-26 03:42:54', '2020-01-26 03:42:54', 4, NULL, NULL),
+(13, 'Faraz Ali', 'farazappy@gmail.com', NULL, '7044728852', 'Gurunanak Institute Of Technology', 'Coding', NULL, NULL, NULL, '25\nLower Range', '$2y$10$kziY53.PcaCRfDuUWOdeeO998/D0Cnm8AVQOPrBSfUqJKVMzoQf0q', NULL, '2020-01-26 03:50:31', '2020-01-26 03:50:31', 1, NULL, NULL),
+(14, 'Guru Nanak Institute of Technology', 'admin@gnit.ac.in', NULL, '8520852025', NULL, NULL, NULL, 'C6166', NULL, '157/F, Nilgunj Road, Sodepur, Kolkata-700114', '$2y$10$oYVikBZOy4zUYBqw/vK/Puu.D9rYpzMB25EpeNiCehJQ12aMN4JQC', NULL, '2020-01-27 01:32:45', '2020-01-27 01:32:45', 2, NULL, NULL),
+(16, 'Srijit Pal', 'srijitman@gmail.com', NULL, '1234567890', NULL, 'Coding, Media, Cultural, Technical', NULL, NULL, 'B.Tech in Computer Science', 'Kharda', '$2y$10$IrGE5gL1H5DDu0wobYRCFuRtFZLkaihe3pn8j577s3l6F/rbatqz.', NULL, '2020-01-30 04:42:00', '2020-01-30 04:42:01', 4, NULL, 5);
 
 --
 -- Indexes for dumped tables
@@ -553,6 +626,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `professions`
+--
+ALTER TABLE `professions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
@@ -601,22 +680,27 @@ ALTER TABLE `interests`
 -- AUTO_INCREMENT for table `interest_user`
 --
 ALTER TABLE `interest_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `oauth_clients`
 --
 ALTER TABLE `oauth_clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `oauth_personal_access_clients`
 --
 ALTER TABLE `oauth_personal_access_clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `professions`
+--
+ALTER TABLE `professions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `questions`
 --
@@ -641,7 +725,7 @@ ALTER TABLE `tests`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
