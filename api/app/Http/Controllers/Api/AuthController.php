@@ -25,9 +25,7 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'phone' => ['required', 'numeric', 'digits:10', 'unique:users'],
             'role' => ['required', 'numeric', 'gt:0']
-            // 'pubgusername' => ['required', 'string', 'unique:users'],
-            // 'pubgid' => ['sometimes', 'numeric', 'unique:users'],
-            // 'heard' => ['required'],
+            
     	]);
 
         $user = User::create([
@@ -54,21 +52,15 @@ class AuthController extends Controller
 
         $http = new Client;
 
-        // $response = $http->post(url('oauth/token'), [
-        //     'form_params' => [
-        //         'grant_type'    => 'password',
-        //         'client_id'     => '2',
-        //         'client_secret' => 'vInKT0gEMev0C8VJ8zcr66I0BoayN6VLZehwnnQf',
-        //         'username'      => $request->email,
-        //         'password'      => $request->password,
-        //         'scope'         => '',
-        //     ]
-        // ]);
+        $response = $http->post("http://192.168.0.5:8000/youth/", [
+            'form_params' => [
+                "interests"    => $request->interests
+            ]
+        ]);
 
-        // $decoded = json_decode((string) $response->getBody(), true);
+        $decoded = json_decode((string) $response->getBody(), true);
 
-        // $user->access_token = $decoded['access_token'];
-        // $user->refresh_token = $decoded['refresh_token'];
+        $user->update(['profession_id' => $decoded['suggested_profession']]);
 
         $token = $user->createToken('password')->accessToken;
         $user->token = $token;
