@@ -128,10 +128,8 @@ class AuthController extends Controller
 
         $http = new Client;
 
-        $response = $http->post("http://192.168.0.5:8000/youth/", [
-            'form_params' => [
-                "answers"    => $sendAnswers
-            ]
+        $response = $http->post("http://localhost:5000/predict_api", [
+            \GuzzleHttp\RequestOptions::JSON => $sendAnswers
         ]);
 
         $decoded = json_decode((string) $response->getBody(), true);
