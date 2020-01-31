@@ -38,7 +38,7 @@
                             <v-tab-item value="tab-1">
                                 <v-card flat>
                                     <v-card-text>
-                                        <v-form>
+                                        <v-form @submit.prevent="loginSubmit" id="login-form">
                                             <v-text-field
                                                 type="text"
                                                 v-model="loginForm.email"
@@ -74,7 +74,7 @@
                             <v-tab-item value="tab-2">
                                 <v-card flat>
                                     <v-card-text>
-                                        <v-form>
+                                        <v-form @submit.prevent="registerSubmit()">
                                             <v-select
                                                 :items="computedRoles"
                                                 label="Select Role"
@@ -145,6 +145,15 @@
                                                     prepend-icon="verified_user"
                                                     name="trade_lic_no"
                                                     label="Trade License Number"
+                                                >
+                                                </v-text-field>
+                                                <v-text-field
+                                                    type="text"
+                                                    v-model="registerForm.technologies_used"
+                                                    v-if="registerForm.role == 3"
+                                                    prepend-icon="build"
+                                                    name="technologies_used"
+                                                    label="Technologies used in your company"
                                                 >
                                                 </v-text-field>
                                                 <v-text-field
