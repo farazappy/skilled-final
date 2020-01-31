@@ -138,7 +138,8 @@ export default {
                                     color: "success",
                                     message: `You have been suggested Level ${resp.user.level}`
                                 })
-                                await this.$auth.fetchUser()
+
+                                this.$auth.fetchUser()
                                     .then(() => {
                                         this.isLoading = false
                                         this.$router.push({
