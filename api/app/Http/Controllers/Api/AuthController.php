@@ -115,6 +115,14 @@ class AuthController extends Controller
         ]);
     }
 
+    public function getExam($examId) {
+        $test = Test::with('questions')->findOrFail($examId);
+
+        return response()->json([
+            'test' => $test
+        ]);
+    }
+
     public function submitFirstExam(Request $request) {
         $answers = $request->answers;
 	$user = User::findOrFail($request->user()->id);
@@ -141,7 +149,11 @@ class AuthController extends Controller
             'user' => $user
         ]);
     }
-
+    public function getTests() {
+        return response()->json([
+            'tests' => Test::all()
+        ]);
+    }
     public function getUser($userId) {
         $user = User::with('role')->with('interests')->findOrFail($userId);
         return response()->json([
@@ -197,7 +209,7 @@ class AuthController extends Controller
         ]);
     }
     public function getVacancies() {
-        $vacancy = Vacancy::all();
+        $vacancy = Vacancy::with('user')->get();
         return response()->json([
             'vacancies' => $vacancy
         ]);

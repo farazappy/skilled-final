@@ -9,16 +9,6 @@
                 justify-center
             >
                 <v-flex md12>
-                    <v-card
-                        color="purple"
-                        class="mb-3"
-                        raised
-                        dark
-                        v-if="user.level === 0"
-                    >
-                        <v-card-title class="headline">You need to answer this test before you can start using the platform!</v-card-title>
-                    </v-card>
-
                     <material-card
                         color="green"
                         :title="test.name"
@@ -113,7 +103,7 @@ export default {
         }
     },
     async asyncData ({ app, params }) {
-        let response = await app.$axios.$get('student/exam/first')
+        let response = await app.$axios.$get(`student/exam/${params.exam}`)
         return {
             test: response.test
         }

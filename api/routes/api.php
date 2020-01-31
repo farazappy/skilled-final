@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/me', function (Request $request) {
-    return \App\User::with('role')->findOrFail($request->user()->id);
+    return \App\User::with('role')->with('profession')->findOrFail($request->user()->id);
 });
 
 Route::post('/auth/register', 'Api\\AuthController@register');
@@ -22,6 +22,8 @@ Route::post('/auth/login', 'Api\\AuthController@login');
 Route::get('/auth/register/generic', 'Api\\AuthController@generic');
 Route::get('/companies', 'Api\\AuthController@getCompanies');
 Route::get('/student/exam/first', 'Api\\AuthController@getFirstExam');
+Route::get('/student/exam/{examId}', 'Api\\AuthController@getExam');
+Route::get('tests', 'Api\\AuthController@getTests');
 Route::middleware('auth:api')->post('/student/exam/first', 'Api\\AuthController@submitFirstExam');
 Route::get('/question/{level}', 'Api\\AuthController@getQuestions');
 Route::get('/profile/{userId}', 'Api\\AuthController@getUser');

@@ -34,7 +34,7 @@
                                 Hey, {{ user.name }}
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                {{ user.role.name }}
+                                Welcome to SkillED
                             </v-list-item-subtitle>
                         </v-list-tile-content>
                     </v-list-tile>
@@ -94,16 +94,22 @@ export default {
                     showIf: 'all'
                 },
                 {
-                    to: '/students/exam',
+                    to: '/student/exam',
                     icon: 'post_add',
                     text: 'Exam',
                     showIf: 'student'
                 },
                 {
-                    to: '/search/jobs',
+                    to: '/student/vacancies',
                     icon: 'search',
                     text: 'Search for Jobs',
                     showIf: 'student'
+                },
+                {
+                    to: '/',
+                    icon: 'live_tv',
+                    text: 'Lectures',
+                    showIf: 'unemployed-youth'
                 },
                 {
                     to: '/company/my-tests',
@@ -140,9 +146,9 @@ export default {
     },
     mounted () {
 
-        if(this.user.role.id === 1 && this.user.level === 0) {
+        if (this.user.role.id === 1 && this.user.level === 0) {
             this.$router.push({
-                path: '/student/exam/first'
+                path: '/student/exam/take'
             })
         }
 

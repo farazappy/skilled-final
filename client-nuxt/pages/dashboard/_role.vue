@@ -94,21 +94,22 @@
                 sm6
                 xs12
                 md6
-                lg3
+                lg4
+                v-if="user.role.id === 1"
             >
                 <material-stats-card
                     color="green"
                     icon="verified_user"
                     title="Level"
                     :value="user.level"
-                    
                 />
             </v-flex>
             <v-flex
                 sm6
                 xs12
                 md6
-                lg3
+                lg4
+                v-if="user.role.id === 1"
             >
                 <material-stats-card
                     color="orange"
@@ -121,7 +122,8 @@
                 sm6
                 xs12
                 md6
-                lg3
+                lg4
+                v-if="user.role.id === 2"
             >
                 <material-stats-card
                     color="red"
@@ -130,24 +132,82 @@
                     value="75"
                 />
             </v-flex>
+
             <v-flex
                 sm6
                 xs12
                 md6
-                lg3
+                lg4
+                v-if="user.role.id === 3"
             >
                 <material-stats-card
-                    color="info"
-                    icon="mdi-twitter"
-                    title="Followers"
-                    value="+245"
-                    sub-icon="mdi-update"
-                    sub-text="Just Updated"
+                    color="green"
+                    icon="verified_user"
+                    title="Jobs posted"
+                    :value="4"
+                />
+            </v-flex>
+            <v-flex
+                sm6
+                xs12
+                md6
+                lg4
+                v-if="user.role.id === 3"
+            >
+                <material-stats-card
+                    color="orange"
+                    icon="assignment_ind"
+                    title="Tests posted"
+                    value="3"
+                />
+            </v-flex>
+            <v-flex
+                sm6
+                xs12
+                md6
+                lg4
+                v-if="user.role.id === 3"
+            >
+                <material-stats-card
+                    color="red"
+                    icon="assignment_turned_in"
+                    title="Hired candidates"
+                    value="1"
+                />
+            </v-flex>
+
+            <v-flex
+                sm6
+                xs12
+                md6
+                lg6
+                v-if="user.role.id === 4"
+            >
+                <material-stats-card
+                    color="green"
+                    icon="verified_user"
+                    title="Suggested crareer path"
+                    :value="user.profession.name"
+                />
+            </v-flex>
+            <v-flex
+                sm6
+                xs12
+                md6
+                lg6
+                v-if="user.role.id === 4"
+            >
+                <material-stats-card
+                    color="orange"
+                    icon="tv"
+                    title="Lectures Watched"
+                    value="3"
                 />
             </v-flex>
             <v-flex
                 md12
-                lg6
+                lg12
+                v-if="user.role.id === 1"
             >
                 <material-card
                     color="purple"
@@ -178,178 +238,6 @@
                             <td class="text-xs-right">{{ item.city }}</td>
                         </template>
                     </v-data-table>
-                </material-card>
-            </v-flex>
-            <v-flex
-                md12
-                lg6
-            >
-                <material-card
-                    class="card-tabs"
-                    color="green"
-                >
-                    <v-flex slot="header">
-                        <v-tabs
-                            v-model="tabs"
-                            color="transparent"
-                            slider-color="white"
-                        >
-                            <span
-                                class="subheading font-weight-light mr-3"
-                                style="align-self: center"
-                            >Tasks:</span>
-                            <v-tab class="mr-3">
-                                <v-icon class="mr-2">mdi-bug</v-icon>
-                                Bugs
-                            </v-tab>
-                            <v-tab class="mr-3">
-                                <v-icon class="mr-2">mdi-code-tags</v-icon>
-                                Website
-                            </v-tab>
-                            <v-tab>
-                                <v-icon class="mr-2">mdi-cloud</v-icon>
-                                Server
-                            </v-tab>
-                        </v-tabs>
-                    </v-flex>
-
-                    <v-tabs-items v-model="tabs">
-                        <v-tab-item
-                            v-for="n in 3"
-                            :key="n"
-                        >
-                            <v-list three-line>
-                                <v-list-tile @click="complete(0)">
-                                    <v-list-tile-action>
-                                        <v-checkbox
-                                            :value="list[0]"
-                                            color="green"
-                                        />
-                                    </v-list-tile-action>
-                                    <v-list-tile-title>
-                                        Sign contract for "What are conference organized afraid of?"
-                                    </v-list-tile-title>
-                                    <div class="d-flex">
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="success"
-                                                icon
-                                            >
-                                                <v-icon color="primary">mdi-pencil</v-icon>
-                                            </v-btn>
-                                            <span>Edit</span>
-                                        </v-tooltip>
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="danger"
-                                                icon
-                                            >
-                                                <v-icon color="error">mdi-close</v-icon>
-                                            </v-btn>
-                                            <span>Close</span>
-                                        </v-tooltip>
-
-                                    </div>
-                                </v-list-tile>
-                                <v-divider />
-                                <v-list-tile @click="complete(1)">
-                                    <v-list-tile-action>
-                                        <v-checkbox
-                                            :value="list[1]"
-                                            color="success"
-                                        />
-                                    </v-list-tile-action>
-                                    <v-list-tile-title>
-                                        Lines From Great Russian Literature? Or E-mails From My Boss?
-                                    </v-list-tile-title>
-                                    <div class="d-flex">
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="success"
-                                                icon
-                                            >
-                                                <v-icon color="primary">mdi-pencil</v-icon>
-                                            </v-btn>
-                                            <span>Edit</span>
-                                        </v-tooltip>
-
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="danger"
-                                                icon
-                                            >
-                                                <v-icon color="error">mdi-close</v-icon>
-                                            </v-btn>
-                                            <span>Close</span>
-                                        </v-tooltip>
-                                    </div>
-                                </v-list-tile>
-                                <v-divider />
-                                <v-list-tile @click="complete(2)">
-                                    <v-list-tile-action>
-                                        <v-checkbox
-                                            :value="list[2]"
-                                            color="success"
-                                        />
-                                    </v-list-tile-action>
-                                    <v-list-tile-title>
-                                        Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                    </v-list-tile-title>
-                                    <div class="d-flex">
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="success"
-                                                icon
-                                            >
-                                                <v-icon color="primary">mdi-pencil</v-icon>
-                                            </v-btn>
-                                            <span>Edit</span>
-                                        </v-tooltip>
-                                        <v-tooltip
-                                            top
-                                            content-class="top"
-                                        >
-                                            <v-btn
-                                                slot="activator"
-                                                class="v-btn--simple"
-                                                color="danger"
-                                                icon
-                                            >
-                                                <v-icon color="error">mdi-close</v-icon>
-                                            </v-btn>
-                                            <span>Close</span>
-                                        </v-tooltip>
-
-                                    </div>
-                                </v-list-tile>
-                            </v-list>
-                        </v-tab-item>
-                    </v-tabs-items>
                 </material-card>
             </v-flex>
         </v-layout>
@@ -462,35 +350,35 @@ export default {
                     align: 'right'
                 }
             ],
-            items: [
-                {
-                    name: 'Dakota Rice',
-                    country: 'Niger',
-                    city: 'Oud-Tunrhout',
-                    salary: '$35,738'
-                },
-                {
-                    name: 'Minerva Hooper',
-                    country: 'Curaçao',
-                    city: 'Sinaai-Waas',
-                    salary: '$23,738'
-                }, {
-                    name: 'Sage Rodriguez',
-                    country: 'Netherlands',
-                    city: 'Overland Park',
-                    salary: '$56,142'
-                }, {
-                    name: 'Philip Chanley',
-                    country: 'Korea, South',
-                    city: 'Gloucester',
-                    salary: '$38,735'
-                }, {
-                    name: 'Doris Greene',
-                    country: 'Malawi',
-                    city: 'Feldkirchen in Kārnten',
-                    salary: '$63,542'
-                }
-            ],
+            // items: [
+            //     {
+            //         name: 'Dakota Rice',
+            //         country: 'Niger',
+            //         city: 'Oud-Tunrhout',
+            //         salary: '$35,738'
+            //     },
+            //     {
+            //         name: 'Minerva Hooper',
+            //         country: 'Curaçao',
+            //         city: 'Sinaai-Waas',
+            //         salary: '$23,738'
+            //     }, {
+            //         name: 'Sage Rodriguez',
+            //         country: 'Netherlands',
+            //         city: 'Overland Park',
+            //         salary: '$56,142'
+            //     }, {
+            //         name: 'Philip Chanley',
+            //         country: 'Korea, South',
+            //         city: 'Gloucester',
+            //         salary: '$38,735'
+            //     }, {
+            //         name: 'Doris Greene',
+            //         country: 'Malawi',
+            //         city: 'Feldkirchen in Kārnten',
+            //         salary: '$63,542'
+            //     }
+            // ],
             tabs: 0,
             list: {
                 0: false,

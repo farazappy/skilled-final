@@ -7,16 +7,15 @@
         <v-layout wrap>
             <v-flex
                 md12
-                lg6
+                lg12
             >
                 <material-card
                     color="purple"
-                    title="Test Stats"
-                    text="Last test given on 23rd January, 2020"
+                    title="List of tests"
                 >
                     <v-data-table
                         :headers="headers"
-                        :items="items"
+                        :items="tests"
                         hide-actions
                     >
                         <template
@@ -33,9 +32,14 @@
                             slot-scope="{ index, item }"
                         >
                             <td>{{ item.name }}</td>
-                            <td class="text-xs-right">{{ item.salary }}</td>
-                            <td class="text-xs-right">{{ item.country }}</td>
-                            <td class="text-xs-right">{{ item.city }}</td>
+                            <td class="text-xs-right">
+                                <nuxt-link :to="`/student/exam/${item.id}`">
+                                    <v-btn
+                                        color="success"
+                                        round
+                                    >Take test</v-btn>
+                                </nuxt-link>
+                            </td>
                         </template>
                     </v-data-table>
                 </material-card>
@@ -55,6 +59,31 @@ export default {
         materialCard,
         materialChartCard,
         materialStatsCard
+    },
+    data () {
+        return {
+            headers: [
+                {
+                    sortable: false,
+                    text: 'Test name',
+                    value: 'name'
+                },
+                {
+                    sortable: false,
+                    text: 'Action',
+                    value: 'action',
+                    align: 'right'
+                }
+            ],
+            tests: []
+        }
+    },
+    async asyncData ({ app, params }) {
+        let response = await app.$axios.$get('/tests')
+        console.log(response)
+        return {
+            tests: response.tests
+        }
     }
 }
 </script>
