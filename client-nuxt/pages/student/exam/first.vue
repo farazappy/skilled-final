@@ -128,7 +128,7 @@ export default {
                             message: `Answer all the questions!`
                         })
                     } else {
-                        await this.$axios.$post('student/exam/first')
+                        await this.$axios.$post('student/exam/first', this.testForm)
                             .then((resp) => {
                                 this.$store.dispatch('notification/setNotification', {
                                     type: "Success!",
