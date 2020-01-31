@@ -45,33 +45,34 @@ class AuthController extends Controller
         if ($request->role == 4 && $request->interests) {
             foreach ($request->interests as $interest) 
                 $user->interests()->attach($interest);
+
+
+            $http = new Client;
+
+            $response = $http->post("http://192.168.0.5:8000/youth/", [
+                'form_params' => [
+                    "interests"    => $request->interests
+                ]
+            ]);
+
+            $decoded = json_decode((string) $response->getBody(), true);
+
+            $user->update(['profession_id' => $decoded['suggested_profession']]);
             
         }
-
-        //$user->notify(new VerifyAccount());
-
-        $http = new Client;
-
-        $response = $http->post("http://192.168.0.5:8000/youth/", [
-            'form_params' => [
-                "interests"    => $request->interests
-            ]
-        ]);
-
-        $decoded = json_decode((string) $response->getBody(), true);
-
-        $user->update(['profession_id' => $decoded['suggested_profession']]);
 
         $token = $user->createToken('password')->accessToken;
         $user->token = $token;
         
 
-    	return response()->json([
-    		'success' => [
-    			'message' => 'Registration was sucessfull!',
+        return response()->json([
+            'success' => [
+                'message' => 'Registration was sucessfull!',
                 'user' => $user,
-    		]
-    	]);	
+            ]
+        ]); 
+
+        //$user->notify(new VerifyAccount());
     }
 
     public function login(Request $request) {
@@ -103,6 +104,15 @@ class AuthController extends Controller
             'questions' => $questions
         ]);
     }
+
+    public function getFirstExam() {
+        $test = Test::where('user_id',18)->with('questions')->inRandomOrder()->first();
+
+        return response()->json([
+            'test' => $test
+        ]);
+    }
+
     public function getUser($userId) {
         $user = User::with('role')->with('interests')->findOrFail($userId);
         return response()->json([
@@ -134,7 +144,6 @@ class AuthController extends Controller
         $test = $user->tests()->create($request->all());
         foreach ($request->testQuestions as $testQuestion) {
             $test->questions()->create($testQuestion);
-            //dd($testQuestion);
         }
 
         $tests = Test::with('subject')->where('user_id', $request->user()->id)->get();

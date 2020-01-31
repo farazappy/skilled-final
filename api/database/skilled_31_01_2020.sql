@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 30, 2020 at 06:45 PM
+-- Generation Time: Jan 31, 2020 at 07:46 PM
 -- Server version: 5.7.29-0ubuntu0.18.04.1
 -- PHP Version: 7.3.13-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -129,6 +129,23 @@ INSERT INTO `interest_user` (`id`, `user_id`, `interest_id`, `created_at`, `upda
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lectures`
+--
+
+CREATE TABLE `lectures` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profession_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -163,7 +180,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2020_01_27_190716_delete_level_from_questions', 7),
 (19, '2020_01_28_083640_update_questions_table', 8),
 (20, '2020_01_30_082724_create_professions_table', 9),
-(21, '2020_01_30_090421_add_level_to_users', 9);
+(21, '2020_01_30_090421_add_level_to_users', 9),
+(22, '2020_01_31_092854_create_vacancies_table', 10),
+(23, '2020_01_31_093418_add_fields_to_user', 10),
+(24, '2020_01_31_093643_create_lectures_table', 10);
 
 -- --------------------------------------------------------
 
@@ -196,6 +216,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('1a87ab5912eeec19f6334138a6d20957f2853f741382f5d8210620544ad0800df2b4d442f727b992', 13, 3, 'password', '[]', 0, '2020-01-26 08:43:30', '2020-01-26 08:43:30', '2021-01-26 14:13:30'),
 ('1bbfe5858c4f06efd7d6783a78e9938141ccda3f966cfff7101c5f59f8bf4a0617c7422b31a3e319', 13, 3, 'password', '[]', 0, '2020-01-26 08:25:40', '2020-01-26 08:25:40', '2021-01-26 13:55:40'),
 ('1c1e711640b2a62405c737e2dca522ee1dfeee80788a872570b45a64efd64015ab92904dc49bf9e8', 1, 3, 'password', '[]', 0, '2020-01-25 01:47:52', '2020-01-25 01:47:52', '2021-01-25 07:17:52'),
+('1d9c07e557439c6f04d04062c7a3be35e424f95d05ad6a53f3c9687e239d287f1d6dce88e2c82542', 18, 5, 'password', '[]', 0, '2020-01-31 03:15:49', '2020-01-31 03:15:49', '2021-01-31 08:45:49'),
 ('1f091f03332375231bdf98b9df3d84e85c589bd45428b87884bf35a4b4b01405bc0bc94b73874d50', 13, 3, 'password', '[]', 0, '2020-01-26 08:27:11', '2020-01-26 08:27:11', '2021-01-26 13:57:11'),
 ('2142706fb93329111399c5fbdf7af00a7e0385a8ae29117ccf7fbf09b982c612bc07f5aa618c6d5d', 13, 3, 'password', '[]', 0, '2020-01-26 08:18:26', '2020-01-26 08:18:26', '2021-01-26 13:48:26'),
 ('219645541254ef5ec7807c6af128972157b04337836d40279bdb7fea16235128f86146d3d2833ac5', 1, 3, 'password', '[]', 0, '2020-01-23 10:06:24', '2020-01-23 10:06:24', '2021-01-23 15:36:24'),
@@ -215,6 +236,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('365d4a200a237d01c93b4b7684839c41b6f9555686e8a8ea40aabc7fddb56b47cf89374c7e377570', 13, 3, 'password', '[]', 0, '2020-01-26 03:50:31', '2020-01-26 03:50:31', '2021-01-26 09:20:31'),
 ('40a0e851c3166f153203af1aac5ef171443c2f547b303f924378179e57d847313996553e17cd8621', 13, 3, 'password', '[]', 0, '2020-01-26 08:42:40', '2020-01-26 08:42:40', '2021-01-26 14:12:40'),
 ('417bfd1551eb252b61cc8dc7284d33542cb852fa4a542437841932c57c2c4c4dbe23ca4c101689ff', 13, 3, 'password', '[]', 0, '2020-01-26 08:22:18', '2020-01-26 08:22:18', '2021-01-26 13:52:18'),
+('427c1515570560c80dbcef3e9f55aa1363f8964bcfe77e17cd35e6586ead4981f2085cb20ef7c2b5', 18, 5, 'password', '[]', 0, '2020-01-31 03:15:48', '2020-01-31 03:15:48', '2021-01-31 08:45:48'),
 ('42d5419ed33d14f0f43a27313f2488fbfabda48cfeae2846d86269d9037e8db8c1f08ca10671e85e', 11, 3, 'password', '[]', 0, '2020-01-26 03:47:05', '2020-01-26 03:47:05', '2021-01-26 09:17:05'),
 ('44a0fe3735871e78c4769d1baf0bd615ee0fbff5b7fcf3fcd0fd146d0a61f48a2ccf251a62b8d81d', 2, 3, 'password', '[]', 0, '2020-01-23 09:38:24', '2020-01-23 09:38:24', '2021-01-23 15:08:24'),
 ('47350b17bcb22fd61e601e4bd569fd0a8aa598da4abf2bd0f0cf9d44140a245dc4b8ae301b81e047', 13, 3, 'password', '[]', 0, '2020-01-26 08:45:43', '2020-01-26 08:45:43', '2021-01-26 14:15:43'),
@@ -243,6 +265,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('95bfc15e237095af1a85f150753f373826605e9a78f1f96e45ae34861727c68b65fb4ae6ba822e8a', 13, 3, 'password', '[]', 0, '2020-01-26 04:46:55', '2020-01-26 04:46:55', '2021-01-26 10:16:55'),
 ('96dc6d62ce7ef4d8f148285c02bb205c82374d2cc80b8ce6dbd8ad80b4ce2d571ff4afbecfb3e059', 13, 3, 'password', '[]', 0, '2020-01-26 08:23:47', '2020-01-26 08:23:47', '2021-01-26 13:53:47'),
 ('9a94a2b2db063b08dc166af1250a0af82ecdf336b3be270c404bc3a9a719cfc4ab92aa340c6856ad', 1, 3, 'password', '[]', 0, '2020-01-28 04:18:31', '2020-01-28 04:18:31', '2021-01-28 09:48:31'),
+('9b5620a2c7f11ea5a14dc707d649ee29e46358533670c45241072d9ff3c9d2880443a2a045e73626', 13, 5, 'password', '[]', 0, '2020-01-31 04:39:51', '2020-01-31 04:39:51', '2021-01-31 10:09:51'),
 ('a2754c567852ad32dd53f9560aee71c56f78960ab91fd6ae39aa55d98764454db3c3ff0a7c4aea58', 1, 3, 'password', '[]', 0, '2020-01-25 01:44:46', '2020-01-25 01:44:46', '2021-01-25 07:14:46'),
 ('a3b343e33fa7e9c7077e5e8e65df6c7e8efeff2913e36eeaebbacbcdfd2f9d215b38ba1fa466fd10', 10, 3, 'password', '[]', 0, '2020-01-26 03:45:49', '2020-01-26 03:45:49', '2021-01-26 09:15:49'),
 ('a4495f6e822bb8cc8a85542a1a713ff0076a4af1ee4b786ceccbed6bbd9d2a258c91ee61cd3f90f4', 1, 3, 'password', '[]', 0, '2020-01-24 10:39:39', '2020-01-24 10:39:39', '2021-01-24 16:09:39'),
@@ -254,10 +277,12 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('bd5504fc409dd460c80fd435b10ec6fea99d28b3e293c6610bcff08704cab00df9615e71133f1006', 8, 3, 'password', '[]', 0, '2020-01-28 00:19:59', '2020-01-28 00:19:59', '2021-01-28 05:49:59'),
 ('c5a0b32b2e04ec5442f85010285ff1ab631034b55dd025c312d21ab22cf052a945fb3ee3704b8233', 14, 3, 'password', '[]', 0, '2020-01-27 01:32:45', '2020-01-27 01:32:45', '2021-01-27 07:02:45'),
 ('c5b4defae1b5a4d8bd883b5f34d2996f5b6e174404a10fa636f0cf9259cc537fed35d641fb51f925', 1, 3, 'password', '[]', 0, '2020-01-24 10:16:27', '2020-01-24 10:16:27', '2021-01-24 15:46:27'),
+('c6deb09eb2e0a0275d009663d190c670f20516195c66148d67a17cf179f45ce13ff45caf856bc14a', 13, 5, 'password', '[]', 0, '2020-01-31 00:42:26', '2020-01-31 00:42:26', '2021-01-31 06:12:26'),
 ('cb82a7ba76ea6b42de441cb968d0f1d1b9f13c9e94055a49019a5894a4c3a0c87c32709fb9f5b0c3', 2, 5, 'password', '[]', 0, '2020-01-28 13:21:16', '2020-01-28 13:21:16', '2021-01-28 18:51:16'),
 ('d1dc2ff4e322836ceb6a830ca4fc90a3fa1e3b28ee2897618a39d59c10d49741f8cce99d4d0c854e', 2, 5, 'password', '[]', 0, '2020-01-30 04:44:19', '2020-01-30 04:44:19', '2021-01-30 10:14:19'),
 ('d6d21defec540bbf9988f44d88597a5dcf13808ac71f667fb1b6f16e7b926941e8d7011935ad5ef7', 1, 3, 'password', '[]', 0, '2020-01-24 10:29:23', '2020-01-24 10:29:23', '2021-01-24 15:59:23'),
 ('da7eb795aa1b8a48f5192ffca1846156ead757a33d64e3d35a32114eb10c83ffa1891741b1944ece', 1, 3, 'password', '[]', 0, '2020-01-24 10:32:30', '2020-01-24 10:32:30', '2021-01-24 16:02:30'),
+('dba04e8e75bc32973e9170174d29a21a1cf298846fa6c8259fea02144d6f3bf88ff7d544f3f59afa', 13, 5, 'password', '[]', 0, '2020-01-31 00:49:29', '2020-01-31 00:49:29', '2021-01-31 06:19:29'),
 ('df8e7c460925203a568d5ddbbde550a88846680686706954e8ae1abde60f446bc88530e652c3023a', 2, 3, 'password', '[]', 0, '2020-01-28 01:20:49', '2020-01-28 01:20:49', '2021-01-28 06:50:49'),
 ('e0e95fe4b09c30c78f5b12071d1ec4ac78987b6e2c7a339f50ee912850d771912963dea20010562c', 13, 3, 'password', '[]', 0, '2020-01-26 08:40:33', '2020-01-26 08:40:33', '2021-01-26 14:10:33'),
 ('e59e295d5e443714e83e14ece5e1b8c6e093c6988a0d4e14549016a12de8cfea7f4ab2eba30fc426', 13, 3, 'password', '[]', 0, '2020-01-26 13:20:44', '2020-01-26 13:20:44', '2021-01-26 18:50:44'),
@@ -266,6 +291,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('f0323dd2d79919df23e95b6778a521ad668da860990e033ac2f0091c9dec27e7d2076e7e29e52394', 13, 3, 'password', '[]', 0, '2020-01-26 08:16:56', '2020-01-26 08:16:56', '2021-01-26 13:46:56'),
 ('f2468864457a9ce8949e9a29c1b54d41592678ece1ef13cd3f34fa19f8281f280d39a2270d854bbc', 1, 3, 'password', '[]', 0, '2020-01-24 09:16:03', '2020-01-24 09:16:03', '2021-01-24 14:46:03'),
 ('f93e5d9de4506a94a5ba7b250977ee7503963899e6adc34b5c183acb1fcabc1156e2a8b30055dd35', 13, 3, 'password', '[]', 0, '2020-01-26 08:37:37', '2020-01-26 08:37:37', '2021-01-26 14:07:37'),
+('faf2212f9b70e34bf8bb3a573457d49a9aac3500cbef70eeffa73e6b15617fe303da3575914f2ba3', 1, 5, 'password', '[]', 0, '2020-01-31 00:21:49', '2020-01-31 00:21:49', '2021-01-31 05:51:49'),
 ('fc2767c86aa9c8c18ed4ea268c52621b0cf55d50b5d5c87bb49853f0c3431e96056b2bf0d4d29755', 13, 3, 'password', '[]', 0, '2020-01-26 08:28:30', '2020-01-26 08:28:30', '2021-01-26 13:58:30'),
 ('fc8a0fcc53e34d0ed0d6164958bc3b475b357bf4b1dd124e7f8d01c85b88947efe4a96f1d6949619', 13, 3, 'password', '[]', 0, '2020-01-26 07:45:23', '2020-01-26 07:45:23', '2021-01-26 13:15:23'),
 ('fe9bbda0998f52abc9c29e81a8896234011bf34287e5b1180aa2834581d8e86a79cd129a24d4c033', 13, 3, 'password', '[]', 0, '2020-01-26 08:41:39', '2020-01-26 08:41:39', '2021-01-26 14:11:39');
@@ -441,7 +467,57 @@ INSERT INTO `questions` (`id`, `name`, `option1`, `option2`, `option3`, `option4
 (27, 'Her selection in the crew surprised Peter.', 'Her selection in the crew was a big surprise.', 'Peter was surprised at her selection in the crew.', 'Her selection was a surprise.', 'Peter was surprised at her selection of the crew.', '2', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
 (28, '....... Indus River is the longest river in India.', 'The', 'An', 'A', 'None Of These', '1', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
 (29, 'Liquid: Liter', 'Hot: Cold', 'Movie: Entertainment', 'Winter: Cold', 'Weight: Kilogram', '4', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
-(30, 'On looking at the cloudless sky, Peter said, \"It won\'t rain today.\"', 'at', 'cloudless', 'sky', 'today', '2', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3);
+(30, 'On looking at the cloudless sky, Peter said, \"It won\'t rain today.\"', 'at', 'cloudless', 'sky', 'today', '2', '2020-01-28 04:32:06', '2020-01-28 04:32:06', 3),
+(31, 'What does following declaration means ?Int (*a)[10];', 'a is the array of pointers to 10 integers', 'a is the array of 10 integer', 'a is the pointer to an array of 10 integers', 'a is an pointer to array', '3', '2020-01-31 04:21:32', '2020-01-31 04:21:32', 4),
+(32, 'Which is the valid keyword in java ?', 'String', 'Interface', 'Float', 'Unsigned', '2', '2020-01-31 04:21:32', '2020-01-31 04:21:32', 4),
+(33, 'The DBMS acts as an interface between what two components of an enterprise-class database system?', 'Database application and the database', 'Data and the database', 'The user and the database application', 'Database application and SQL', '1', '2020-01-31 04:21:34', '2020-01-31 04:21:34', 4),
+(34, 'SQL stands for ____ .', 'Structured Query Language', 'Sequential Query Language', 'Structured Question Language', 'Sequential Question Language', '1', '2020-01-31 04:21:34', '2020-01-31 04:21:34', 4),
+(35, 'Thrashing is', 'is a natural consequence of virtual memory systems', 'can always be avoided by swapping', 'always occurs on large computers', 'can be caused by poor paging algorithms', '4', '2020-01-31 04:21:34', '2020-01-31 04:21:34', 4),
+(36, 'How many digits of the DNIC (Data Network Identification Code) identify the country?', 'first three', 'first four', 'first five', 'first six', '1', '2020-01-31 04:21:34', '2020-01-31 04:21:34', 4),
+(37, 'What command is used to remove files?', 'dm', 'rm', 'delete', 'erase', '2', '2020-01-31 04:21:34', '2020-01-31 04:21:34', 4),
+(38, 'A self-relocating program is one which', 'cannot be made to execute in any area of storage other than the one designated for it at the time of its coding or translation', 'consists of a program and relevant information for its relocation', 'can itself perform the relocation of its address-sensitive portions', 'All of the above', '3', '2020-01-31 04:21:34', '2020-01-31 04:21:34', 4),
+(39, 'A hard disk is divided into tracks which are further subdivided into:', 'clusters', 'sectors', 'vectors', 'heads', '2', '2020-01-31 04:21:34', '2020-01-31 04:21:34', 4),
+(40, 'When the compiler cannot differentiate between two overloaded constructors, they are called', 'overloaded', 'destructed', 'ambiguous', 'dubious', '3', '2020-01-31 04:21:34', '2020-01-31 04:21:34', 4),
+(41, 'Look at this series: 12, 11, 13, 12, 14, 13, … What number should come next?', '10', '16', '13', '15', '4', '2020-01-31 04:37:06', '2020-01-31 04:37:06', 5),
+(42, 'P, Q, R, S, T, U, V and W are sitting round the circle and are facing the center: P is second to the right of T who is the neighbor of R and V. S is not the neighbor of P. V is the neighbor of U. Q is not between S and W. W is not between U and S.  Which one is immediate right to the V if the position of S and U are interchanged?', 'I', 'U', 'T', 'None Of These', '3', '2020-01-31 04:37:06', '2020-01-31 04:37:06', 5),
+(43, '3. Below given a series of some five numbers :  446 362 576 495 241 Answer the following questions based on these numbers:   If the middle digit in all the numbers are removed, then which of the following number will be minimum? ', '446', '362', '241', '495', '3', '2020-01-31 04:37:06', '2020-01-31 04:37:06', 5),
+(44, '4. In each of the following questions find out the alternative which will replace the question mark.  Meager: Adequate :: Condign : ?', 'Ache', 'Prolific', 'Far', 'Immoral', '4', '2020-01-31 04:37:07', '2020-01-31 04:37:07', 5),
+(45, 'Pointing to a man, a woman said, \"His mother is the only daughter of my mother.\" How is the woman related to the man ?', 'Mother', 'Sister', 'grand Father', 'None Of these', '1', '2020-01-31 04:37:07', '2020-01-31 04:37:07', 5),
+(46, 'Five persons F,M,K,J,E are sitting in a straight row, not necessarily in the same order. M do not sit in the middle and is the immediate left of J. F and J occupy the extreme positions. K sits between F and E.    If the position of K and J are interchanged, which of the following option denotes the first two people? ', 'EJ', 'FJ', 'FK', 'ME', '2', '2020-01-31 04:37:07', '2020-01-31 04:37:07', 5),
+(47, 'If P denotes +, Q denotes *, R denotes / and S denotes -, then 18 Q 12 P 4 R 5 S 6 = ?', '63', '33', '210.8', 'None of these', '3', '2020-01-31 04:37:07', '2020-01-31 04:37:07', 5),
+(48, '8. D lives between B and F. E and A live on successive floors. B lives in the topmost floor. There is exactly one person between C and E. There are exactly two people between F and G.  Who lives in the seventh floor?', 'D', 'A', 'B', 'F', '3', '2020-01-31 04:37:07', '2020-01-31 04:37:07', 5),
+(49, '9. Five girls are sitting on a bench to be photographed. Seema is to the left of Rani and to the right of Bindu. Mary is to the right of Rani. Reeta is between Rani and Mary.   Who are at the corners in the photograph? ', ' Rani and Bindu', 'Seema and Mary', 'Bindu and Mary', 'None of these', '3', '2020-01-31 04:37:07', '2020-01-31 04:37:07', 5),
+(50, 'A factory worker has five children. No one else in the factory has five children.', 'All workers in the factory have five children each.', 'Everybody in the factory has children.', 'Some of the factory workers have more than five children.', 'Only one worker in the factory has exactly five children.', '4', '2020-01-31 04:37:07', '2020-01-31 04:37:07', 5),
+(51, 'Look at this series: 12, 11, 13, 12, 14, 13, … What number should come next?', '10', '16', '13', '15', '4', '2020-01-31 04:37:21', '2020-01-31 04:37:21', 6),
+(52, 'P, Q, R, S, T, U, V and W are sitting round the circle and are facing the center: P is second to the right of T who is the neighbor of R and V. S is not the neighbor of P. V is the neighbor of U. Q is not between S and W. W is not between U and S.  Which one is immediate right to the V if the position of S and U are interchanged?', 'I', 'U', 'T', 'None Of These', '3', '2020-01-31 04:37:21', '2020-01-31 04:37:21', 6),
+(53, '3. Below given a series of some five numbers :  446 362 576 495 241 Answer the following questions based on these numbers:   If the middle digit in all the numbers are removed, then which of the following number will be minimum? ', '446', '362', '241', '495', '3', '2020-01-31 04:37:21', '2020-01-31 04:37:21', 6),
+(54, '4. In each of the following questions find out the alternative which will replace the question mark.  Meager: Adequate :: Condign : ?', 'Ache', 'Prolific', 'Far', 'Immoral', '4', '2020-01-31 04:37:21', '2020-01-31 04:37:21', 6),
+(55, 'Pointing to a man, a woman said, \"His mother is the only daughter of my mother.\" How is the woman related to the man ?', 'Mother', 'Sister', 'grand Father', 'None Of these', '1', '2020-01-31 04:37:21', '2020-01-31 04:37:21', 6),
+(56, 'Five persons F,M,K,J,E are sitting in a straight row, not necessarily in the same order. M do not sit in the middle and is the immediate left of J. F and J occupy the extreme positions. K sits between F and E.    If the position of K and J are interchanged, which of the following option denotes the first two people? ', 'EJ', 'FJ', 'FK', 'ME', '2', '2020-01-31 04:37:21', '2020-01-31 04:37:21', 6),
+(57, 'If P denotes +, Q denotes *, R denotes / and S denotes -, then 18 Q 12 P 4 R 5 S 6 = ?', '63', '33', '210.8', 'None of these', '3', '2020-01-31 04:37:21', '2020-01-31 04:37:21', 6),
+(58, '8. D lives between B and F. E and A live on successive floors. B lives in the topmost floor. There is exactly one person between C and E. There are exactly two people between F and G.  Who lives in the seventh floor?', 'D', 'A', 'B', 'F', '3', '2020-01-31 04:37:21', '2020-01-31 04:37:21', 6),
+(59, '9. Five girls are sitting on a bench to be photographed. Seema is to the left of Rani and to the right of Bindu. Mary is to the right of Rani. Reeta is between Rani and Mary.   Who are at the corners in the photograph? ', ' Rani and Bindu', 'Seema and Mary', 'Bindu and Mary', 'None of these', '3', '2020-01-31 04:37:21', '2020-01-31 04:37:21', 6),
+(60, 'A factory worker has five children. No one else in the factory has five children.', 'All workers in the factory have five children each.', 'Everybody in the factory has children.', 'Some of the factory workers have more than five children.', 'Only one worker in the factory has exactly five children.', '4', '2020-01-31 04:37:21', '2020-01-31 04:37:21', 6),
+(61, 'Find the next number in the the below series 11, 39, 69, 101, _____', '134', '133', '135', 'None Of These', '3', '2020-01-31 04:54:06', '2020-01-31 04:54:06', 7),
+(62, 'A train covers a distance of 12 km in 10 minutes .If it takes 6 seconds to pass a telegraph post,then the length of the train is:', '140', '120', '200', '100', '2', '2020-01-31 04:54:06', '2020-01-31 04:54:06', 7),
+(63, 'What would be the amount to be paid on the principal of 5000 Rs. at the end of 2 years at compound interest at the rate of 9 % per annum?', ' 5980.5', '5990.5', '5950.5', '5940.5', '4', '2020-01-31 04:54:06', '2020-01-31 04:54:06', 7),
+(64, 'A toy is in the form of a cylinder, find the lateral surface area if the radius and height of toy is given to be 7 and 10 cm respectively.', '420', '440', '480', '460', '2', '2020-01-31 04:54:06', '2020-01-31 04:54:06', 7),
+(65, '4. Can you find the answer for the below equation 97 / 382 - 375 * 378 + 371', '-141374.75', '-141372.75', '-141378.75', '-141381.75', '3', '2020-01-31 04:54:06', '2020-01-31 04:54:06', 7),
+(66, 'A man is 24 years older than his son. In two years, his age will be twice the age of his son. The present age of his son is: ', '14', '20', '22', 'None Of These', '3', '2020-01-31 04:54:06', '2020-01-31 04:54:06', 7),
+(67, 'In the below given sequence, what should be the Missing number?                   133, 108, 83, X , 33, 8 ', '58', '60', '56', '57', '1', '2020-01-31 04:54:06', '2020-01-31 04:54:06', 7),
+(68, 'An accurate clock shows 9 \'o\' clock in the morning. Through how many degrees will the hour hand rotate when the clock shows 3 \'o\' clock in the afternoon?', '120 Degree', '180 Degree', '150 Degree', 'None of these', '2', '2020-01-31 04:54:06', '2020-01-31 04:54:06', 7),
+(69, 'What annual payment will discharge a debt of Rs.1025 due in 2 years at the rate of 5% compound interest?', 'Rs.560', 'Rs.551.25', 'Rs.560.75', 'Rs.550', '2', '2020-01-31 04:54:06', '2020-01-31 04:54:06', 7),
+(70, 'The difference b/w two parallel sides of a trapezium is 8 cm and the perpendicular distance b/w them is 38 cm. Find the lengths of the parallel sides, if the area of the trapezium is 950 cm 2 .', '32 and 28 ', '29 and 21', '32 and 18', 'None Of These', '2', '2020-01-31 04:54:07', '2020-01-31 04:54:07', 7),
+(71, 'Find the correctly spelt words.', 'Efficient', 'Beterment', 'Employd', 'Treatmeant', '1', '2020-01-31 05:38:48', '2020-01-31 05:38:48', 8),
+(72, 'In the questions below the sentences have been given in Active/Passive voice. From the given alternatives, choose the one which best expresses the given sentence in Passive/Active voice. 	 After driving professor Kumar to the museum she dropped him at his hotel.', 'After being driven to the museum, Professor Kumar was dropped at his hotel.', 'Professor Kumar was being driven dropped at his hotel.', 'After she had driven Professor Kumar to the museum she had dropped him at his hotel.', 'After she was driven Professor Kumar to the museum she had dropped him at his hotel.', '1', '2020-01-31 05:38:48', '2020-01-31 05:38:48', 8),
+(73, 'Read each sentence to find out whether there is any grammatical error in it. The error, if any will be in one part of the sentence. The letter of that part is the answer. If there is no error, the answer is \'D\'. (Ignore the errors of punctuation, if any).', 'We discussed about the problem so thoroughly', 'on the eve of the examination', 'that I found it very easy to work it out.', 'No error.', '1', '2020-01-31 05:38:48', '2020-01-31 05:38:48', 8),
+(74, 'which can be substituted for the given word/sentence.	 Extreme old age when a man behaves like a fool', 'Imbecility', 'Senility', 'Dotage', 'Superannuation', '3', '2020-01-31 05:38:48', '2020-01-31 05:38:48', 8),
+(75, 'In the following the questions choose the word which best expresses the meaning of the given word.	 CORPULENT', 'Lean', 'Gaunt', 'Emaciated', 'Obese', '4', '2020-01-31 05:38:48', '2020-01-31 05:38:48', 8),
+(76, 'In questions given below out of four alternatives, choose the one which can be substituted for the given word/sentence. Extreme old age when a man behaves like a fool', 'Imbecility', 'Senility', 'Dotage', 'Superannuation', '4', '2020-01-31 05:38:48', '2020-01-31 05:38:48', 8),
+(77, 'Event (A):   Mr. X was killed in the floods. Event (B):   It was raining heavily.', 'If \'A\' is the effect and \'B\' is its immediate and principle cause.', 'If \'B\' is the effect and \'A\' is its immediate and principle cause.', 'If \'A\' is the effect but \'B\' is not its immediate and principle cause.', 'None of these.', '4', '2020-01-31 05:38:48', '2020-01-31 05:38:48', 8),
+(78, 'Arrange the given words in alphabetical order and tick the one that comes in the middle?', 'Plane', 'Player', 'Plenty', 'Place', '1', '2020-01-31 05:38:49', '2020-01-31 05:38:49', 8),
+(79, 'Statement: Mr. X is one of the probable candidates shortlisted for the post of Director of KLM Institute. Conclusions: I. Mr. X will be selected as Director of KLM Institute. II. Mr. X will not be selected as Director of KLM Institute.', 'If only conclusion I follows', 'If neither I nor II follows', 'If either I or II follows', 'If only conclusion II follows', '3', '2020-01-31 05:38:49', '2020-01-31 05:38:49', 8),
+(80, 'Find the correctly spelt words.', 'Benefitted', 'Benifited', 'Benefited', 'Benefeted', '3', '2020-01-31 05:38:49', '2020-01-31 05:38:49', 8);
 
 -- --------------------------------------------------------
 
@@ -516,7 +592,12 @@ CREATE TABLE `tests` (
 INSERT INTO `tests` (`id`, `user_id`, `name`, `people_attempted`, `level`, `subject_id`, `created_at`, `updated_at`) VALUES
 (1, 2, 'logical Test', 0, 1, 5, '2020-01-28 03:28:53', '2020-01-28 03:28:53'),
 (2, 2, 'Banibandana', 0, 1, 1, '2020-01-28 03:57:42', '2020-01-28 03:57:42'),
-(3, 2, 'Hello Smart', 0, 1, 2, '2020-01-28 04:32:06', '2020-01-28 04:32:06');
+(3, 2, 'Hello Smart', 0, 1, 2, '2020-01-28 04:32:06', '2020-01-28 04:32:06'),
+(4, 18, 'Pratice Test', 0, 1, 4, '2020-01-31 04:21:32', '2020-01-31 04:21:32'),
+(5, 18, 'Pratice Test', 0, 1, 5, '2020-01-31 04:37:06', '2020-01-31 04:37:06'),
+(6, 18, 'Pratice Test', 0, 1, 5, '2020-01-31 04:37:21', '2020-01-31 04:37:21'),
+(7, 18, 'Pratice Test', 0, 1, 1, '2020-01-31 04:54:06', '2020-01-31 04:54:06'),
+(8, 18, 'Pratice Test', 0, 1, 2, '2020-01-31 05:38:48', '2020-01-31 05:38:48');
 
 -- --------------------------------------------------------
 
@@ -541,21 +622,39 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `role_id` int(11) NOT NULL,
-  `level` int(11) DEFAULT NULL,
-  `profession_id` int(11) DEFAULT NULL
+  `level` int(11) DEFAULT '0',
+  `profession_id` int(11) DEFAULT NULL,
+  `technologies_used` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `phone`, `institution`, `skills`, `trade_lic_no`, `ugc_no`, `qualification`, `address`, `password`, `remember_token`, `created_at`, `updated_at`, `role_id`, `level`, `profession_id`) VALUES
-(1, 'Supriyo Das', 'supriyo15998@gmail.com', NULL, '7890122334', 'GNIT', 'HTML, CSS', NULL, NULL, NULL, 'basuduakdada', '$2y$10$KM8FDG6YKJgTphfVJvp01uXNcORJnLqnrRJN8hh7NJJZbgCbxF1Ti', NULL, '2020-01-23 09:32:05', '2020-01-23 09:32:05', 1, NULL, NULL),
-(2, 'The BugLabs', 'thebuglabs@gmail.com', NULL, '7417417414', NULL, NULL, 'ufua21312', NULL, NULL, 'ahbda', '$2y$10$NPwKYe4FCzmpbJBD3IEfdOQWbLixEfXXLFre7OPy6smgYZfi078Si', NULL, '2020-01-23 09:38:23', '2020-01-23 09:38:23', 3, NULL, NULL),
-(8, 'Sandipan Sau', 'sandipan08@gmail.com', NULL, '8617556459', NULL, 'Hau hau', NULL, NULL, 'B.Tech in Computer Science', 'Khorgopur, Bagnan', '$2y$10$sD9mIgUUo/ZOUgfAqT2RKuiH91JWzKdwemPFdsEBYRmN6xwygYDMy', NULL, '2020-01-26 03:42:54', '2020-01-26 03:42:54', 4, NULL, NULL),
-(13, 'Faraz Ali', 'farazappy@gmail.com', NULL, '7044728852', 'Gurunanak Institute Of Technology', 'Coding', NULL, NULL, NULL, '25\nLower Range', '$2y$10$kziY53.PcaCRfDuUWOdeeO998/D0Cnm8AVQOPrBSfUqJKVMzoQf0q', NULL, '2020-01-26 03:50:31', '2020-01-26 03:50:31', 1, NULL, NULL),
-(14, 'Guru Nanak Institute of Technology', 'admin@gnit.ac.in', NULL, '8520852025', NULL, NULL, NULL, 'C6166', NULL, '157/F, Nilgunj Road, Sodepur, Kolkata-700114', '$2y$10$oYVikBZOy4zUYBqw/vK/Puu.D9rYpzMB25EpeNiCehJQ12aMN4JQC', NULL, '2020-01-27 01:32:45', '2020-01-27 01:32:45', 2, NULL, NULL),
-(16, 'Srijit Pal', 'srijitman@gmail.com', NULL, '1234567890', NULL, 'Coding, Media, Cultural, Technical', NULL, NULL, 'B.Tech in Computer Science', 'Kharda', '$2y$10$IrGE5gL1H5DDu0wobYRCFuRtFZLkaihe3pn8j577s3l6F/rbatqz.', NULL, '2020-01-30 04:42:00', '2020-01-30 04:42:01', 4, NULL, 5);
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `phone`, `institution`, `skills`, `trade_lic_no`, `ugc_no`, `qualification`, `address`, `password`, `remember_token`, `created_at`, `updated_at`, `role_id`, `level`, `profession_id`, `technologies_used`) VALUES
+(1, 'Supriyo Das', 'supriyo15998@gmail.com', NULL, '7890122334', 'GNIT', 'HTML, CSS', NULL, NULL, NULL, 'basuduakdada', '$2y$10$KM8FDG6YKJgTphfVJvp01uXNcORJnLqnrRJN8hh7NJJZbgCbxF1Ti', NULL, '2020-01-23 09:32:05', '2020-01-23 09:32:05', 1, NULL, NULL, ''),
+(2, 'The BugLabs', 'thebuglabs@gmail.com', NULL, '7417417414', NULL, NULL, 'ufua21312', NULL, NULL, 'ahbda', '$2y$10$NPwKYe4FCzmpbJBD3IEfdOQWbLixEfXXLFre7OPy6smgYZfi078Si', NULL, '2020-01-23 09:38:23', '2020-01-23 09:38:23', 3, NULL, NULL, ''),
+(8, 'Sandipan Sau', 'sandipan08@gmail.com', NULL, '8617556459', NULL, 'Hau hau', NULL, NULL, 'B.Tech in Computer Science', 'Khorgopur, Bagnan', '$2y$10$sD9mIgUUo/ZOUgfAqT2RKuiH91JWzKdwemPFdsEBYRmN6xwygYDMy', NULL, '2020-01-26 03:42:54', '2020-01-26 03:42:54', 4, NULL, NULL, ''),
+(13, 'Faraz Ali', 'farazappy@gmail.com', NULL, '7044728852', 'Gurunanak Institute Of Technology', 'Coding', NULL, NULL, NULL, '25\nLower Range', '$2y$10$kziY53.PcaCRfDuUWOdeeO998/D0Cnm8AVQOPrBSfUqJKVMzoQf0q', NULL, '2020-01-26 03:50:31', '2020-01-31 00:51:37', 1, 0, NULL, ''),
+(14, 'Guru Nanak Institute of Technology', 'admin@gnit.ac.in', NULL, '8520852025', NULL, NULL, NULL, 'C6166', NULL, '157/F, Nilgunj Road, Sodepur, Kolkata-700114', '$2y$10$oYVikBZOy4zUYBqw/vK/Puu.D9rYpzMB25EpeNiCehJQ12aMN4JQC', NULL, '2020-01-27 01:32:45', '2020-01-27 01:32:45', 2, NULL, NULL, ''),
+(16, 'Srijit Pal', 'srijitman@gmail.com', NULL, '1234567890', NULL, 'Coding, Media, Cultural, Technical', NULL, NULL, 'B.Tech in Computer Science', 'Kharda', '$2y$10$IrGE5gL1H5DDu0wobYRCFuRtFZLkaihe3pn8j577s3l6F/rbatqz.', NULL, '2020-01-30 04:42:00', '2020-01-30 04:42:01', 4, NULL, 5, ''),
+(18, 'Skiled', 'skilled.s4ds@gmail.com', NULL, '7478470737', NULL, NULL, '01122', NULL, NULL, 'vill-Khalore,P.O+P.S-Bagnan', '$2y$10$/a7UXcijUzRhT84kOMDIVe26h7rxFh5YExgGxSNHjio.B5voKnH6G', NULL, '2020-01-31 03:15:48', '2020-01-31 03:15:48', 3, NULL, NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vacancies`
+--
+
+CREATE TABLE `vacancies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(161) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `package` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -577,6 +676,12 @@ ALTER TABLE `interests`
 -- Indexes for table `interest_user`
 --
 ALTER TABLE `interest_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lectures`
+--
+ALTER TABLE `lectures`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -663,6 +768,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `vacancies`
+--
+ALTER TABLE `vacancies`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -682,10 +793,15 @@ ALTER TABLE `interests`
 ALTER TABLE `interest_user`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
+-- AUTO_INCREMENT for table `lectures`
+--
+ALTER TABLE `lectures`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `oauth_clients`
 --
@@ -705,7 +821,7 @@ ALTER TABLE `professions`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT for table `roles`
 --
@@ -720,12 +836,17 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT for table `vacancies`
+--
+ALTER TABLE `vacancies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

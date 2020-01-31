@@ -21,6 +21,7 @@ Route::post('/auth/register', 'Api\\AuthController@register');
 Route::post('/auth/login', 'Api\\AuthController@login');
 Route::get('/auth/register/generic', 'Api\\AuthController@generic');
 Route::get('/companies', 'Api\\AuthController@getCompanies');
+Route::get('/student/exam/first', 'Api\\AuthController@getFirstExam');
 Route::get('/question/{level}', 'Api\\AuthController@getQuestions');
 Route::get('/profile/{userId}', 'Api\\AuthController@getUser');
 Route::get('/subjects', 'Api\\AuthController@getSubjects');
