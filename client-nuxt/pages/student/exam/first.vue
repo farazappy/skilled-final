@@ -24,7 +24,7 @@
                         :text="test.name"
                     >
 
-                        <v-form @submit.prevent="submitTestForm()">
+                        <v-form @submit.prevent="submitAnswerForm()">
                             <v-container py-0>
                                 <v-layout wrap>
                                     <v-flex
@@ -39,13 +39,14 @@
                                         :key="question.id"
                                     >
                                         <v-card ref="form">
+                                            {{ testForm }}
                                             <v-card-title>
                                                 Question {{ index+1 }}
                                             </v-card-title>
                                             <v-card-text>
                                                 <p>{{ question.name }}</p>
                                                 <v-radio-group
-                                                    v-model="testForm.testQuestions[n-1]"
+                                                    v-model="testForm.answers[index]"
                                                     label="Choose correct answer"
                                                 >
                                                     <v-radio
@@ -77,7 +78,7 @@
                                             color="success"
                                             :loading="isLoading"
                                             :disabled="isLoading"
-                                            @click="submitTestForm"
+                                            @click="submitAnswerForm"
                                         >
                                             Submit Answer
                                         </v-btn>
@@ -105,93 +106,9 @@ export default {
         return {
             test: null,
             testForm: {
-                name: '',
-                subject_id: '',
-                level: '',
-                people_attempted: 0,
-                testQuestions: [
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    },
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    },
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    },
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    },
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    },
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    },
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    },
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    },
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    },
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    }
-                ]
-            },
+                answers: [],
+                test: null,
+            }
         }
     },
     async asyncData ({ app, params }) {
@@ -199,6 +116,30 @@ export default {
         return {
             test: response.test
         }
+    },
+    methods: {
+        submitAnswerForm () {
+            if (this.testForm.answers.length > 0) {
+                for (var i = 0; i < 10; i++) {
+                    if (!this.testForm.answers[i]) {
+                        this.$store.dispatch('notification/setNotification', {
+                            type: "Error!",
+                            color: "error",
+                            message: `Answer all the questions!`
+                        })
+                    }
+                }
+            } else {
+                this.$store.dispatch('notification/setNotification', {
+                    type: "Error!",
+                    color: "error",
+                    message: `Answer all the questions!`
+                })
+            }
+        }
+    },
+    mounted () {
+        this.testForm.test = this.test.id
     }
 }
 </script>

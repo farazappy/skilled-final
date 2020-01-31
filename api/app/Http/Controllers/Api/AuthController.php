@@ -115,6 +115,34 @@ class AuthController extends Controller
         ]);
     }
 
+    public function submitFirstExam(Request $request) {
+        $answers = $request->answers;
+        $test = Test::findOrFail($request->test);
+        $sendAnswers = ['Q1' => '0', 'Q2' => '0', 'Q3' => '0', 'Q4' => '0', 'Q5' => '0', 'Q6' => '0', 'Q7' => '0', 'Q8' => '0', 'Q9' => '0', 'Q10' => '0'];
+        foreach (array_keys($sendAnswers) as $key => $value) {
+            if ($test->questions[$key]->correct == $answers[$key])
+                $sendAnswers[$value] = 1;
+            else
+                $sendAnswers[$value] = 0;
+        }
+
+        $http = new Client;
+
+        $response = $http->post("http://192.168.0.5:8000/youth/", [
+            'form_params' => [
+                "answers"    => $sendAnswers
+            ]
+        ]);
+
+        $decoded = json_decode((string) $response->getBody(), true);
+
+        dd($decoded);
+
+        //$user->update(['profession_id' => $decoded['suggested_profession']]);
+
+        dd($sendAnswers);
+    }
+
     public function getUser($userId) {
         $user = User::with('role')->with('interests')->findOrFail($userId);
         return response()->json([
