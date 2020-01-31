@@ -133,15 +133,26 @@ export default {
                     } else {
                         await this.$axios.$post('student/exam/first', this.testForm)
                             .then((resp) => {
-                                this.isLoading = false
                                 this.$store.dispatch('notification/setNotification', {
                                     type: "Success!",
                                     color: "success",
                                     message: `You have been suggested Level ${resp.user.level}`
                                 })
-                                this.$router.push({
-                                    path: '/'
-                                })
+                                await this.$auth.fetchUser()
+                                    .then(() => {
+                                        this.isLoading = false
+                                        this.$router.push({
+                                            path: '/'
+                                        })
+                                    })
+                                    .catch(() => {
+                                        this.$store.dispatch('notification/setNotification', {
+                                            type: "Error!",
+                                            color: "error",
+                                            message: `Somethign went wrong!`
+                                        })
+                                    })
+
                             })
                             .catch((err) => {
                                 this.isLoading = false
