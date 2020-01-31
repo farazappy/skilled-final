@@ -117,6 +117,7 @@ class AuthController extends Controller
 
     public function submitFirstExam(Request $request) {
         $answers = $request->answers;
+	$user = User::findOrFail($request->user()->id);
         $test = Test::findOrFail($request->test);
         $sendAnswers = ['Q1' => '0', 'Q2' => '0', 'Q3' => '0', 'Q4' => '0', 'Q5' => '0', 'Q6' => '0', 'Q7' => '0', 'Q8' => '0', 'Q9' => '0', 'Q10' => '0'];
         foreach (array_keys($sendAnswers) as $key => $value) {
@@ -133,8 +134,6 @@ class AuthController extends Controller
         ]);
 
         $decoded = json_decode((string) $response->getBody(), true);
-
-        dd($decoded);
 
         $user->update(['level' => $decoded['suggested_level']]);
 
