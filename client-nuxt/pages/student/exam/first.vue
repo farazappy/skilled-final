@@ -118,7 +118,7 @@ export default {
         }
     },
     methods: {
-        submitAnswerForm () {
+        async submitAnswerForm () {
             if (this.testForm.answers.length > 0) {
                 for (var i = 0; i < 10; i++) {
                     if (!this.testForm.answers[i]) {
@@ -127,6 +127,22 @@ export default {
                             color: "error",
                             message: `Answer all the questions!`
                         })
+                    } else {
+                        await this.$axios.$post('student/exam/first')
+                            .then((resp) => {
+                                this.$store.dispatch('notification/setNotification', {
+                                    type: "Success!",
+                                    color: "success",
+                                    message: `You have been suggested Level ${resp.user.level}`
+                                })
+                            })
+                            .catch((err) => {
+                                this.$store.dispatch('notification/setNotification', {
+                                    type: "Error!",
+                                    color: "error",
+                                    message: `Somethign went wrong!`
+                                })
+                            });
                     }
                 }
             } else {

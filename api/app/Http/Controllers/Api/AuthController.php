@@ -136,9 +136,11 @@ class AuthController extends Controller
 
         dd($decoded);
 
-        //$user->update(['profession_id' => $decoded['suggested_profession']]);
+        $user->update(['level' => $decoded['suggested_level']]);
 
-        dd($sendAnswers);
+        return response()->json([
+            'user' => $user
+        ]);
     }
 
     public function getUser($userId) {
