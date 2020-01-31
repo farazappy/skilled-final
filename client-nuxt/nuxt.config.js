@@ -60,7 +60,7 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'http://192.168.0.5:5000/api'
+    baseURL: 'http://192.168.0.5:8000/api'
     // baseURL: 'http://127.0.0.1:8000/api',
     // debug: true
   },
@@ -100,8 +100,8 @@ export default {
     extend (config, ctx) {
     }
   },
-  // server: {
-  //   port: 8000, // default: 3000
-  //   host: '192.168.0.3' // default: localhost
-  // }
+  server: {
+    port: 8000, // default: 3000
+    host: '192.168.0.3' // default: localhost
+  }
 }
