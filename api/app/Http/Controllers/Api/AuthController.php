@@ -12,6 +12,8 @@ use App\Role;
 use App\Interest;
 use App\Subject;
 use App\Test;
+use App\Lecture;
+use App\Vacancy;
 use GuzzleHttp\Client;
 
 
@@ -159,6 +161,30 @@ class AuthController extends Controller
         return response()->json([
             'students' => $students,
             'youths' => $youths
+        ]);
+    }
+    public function createVacancy(Request $request) {
+        Vacancy::create($request->all());
+        return response()->json([
+            'message' => 'Vacancy created'
+        ]);
+    }
+    public function getVacancies() {
+        $vacancy = Vacancy::all();
+        return response()->json([
+            'vacancies' => $vacancy
+        ]);
+    }
+    public function createLecture(Request $request) {
+        Lecture::create($request->all());
+        return response()->json([
+            'message' => 'Lecture created'
+        ]);
+    }
+    public function getLecture() {
+        $lectures = Lecture::all();
+        return response()->json([
+            'lectures' => $lectures
         ]);
     }
 }
