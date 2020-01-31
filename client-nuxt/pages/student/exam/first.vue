@@ -105,6 +105,7 @@ export default {
     data () {
         return {
             test: null,
+            isLoading: false,
             testForm: {
                 answers: [],
                 test: null,
@@ -119,9 +120,11 @@ export default {
     },
     methods: {
         async submitAnswerForm () {
+            this.isLoading = true
             if (this.testForm.answers.length > 0) {
                 for (var i = 0; i < 10; i++) {
                     if (!this.testForm.answers[i]) {
+                        this.isLoading = false
                         this.$store.dispatch('notification/setNotification', {
                             type: "Error!",
                             color: "error",
@@ -130,13 +133,18 @@ export default {
                     } else {
                         await this.$axios.$post('student/exam/first', this.testForm)
                             .then((resp) => {
+                                this.isLoading = false
                                 this.$store.dispatch('notification/setNotification', {
                                     type: "Success!",
                                     color: "success",
                                     message: `You have been suggested Level ${resp.user.level}`
                                 })
+                                this.$router.push({
+                                    path: '/'
+                                })
                             })
                             .catch((err) => {
+                                this.isLoading = false
                                 this.$store.dispatch('notification/setNotification', {
                                     type: "Error!",
                                     color: "error",
@@ -146,6 +154,7 @@ export default {
                     }
                 }
             } else {
+                this.isLoading = false
                 this.$store.dispatch('notification/setNotification', {
                     type: "Error!",
                     color: "error",
