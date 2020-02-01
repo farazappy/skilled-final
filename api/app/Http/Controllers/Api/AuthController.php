@@ -125,7 +125,7 @@ class AuthController extends Controller
 
     public function submitFirstExam(Request $request) {
         $answers = $request->answers;
-	$user = User::findOrFail($request->user()->id);
+	    $user = User::findOrFail($request->user()->id);
         $test = Test::findOrFail($request->test);
         $sendAnswers = ['Q1' => '0', 'Q2' => '0', 'Q3' => '0', 'Q4' => '0', 'Q5' => '0', 'Q6' => '0', 'Q7' => '0', 'Q8' => '0', 'Q9' => '0', 'Q10' => '0'];
         foreach (array_keys($sendAnswers) as $key => $value) {
@@ -144,6 +144,8 @@ class AuthController extends Controller
         $decoded = json_decode((string) $response->getBody(), true);
 
         $user->update(['level' => $decoded['suggested_level']]);
+
+        $test->update(['people_attempted' => $test->people_attempted++]);
 
         return response()->json([
             'user' => $user
@@ -220,8 +222,9 @@ class AuthController extends Controller
             'message' => 'Lecture created'
         ]);
     }
-    public function getLecture() {
-        $lectures = Lecture::all();
+    public function getLecture(Request $request) {
+        $user = User::findOrFail($request->user()->id);
+        $lectures = Lecture::with('user')->where('profession_id', $user->profession_id)->get();
         return response()->json([
             'lectures' => $lectures
         ]);

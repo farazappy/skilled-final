@@ -106,7 +106,7 @@ export default {
                     showIf: 'student'
                 },
                 {
-                    to: '/',
+                    to: '/unemployed-youth/lectures',
                     icon: 'live_tv',
                     text: 'Lectures',
                     showIf: 'unemployed-youth'

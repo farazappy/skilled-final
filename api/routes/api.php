@@ -34,4 +34,4 @@ Route::middleware('auth:api')->get('/company/hire/profiles', 'Api\\AuthControlle
 Route::post('/company/createVacancy', 'Api\\AuthController@createVacancy');
 Route::get('/getVacancies','Api\\AuthController@getVacancies');
 Route::post('/createLecture','Api\\AuthController@createLecture');
-Route::get('/getLectures','Api\\AuthController@getLecture');
+Route::middleware('auth:api')->get('/getLectures','Api\\AuthController@getLecture');

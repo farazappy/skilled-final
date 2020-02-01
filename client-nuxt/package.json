@@ -1,8 +1,8 @@
 {
-  "name": "nuxtjs-dashboard",
+  "name": "SkillED",
   "version": "1.0.0",
-  "description": "NuxtJs Dashboard",
-  "author": "Jimmy Jouanne",
+  "description": "SkillED Dashboard",
+  "author": "The BugLabs",
   "private": true,
   "scripts": {
     "dev": "nuxt",

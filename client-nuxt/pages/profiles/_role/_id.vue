@@ -44,12 +44,14 @@
                                 <v-flex
                                     xs12
                                     md2
+                                    v-if="profileUser.role.id === 4"
                                 >
                                     <h4 class="title">Interests</h4>
                                 </v-flex>
                                 <v-flex
                                     xs12
                                     md10
+                                    v-if="profileUser.role.id === 4"
                                 >
                                     <v-chip
                                         class="ma-2"
@@ -61,60 +63,26 @@
                                         {{ interest.name }}
                                     </v-chip>
                                 </v-flex>
+
                                 <v-flex
                                     xs12
-                                    md12
+                                    md2
+                                    v-if="profileUser.role.id === 1"
                                 >
-                                    <v-text-field
-                                        label="Adress"
-                                        class="purple-input"
-                                    />
+                                    <h4 class="title">Level</h4>
                                 </v-flex>
                                 <v-flex
                                     xs12
-                                    md4
+                                    md10
+                                    v-if="profileUser.role.id === 1"
                                 >
-                                    <v-text-field
-                                        label="City"
-                                        class="purple-input"
-                                    />
-                                </v-flex>
-                                <v-flex
-                                    xs12
-                                    md4
-                                >
-                                    <v-text-field
-                                        label="Country"
-                                        class="purple-input"
-                                    />
-                                </v-flex>
-                                <v-flex
-                                    xs12
-                                    md4
-                                >
-                                    <v-text-field
-                                        class="purple-input"
-                                        label="Postal Code"
-                                        type="number"
-                                    />
-                                </v-flex>
-                                <v-flex xs12>
-                                    <v-textarea
-                                        class="purple-input"
-                                        label="About Me"
-                                        value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                                    />
-                                </v-flex>
-                                <v-flex
-                                    xs12
-                                    text-xs-right
-                                >
-                                    <v-btn
-                                        class="mx-0 font-weight-light"
-                                        color="success"
+                                    <v-chip
+                                        class="ma-2"
+                                        color="purple"
+                                        text-color="white"
                                     >
-                                        Update Profile
-                                    </v-btn>
+                                        {{ profileUser.level }}
+                                    </v-chip>
                                 </v-flex>
                             </v-layout>
                         </v-container>
