@@ -8,6 +8,9 @@ export default {
         this.$router.push({
             path: `/dashboard/${this.user.role.slug}` // @todo redirect intended
         })
+    },
+    created() {
+        console.log(this.user)
     }
 }
 </script>

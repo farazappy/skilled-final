@@ -115,7 +115,7 @@
                     color="orange"
                     icon="assignment_ind"
                     title="Jobs applied for"
-                    value="3"
+                    value="2"
                 />
             </v-flex>
             <v-flex
@@ -391,6 +391,9 @@ export default {
         complete (index) {
             this.list[index] = !this.list[index]
         }
+    },
+    created() {
+        console.log("_role.vue me aaya")
     },
     mounted () {
         this.$nextTick(() => {

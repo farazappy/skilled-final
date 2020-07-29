@@ -146,11 +146,11 @@ export default {
     },
     mounted () {
 
-        if (this.user.role.id === 1 && this.user.level === 0) {
-            this.$router.push({
-                path: '/student/exam/take'
-            })
-        }
+        // if (this.user.role.id === 1 && this.user.level === 0) {
+        //     this.$router.push({
+        //         path: '/student/exam/take'
+        //     })
+        // }
 
         this.onResponsiveInverted()
         window.addEventListener('resize', this.onResponsiveInverted)
