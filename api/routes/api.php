@@ -30,7 +30,7 @@ Route::get('/profile/{userId}', 'Api\\AuthController@getUser');
 Route::get('/subjects', 'Api\\AuthController@getSubjects');
 Route::middleware('auth:api')->get('/auth/tests', 'Api\\AuthController@getMyTestsWithSubjects');
 Route::middleware('auth:api')->post('/auth/tests/create', 'Api\\AuthController@createTest');
-Route::middleware('auth:api')->get('/company/hire/profiles', 'Api\\AuthController@allProfiles');
+Route::get('/company/hire/profiles', 'Api\\AuthController@allProfiles');
 Route::post('/company/createVacancy', 'Api\\AuthController@createVacancy');
 Route::get('/getVacancies','Api\\AuthController@getVacancies');
 Route::post('/createLecture','Api\\AuthController@createLecture');

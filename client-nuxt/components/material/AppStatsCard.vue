@@ -41,7 +41,12 @@
         class="caption font-weight-light"
         v-text="subText"
       />
+      <v-btn
+          v-if="buttonDegaBC"
+          color="primary"
+      >{{ btnText }}</v-btn>
     </template>
+    
   </material-card>
 </template>
 
@@ -64,6 +69,14 @@
         default: undefined
       },
       subIconColor: {
+        type: String,
+        default: undefined
+      },
+      buttonDegaBC :{
+        type: Boolean,
+        default: false,
+      },
+      btnText: {
         type: String,
         default: undefined
       },

@@ -198,10 +198,11 @@ class AuthController extends Controller
     public function allProfiles() {
         $students = User::with('role')->where('role_id', 1)->get();
         $youths = User::with('role')->where('role_id', 4)->get();
-
+        $teachers = User::with('role')->where('role_id', 3)->get();
         return response()->json([
             'students' => $students,
-            'youths' => $youths
+            'youths' => $youths,
+            'teachers' => $teachers
         ]);
     }
     public function createVacancy(Request $request) {

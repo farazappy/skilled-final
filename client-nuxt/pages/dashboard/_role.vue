@@ -128,10 +128,58 @@
                 <material-stats-card
                     color="red"
                     icon="assignment_turned_in"
+                    title="Total Teachers"
+                    :value="teachers.length.toString()"
+                    buttonDegaBC="true"
+                    btnText="View Teachers"
+                    @click.prevent="viewTeachers()"
+                />
+                
+            </v-flex>
+            <v-flex
+                sm6
+                xs12
+                md6
+                lg4
+                v-if="user.role.id === 2"
+            >
+                <material-stats-card
+                    color="red"
+                    icon="assignment_turned_in"
                     title="Tests taken"
                     value="75"
                 />
             </v-flex>
+
+            <material-card v-if="user.role.id === 2 && showTeachersTable"
+                    color="orange"
+                    title="Teacher Stats"
+                    text="Viewing all teachers"
+                >
+                    <v-data-table
+                        :headers="headers2"
+                        :items="teachers"
+                        hide-actions
+                    >
+                        <template
+                            slot="headerCell"
+                            slot-scope="{ header }"
+                        >
+                            <span
+                                class="font-weight-light text-warning text--darken-3"
+                                v-text="header.text"
+                            />
+                        </template>
+                        <template
+                            slot="items"
+                            slot-scope="{ index, item }"
+                        >
+                            <td>{{ item.name }}</td>
+                            <td class="text-xs-right">{{ item.email }}</td>
+                            <td class="text-xs-right">{{ item.phone }}</td>
+                        </template>
+                    </v-data-table>
+                </material-card>
 
             <v-flex
                 sm6
@@ -258,6 +306,8 @@ export default {
     },
     data () {
         return {
+            teachers: [],
+            showTeachersTable: false,
             dailySalesChart: {
                 data: {
                     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -350,35 +400,51 @@ export default {
                     align: 'right'
                 }
             ],
-            // items: [
-            //     {
-            //         name: 'Dakota Rice',
-            //         country: 'Niger',
-            //         city: 'Oud-Tunrhout',
-            //         salary: '$35,738'
-            //     },
-            //     {
-            //         name: 'Minerva Hooper',
-            //         country: 'Curaçao',
-            //         city: 'Sinaai-Waas',
-            //         salary: '$23,738'
-            //     }, {
-            //         name: 'Sage Rodriguez',
-            //         country: 'Netherlands',
-            //         city: 'Overland Park',
-            //         salary: '$56,142'
-            //     }, {
-            //         name: 'Philip Chanley',
-            //         country: 'Korea, South',
-            //         city: 'Gloucester',
-            //         salary: '$38,735'
-            //     }, {
-            //         name: 'Doris Greene',
-            //         country: 'Malawi',
-            //         city: 'Feldkirchen in Kārnten',
-            //         salary: '$63,542'
-            //     }
-            // ],
+            items: [
+                {
+                    name: 'Dakota Rice',
+                    country: 'Niger',
+                    city: 'Oud-Tunrhout',
+                    salary: '$35,738'
+                },
+                {
+                    name: 'Minerva Hooper',
+                    country: 'Curaçao',
+                    city: 'Sinaai-Waas',
+                    salary: '$23,738'
+                }
+            ],
+            headers2: [
+                {
+                    sortable: false,
+                    text: 'Teacher name',
+                    value: 'name'
+                },
+                {
+                    sortable: false,
+                    text: 'Teacher email',
+                    value: 'performance',
+                    align: 'right'
+                },
+                {
+                    sortable: false,
+                    text: 'Teacher phone',
+                    value: 'Time taken',
+                    align: 'right'
+                }
+            ],
+            items2: [
+                {
+                    name: 'Cool cool',
+                    phone: 'cool_ka_phone',
+                    email: 'cool_ka_email'
+                },
+                {
+                    name: 'Cool 2',
+                    phone: 'cool2_ka_phone',
+                    email: 'cool2_ka_email'
+                }
+            ],
             tabs: 0,
             list: {
                 0: false,
@@ -387,15 +453,28 @@ export default {
             }
         }
     },
+    async asyncData ({ app, params }) {
+        let response = await app.$axios.$get('/company/hire/profiles')
+        //console.log(response.teachers)
+        return {
+            teachers: response.teachers
+        }
+    },
     methods: {
         complete (index) {
             this.list[index] = !this.list[index]
+        },
+        viewTeachers() {
+            console.log("view teachers")
+            this.showTeachersTable = true
         }
     },
     created() {
         console.log("_role.vue me aaya")
     },
     mounted () {
+        console.log(this.teachers)
+        
         this.$nextTick(() => {
             /*this.dailySalesChart.options = {
               lineSmooth: this.$chartist.Interpolation.cardinal({
