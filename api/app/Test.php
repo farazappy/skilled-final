@@ -15,4 +15,8 @@ class Test extends Model
     public function questions() {
         return $this->hasMany('App\Question');
     }
+
+    public function createdBy() {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }

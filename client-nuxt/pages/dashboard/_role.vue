@@ -5,91 +5,6 @@
         grid-list-xl
     >
         <v-layout wrap>
-            <!-- <v-flex
-                md12
-                sm12
-                lg4
-            >
-                <material-chart-card
-                    :data="dailySalesChart.data"
-                    :options="dailySalesChart.options"
-                    color="info"
-                    type="Line"
-                >
-                    <h4 class="title font-weight-light">Daily Sales</h4>
-                    <p class="category d-inline-flex font-weight-light">
-                        <v-icon
-                            color="green"
-                            small
-                        >
-                            mdi-arrow-up
-                        </v-icon>
-                        <span class="green--text">55%</span>&nbsp;
-                        increase in today's sales
-                    </p>
-
-                    <template slot="actions">
-                        <v-icon
-                            class="mr-2"
-                            small
-                        >
-                            mdi-clock-outline
-                        </v-icon>
-                        <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
-                    </template>
-                </material-chart-card>
-            </v-flex>
-            <v-flex
-                md12
-                sm12
-                lg4
-            >
-                <material-chart-card
-                    :data="emailsSubscriptionChart.data"
-                    :options="emailsSubscriptionChart.options"
-                    :responsive-options="emailsSubscriptionChart.responsiveOptions"
-                    color="red"
-                    type="Bar"
-                >
-                    <h4 class="title font-weight-light">Email Subscription</h4>
-                    <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
-
-                    <template slot="actions">
-                        <v-icon
-                            class="mr-2"
-                            small
-                        >
-                            mdi-clock-outline
-                        </v-icon>
-                        <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
-                    </template>
-                </material-chart-card>
-            </v-flex>
-            <v-flex
-                md12
-                sm12
-                lg4
-            >
-                <material-chart-card
-                    :data="dataCompletedTasksChart.data"
-                    :options="dataCompletedTasksChart.options"
-                    color="green"
-                    type="Line"
-                >
-                    <h3 class="title font-weight-light">Completed Tasks</h3>
-                    <p class="category d-inline-flex font-weight-light">Last Last Campaign Performance</p>
-
-                    <template slot="actions">
-                        <v-icon
-                            class="mr-2"
-                            small
-                        >
-                            mdi-clock-outline
-                        </v-icon>
-                        <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
-                    </template>
-                </material-chart-card>
-            </v-flex> -->
             <v-flex
                 sm6
                 xs12
@@ -181,7 +96,7 @@
                     </v-data-table>
                 </material-card>
 
-            <v-flex
+            <!-- <v-flex
                 sm6
                 xs12
                 md6
@@ -194,26 +109,27 @@
                     title="Jobs posted"
                     :value="4"
                 />
-            </v-flex>
+            </v-flex> -->
             <v-flex
                 sm6
                 xs12
                 md6
-                lg4
+                lg6
                 v-if="user.role.id === 3"
             >
                 <material-stats-card
                     color="orange"
                     icon="assignment_ind"
                     title="Tests posted"
-                    value="3"
+                    value="3"                    
                 />
             </v-flex>
+            
             <v-flex
                 sm6
                 xs12
                 md6
-                lg4
+                lg6
                 v-if="user.role.id === 3"
             >
                 <material-stats-card
@@ -223,8 +139,26 @@
                     value="1"
                 />
             </v-flex>
-
             <v-flex
+                sm6
+                xs12
+                md6
+                lg3
+                v-if="user.role.id === 3"
+            >
+                <v-btn
+                    color="success"
+                ><span class="material-icons">
+                add_box
+                </span>Create Test</v-btn>
+                <v-btn
+                    color="info"
+                    @click.prevent="myTestsTeachers()"
+                ><span class="material-icons">
+                preview
+                </span>View Test</v-btn>
+            </v-flex>
+            <!-- <v-flex
                 sm6
                 xs12
                 md6
@@ -237,8 +171,8 @@
                     title="Suggested crareer path"
                     :value="user.profession.name"
                 />
-            </v-flex>
-            <v-flex
+            </v-flex> -->
+            <!-- <v-flex
                 sm6
                 xs12
                 md6
@@ -251,7 +185,7 @@
                     title="Lectures Watched"
                     value="3"
                 />
-            </v-flex>
+            </v-flex> -->
             <v-flex
                 md12
                 lg12
@@ -461,6 +395,9 @@ export default {
         }
     },
     methods: {
+        myTestsTeachers() {
+            this.$router.push('/teacher/my-tests');
+        },
         complete (index) {
             this.list[index] = !this.list[index]
         },

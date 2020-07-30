@@ -230,4 +230,16 @@ class AuthController extends Controller
             'lectures' => $lectures
         ]);
     }
+
+    public function getMyTests(Request $request)
+    {
+        // dd($request->user()->name);
+        //$tests = auth()->user()->tests;
+        $tests = Test::with('subject')->where('user_id', auth()->user()->id)->get();
+        // dd($tests);
+        return response()->json([
+            'tests' => $tests 
+        ]);
+    }
+
 }

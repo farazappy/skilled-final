@@ -35,3 +35,4 @@ Route::post('/company/createVacancy', 'Api\\AuthController@createVacancy');
 Route::get('/getVacancies','Api\\AuthController@getVacancies');
 Route::post('/createLecture','Api\\AuthController@createLecture');
 Route::middleware('auth:api')->get('/getLectures','Api\\AuthController@getLecture');
+Route::middleware('auth:api')->get('/teacher/getMyTests', 'Api\\AuthController@getMyTests');

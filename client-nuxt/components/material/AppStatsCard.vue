@@ -43,8 +43,9 @@
       />
       <v-btn
           v-if="buttonDegaBC"
-          color="primary"
+          :color="btnColor"
       >{{ btnText }}</v-btn>
+      
     </template>
     
   </material-card>
@@ -79,6 +80,10 @@
       btnText: {
         type: String,
         default: undefined
+      },
+      btnColor: {
+        type: String,
+        default: "primary"
       },
       subTextColor: {
         type: String,
