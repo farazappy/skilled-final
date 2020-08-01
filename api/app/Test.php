@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Test extends Model
 {
-    protected $fillable = ['user_id', 'name', 'people_attempted', 'level', 'subject_id'];
-
+    //protected $fillable = ['user_id', 'name', 'people_attempted', 'level', 'subject_id'];
+    protected $guarded = [];
     public function subject() {
         return $this->belongsTo('App\Subject');
     }

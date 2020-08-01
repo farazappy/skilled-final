@@ -30,11 +30,12 @@
                             slot-scope="{ index, item }"
                         >
                             <td>{{ item.name }}</td>
-                            <td class="text-xs-right">{{ item.people_attempted }}</td>
+                            <td class="text-xs-right">{{ item.students_attempted }}</td>
                             <td class="text-xs-right">{{ item.subject.name }}</td>
                             <td class="text-xs-right">
                                 <v-btn 
                                     color="success"
+                                    :to="`test/${item.id}`"
                                 ><span class="material-icons">
                                 remove_red_eye
                                 </span>

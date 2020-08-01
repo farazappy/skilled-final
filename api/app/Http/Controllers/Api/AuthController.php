@@ -184,7 +184,7 @@ class AuthController extends Controller
     }
     public function createTest(Request $request) {
         $user = User::findOrFail($request->user()->id);
-        $test = $user->tests()->create($request->all());
+        $test = $user->tests()->create($request->except('testQuestions'));
         foreach ($request->testQuestions as $testQuestion) {
             $test->questions()->create($testQuestion);
         }
@@ -239,6 +239,13 @@ class AuthController extends Controller
         // dd($tests);
         return response()->json([
             'tests' => $tests 
+        ]);
+    }
+    public function getSingleTest($id)
+    {
+        $test = Test::with('questions')->where('id',$id)->get();
+        return response()->json([
+            'test' => $test
         ]);
     }
 

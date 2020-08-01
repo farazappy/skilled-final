@@ -148,6 +148,7 @@
             >
                 <v-btn
                     color="success"
+                    @click.prevent="createTest()"
                 ><span class="material-icons">
                 add_box
                 </span>Create Test</v-btn>
@@ -404,6 +405,9 @@ export default {
         viewTeachers() {
             console.log("view teachers")
             this.showTeachersTable = true
+        },
+        createTest() {
+            this.$router.push('/teacher/create')
         }
     },
     created() {

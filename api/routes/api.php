@@ -24,6 +24,7 @@ Route::get('/companies', 'Api\\AuthController@getCompanies');
 Route::get('/student/exam/first', 'Api\\AuthController@getFirstExam');
 Route::get('/student/exam/{examId}', 'Api\\AuthController@getExam');
 Route::get('tests', 'Api\\AuthController@getTests');
+Route::middleware('auth:api')->get('/test/{id}', 'Api\\AuthController@getSingleTest');
 Route::middleware('auth:api')->post('/student/exam/first', 'Api\\AuthController@submitFirstExam');
 Route::get('/question/{level}', 'Api\\AuthController@getQuestions');
 Route::get('/profile/{userId}', 'Api\\AuthController@getUser');
