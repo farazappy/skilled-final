@@ -7,10 +7,11 @@
                 lg12
                 v-if="user.role.id === 3"
             >
+            <!-- {{test[0]}} -->
                 <material-card
                     color="green"
-                    title="Publish A New Test"
-                    text="FIll up the form below to publish a new test"
+                    title="Edit Test"
+                    :text="`FIll up the form below to edit ${test[0].name} test`"
                 >
                     
                     <v-container py-0>
@@ -22,7 +23,7 @@
                                 <v-text-field
                                     class="green-input"
                                     label="Title"
-                                    v-model="testForm.name"
+                                    v-model="test[0].name"
                                 />
                             </v-flex>
                             <v-flex
@@ -32,22 +33,22 @@
                                 <v-select
                                     :items="computedSubjects"
                                     label="Subject"
-                                    v-model="testForm.subject_id"
+                                    v-model="test[0].subject_id"
                                 ></v-select>
                             </v-flex>
                             <v-flex xs12 md6 style="margin-bottom: 10px; margin-top: 10px">
                                 <h2>Start:</h2>
-                                <v-time-picker v-model="testForm.start_time" :max="testForm.end_time"></v-time-picker>
+                                <v-time-picker v-model="test[0].start_time" :max="test.end_time"></v-time-picker>
                             </v-flex>
                             <v-flex xs12 md6 style="margin-bottom: 10px; margin-top: 10px">
                                 <h2>End:</h2>
-                                <v-time-picker v-model="testForm.end_time" :min="testForm.start_time"></v-time-picker>
+                                <v-time-picker v-model="test[0].end_time" :min="test.start_time"></v-time-picker>
                             </v-flex>
                             <v-flex
                                 xs12
                                 md4
                                 class="px-2"
-                                v-for="(testQuestion,i) in testForm.testQuestions"
+                                v-for="(question,i) in test[0].questions"
                                 :key="i"
                             >
                                 <v-card ref="form">
@@ -56,32 +57,32 @@
                                     </v-card-title>
                                     <v-card-text>
                                         <v-text-field
-                                            v-model="testForm.testQuestions[i].name"
+                                            v-model="question.name"
                                             label="Question title"
                                             required
                                         ></v-text-field>
                                         <v-text-field
-                                            v-model="testForm.testQuestions[i].option1"
+                                            v-model="question.option1"
                                             label="Answer Option 1"
                                             required
                                         ></v-text-field>
                                         <v-text-field
-                                            v-model="testForm.testQuestions[i].option2"
+                                            v-model="question.option2"
                                             label="Answer Option 2"
                                             required
                                         ></v-text-field>
                                         <v-text-field
-                                            v-model="testForm.testQuestions[i].option3"
+                                            v-model="question.option3"
                                             label="Answer Option 3"
                                             required
                                         ></v-text-field>
                                         <v-text-field
-                                            v-model="testForm.testQuestions[i].option4"
+                                            v-model="question.option4"
                                             label="Answer Option 4"
                                             required
                                         ></v-text-field>
                                         <v-radio-group
-                                            v-model="testForm.testQuestions[i].correct"
+                                            v-model="question.correct_ans"
                                             label="Choose correct answer"
                                         >
                                             <v-radio
@@ -95,7 +96,7 @@
                                     </v-card-text>                
                                     
                                     <v-btn
-                                        @click.prevent="deleteQuestion(i,testQuestion)"
+                                        @click.prevent="deleteQuestion(i,question)"
                                         color="error" 
                                         block>
                                         Delete Question
@@ -145,35 +146,40 @@ export default {
     },
     data(){
         return {
+            test: {},
             id: null,
             isLoading: false,
             subjects: [],
-            testForm: {
-                name: '',
-                start_time: '',
-                end_time: '',
-                subject_id: null,
-                testQuestions: [
-                    {
-                        name: '',
-                        option1: '',
-                        option2: '',
-                        option3: '',
-                        option4: '',
-                        correct: ''
-                    },
-                ]
-            },
+            // testForm: {
+            //     name: '',
+            //     start_time: '',
+            //     end_time: '',
+            //     subject_id: null,
+            //     testQuestions: [
+            //         {
+            //             name: '',
+            //             option1: '',
+            //             option2: '',
+            //             option3: '',
+            //             option4: '',
+            //             correct: ''
+            //         },
+            //     ]
+            // },
         }
     },
     async asyncData ({ params, app }) {
         let response = await app.$axios.$get('/subjects')
         const subjects = response.subjects
-        //response = await app.$axios.$get('/test/{id}')
+        let ID = parseInt(params.test)
+        response = await app.$axios.$get(`/test/${ID}`)
+        const test = response
         return {
-            subjects
+            subjects,
+            test
         }
     },
+    
     computed: {
         computedSubjects () {
             this.subjects.forEach((s, i) => {
@@ -184,21 +190,21 @@ export default {
         }
     },
     created() {
-        this.id = this.$route.params.test
+        this.id = parseInt(this.$route.params.test)
+        //console.log(typeof(this.id))
     },
     methods: {
         
         async submitTest() {
             this.isLoading = true
-            console.log(this.testForm)
-            //this.isLoading = false
-            await this.$axios.post('/auth/tests/create', this.testForm)
+            //console.log(this.test[0])
+            await this.$axios.post('/auth/tests/create', this.test[0])
                 .then((response) => {
                     this.isLoading = false
                     this.$store.dispatch('notification/setNotification', {
                         type: "Success!",
                         color: "success",
-                        message: `Test published successfully!`
+                        message: `Test edited successfully!`
                     })
                     console.log(response)
                     this.$router.push('/teacher/my-tests')
@@ -214,20 +220,20 @@ export default {
                 })
         },
         addQuestion() {
-            this.testForm.testQuestions.push({
+            this.test[0].questions.push({
                 name: '',
                 option1: '',
                 option2: '',
                 option3: '',
                 option4: '',
-                correct: ''
+                correct_ans: ''
             })
         },
         deleteQuestion(index,testQuestion) {
-            let idx = this.testForm.testQuestions.indexOf(testQuestion)
+            let idx = this.test[0].questions.indexOf(testQuestion)
             //console.log(idx,index)
             if(idx > -1) {
-                this.testForm.testQuestions.splice(idx,1)
+                this.test[0].questions.splice(idx,1)
             }
         }
     }

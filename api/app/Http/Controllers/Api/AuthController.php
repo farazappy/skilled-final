@@ -13,6 +13,7 @@ use App\Interest;
 use App\Subject;
 use App\Test;
 use App\Lecture;
+use App\Question;
 use App\Vacancy;
 use GuzzleHttp\Client;
 
@@ -244,9 +245,21 @@ class AuthController extends Controller
     public function getSingleTest($id)
     {
         $test = Test::with('questions')->where('id',$id)->get();
+        return response()->json($test);
+    }
+    public function editTest(Request $request, $id)
+    {
+
+    }
+    public function deleteTest($id)
+    {
+        $test = Test::findOrFail($id)->delete();
+        $questions = Question::where('test_id',$id)->get();
+        foreach ($questions as $question) {
+            $question->delete();
+        }
         return response()->json([
-            'test' => $test
+            'success' => 'Test removed successfully'
         ]);
     }
-
 }

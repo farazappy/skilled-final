@@ -80,7 +80,7 @@
                                             required
                                         ></v-text-field>
                                         <v-radio-group
-                                            v-model="testForm.testQuestions[i].correct"
+                                            v-model="testForm.testQuestions[i].correct_ans"
                                             label="Choose correct answer"
                                         >
                                             <v-radio
@@ -155,7 +155,7 @@ export default {
                         option2: '',
                         option3: '',
                         option4: '',
-                        correct: ''
+                        correct_ans: null
                     },
                 ]
             },
@@ -181,8 +181,8 @@ export default {
         
         async submitTest() {
             this.isLoading = true
-            console.log(this.testForm)
-            //this.isLoading = false
+            //console.log(this.testForm)
+            
             await this.$axios.post('/auth/tests/create', this.testForm)
                 .then((response) => {
                     this.isLoading = false

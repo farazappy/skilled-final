@@ -9,7 +9,7 @@
                 <material-card
                     color="purple"
                     title="Test Stats"
-                    text="Last test given on 23rd January, 2020"
+                    :text="`Tests published by ${user.name}`"
                 >
                     <v-data-table
                         :headers="headers"
@@ -42,6 +42,9 @@
                                 View</v-btn>
                                 <v-btn 
                                     color="error"
+                                    :loading="isLoading"
+                                    :disabled="isLoading"
+                                    @click.prevent="deleteTest(item.id)"
                                 ><span class="material-icons">
                                 delete
                                 </span>
@@ -68,6 +71,7 @@ export default {
     },
     data(){
         return {
+            isLoading: false,
             headers: [
                 {
                     sortable: false,
@@ -94,6 +98,25 @@ export default {
                 }
             ],
             tests: []
+        }
+    },
+    methods: {
+        async deleteTest(id) {
+            if(confirm('Are sure want to delete this test?'))
+            {
+                this.isLoading = true
+                let ID = parseInt(id)
+                await this.$axios.delete(`/test/${ID}`)
+                .then((response) => {
+                    this.isLoading = false
+                    console.log(response)
+                    this.$router.go()
+                })
+                .catch((err) => {
+                    this.isLoading = false
+                    console.log(err)
+                })
+            }
         }
     },
     async asyncData ({ app, params }) {
