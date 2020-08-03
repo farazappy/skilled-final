@@ -39,3 +39,5 @@ Route::get('/getVacancies','Api\\AuthController@getVacancies');
 Route::post('/createLecture','Api\\AuthController@createLecture');
 Route::middleware('auth:api')->get('/getLectures','Api\\AuthController@getLecture');
 Route::middleware('auth:api')->get('/teacher/getMyTests', 'Api\\AuthController@getMyTests');
+Route::get('/all-semesters', 'Api\\AuthController@getSemesters');
+Route::get('/all-question-types', 'Api\\AuthController@getQuestionTypes');

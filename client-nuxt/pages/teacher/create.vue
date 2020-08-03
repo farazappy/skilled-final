@@ -16,7 +16,7 @@
                         <v-layout wrap>
                             <v-flex
                                 xs12
-                                md6
+                                md4
                             >
                                 <v-text-field
                                     class="green-input"
@@ -26,12 +26,19 @@
                             </v-flex>
                             <v-flex
                                 xs12
-                                md6
+                                md4
                             >
                                 <v-select
                                     :items="computedSubjects"
                                     label="Subject"
                                     v-model="testForm.subject_id"
+                                ></v-select>
+                            </v-flex>
+                            <v-flex xs12 md4>
+                                <v-select
+                                    :items="computedBranches"
+                                    label="Semester"
+                                    v-model="testForm.semester_id"
                                 ></v-select>
                             </v-flex>
                             <v-flex xs12 md6 style="margin-bottom: 10px; margin-top: 10px">
@@ -51,9 +58,15 @@
                             >
                                 <v-card ref="form">
                                     <v-card-title>
-                                        Question {{i+1}}
+                                        Question {{i+1}}<br>
+                                        
                                     </v-card-title>
-                                    <v-card-text>
+                                    <v-select
+                                        :items="computedQuestionType"
+                                        label="Question Type"
+                                        v-model="testForm.testQuestions[i].type"
+                                    ></v-select>
+                                    <v-card-text v-if="testForm.testQuestions[i].type === 1">
                                         <v-text-field
                                             v-model="testForm.testQuestions[i].name"
                                             label="Question title"
@@ -92,7 +105,15 @@
                                             
                                         </v-radio-group>
                                     </v-card-text>                
-                                    
+                                    <v-card-text v-if="testForm.testQuestions[i].type === 2">
+                                        <v-text-field
+                                            v-model="testForm.testQuestions[i].name"
+                                            label="Question"
+                                            required
+                                        >
+                                            
+                                        </v-text-field>
+                                    </v-card-text>
                                     <v-btn
                                         @click.prevent="deleteQuestion(i,testQuestion)"
                                         color="error" 
@@ -143,13 +164,17 @@ export default {
         return {
             isLoading: false,
             subjects: [],
+            semesters: [],
+            types: [],
             testForm: {
                 name: '',
                 start_time: '',
                 end_time: '',
                 subject_id: null,
+                semester_id: null,
                 testQuestions: [
                     {
+                        type: null,
                         name: '',
                         option1: '',
                         option2: '',
@@ -164,8 +189,14 @@ export default {
     async asyncData ({ params, app }) {
         let response = await app.$axios.$get('/subjects')
         const subjects = response.subjects
+        response = await app.$axios.$get('/all-semesters')
+        const semesters = response.semesters
+        response = await app.$axios.$get('/all-question-types')
+        const types = response.types
         return {
-            subjects
+            subjects,
+            semesters,
+            types
         }
     },
     computed: {
@@ -175,6 +206,20 @@ export default {
                 s.value = s.id;
             })
             return this.subjects
+        },
+        computedBranches() {
+            this.semesters.forEach((s, i) => {
+                s.text = s.name;
+                s.value = s.id;
+            })
+            return this.semesters
+        },
+        computedQuestionType() {
+            this.types.forEach((s,i) => {
+                s.text = s.name;
+                s.value = s.id;
+            })
+            return this.types
         }
     },
     methods: {

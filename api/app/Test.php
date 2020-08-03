@@ -19,4 +19,7 @@ class Test extends Model
     public function createdBy() {
         return $this->belongsTo('App\User', 'user_id');
     }
+    public function semester() {
+        return $this->belongsTo('\App\Semester');
+    }
 }

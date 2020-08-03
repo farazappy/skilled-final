@@ -15,6 +15,7 @@ use App\Test;
 use App\Lecture;
 use App\Question;
 use App\Vacancy;
+use App\Semester;
 use GuzzleHttp\Client;
 
 
@@ -260,6 +261,17 @@ class AuthController extends Controller
         }
         return response()->json([
             'success' => 'Test removed successfully'
+        ]);
+    }
+    public function getSemesters() {
+        return response()->json([
+            'semesters' => Semester::all()
+        ]);
+    }
+    public function getQuestionTypes() {
+        $question_types = DB::table('question_type')->get();
+        return response()->json([
+            'types' => $question_types
         ]);
     }
 }

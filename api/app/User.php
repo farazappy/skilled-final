@@ -42,6 +42,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
+    public function semester() {
+        return $this->belongsTo('\App\Semester');
+    }
+
     public function interests() {
         return $this->belongsToMany('App\Interest');
     }
