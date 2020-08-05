@@ -68,6 +68,11 @@
                                     ></v-select>
                                     <v-card-text v-if="testForm.testQuestions[i].type === 1">
                                         <v-text-field
+                                            v-model="testForm.testQuestions[i].marks"
+                                            label="Question Marks"
+                                            required
+                                        ></v-text-field>
+                                        <v-text-field
                                             v-model="testForm.testQuestions[i].name"
                                             label="Question title"
                                             required
@@ -107,11 +112,15 @@
                                     </v-card-text>                
                                     <v-card-text v-if="testForm.testQuestions[i].type === 2">
                                         <v-text-field
+                                            v-model="testForm.testQuestions[i].marks"
+                                            label="Question Marks"
+                                            required
+                                        ></v-text-field>
+                                        <v-text-field
                                             v-model="testForm.testQuestions[i].name"
                                             label="Question"
                                             required
-                                        >
-                                            
+                                        >  
                                         </v-text-field>
                                     </v-card-text>
                                     <v-btn
@@ -175,6 +184,7 @@ export default {
                 testQuestions: [
                     {
                         type: null,
+                        marks: null,
                         name: '',
                         option1: '',
                         option2: '',
@@ -220,7 +230,8 @@ export default {
                 s.value = s.id;
             })
             return this.types
-        }
+        },
+        
     },
     methods: {
         

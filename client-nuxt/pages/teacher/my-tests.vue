@@ -30,6 +30,7 @@
                             slot-scope="{ index, item }"
                         >
                             <td>{{ item.name }}</td>
+                            <td class="text-xs-right">{{ item.total_marks }}</td>
                             <td class="text-xs-right">{{ item.students_attempted }}</td>
                             <td class="text-xs-right">{{ item.subject.name }}</td>
                             <td class="text-xs-right">
@@ -77,6 +78,12 @@ export default {
                     sortable: false,
                     text: 'Test name',
                     value: 'name'
+                },
+                {
+                    sortable: false,
+                    text: 'Total Marks',
+                    value: 'performance',
+                    align: 'right'
                 },
                 {
                     sortable: false,

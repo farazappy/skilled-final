@@ -7,7 +7,7 @@
                 lg12
                 v-if="user.role.id === 3"
             >
-            <!-- {{test[0]}} -->
+            {{test[0]}}
                 <material-card
                     color="green"
                     title="Edit Test"
@@ -18,7 +18,7 @@
                         <v-layout wrap>
                             <v-flex
                                 xs12
-                                md6
+                                md4
                             >
                                 <v-text-field
                                     class="green-input"
@@ -28,12 +28,19 @@
                             </v-flex>
                             <v-flex
                                 xs12
-                                md6
+                                md4
                             >
                                 <v-select
                                     :items="computedSubjects"
                                     label="Subject"
                                     v-model="test[0].subject_id"
+                                ></v-select>
+                            </v-flex>
+                            <v-flex xs12 md4>
+                                <v-select
+                                    :items="computedBranches"
+                                    label="Semester"
+                                    v-model="test[0].semester_id"
                                 ></v-select>
                             </v-flex>
                             <v-flex xs12 md6 style="margin-bottom: 10px; margin-top: 10px">
@@ -55,7 +62,17 @@
                                     <v-card-title>
                                         Question {{i+1}}
                                     </v-card-title>
-                                    <v-card-text>
+                                    <v-select
+                                        :items="computedQuestionType"
+                                        label="Question Type"
+                                        v-model="question.type"
+                                    ></v-select>
+                                    <v-card-text v-if="question.type === 1">
+                                        <v-text-field
+                                            v-model="question.marks"
+                                            label="Question Marks"
+                                            required
+                                        ></v-text-field>
                                         <v-text-field
                                             v-model="question.name"
                                             label="Question title"
@@ -94,7 +111,19 @@
                                             
                                         </v-radio-group>
                                     </v-card-text>                
-                                    
+                                    <v-card-text v-if="question.type === 2">
+                                        <v-text-field
+                                            v-model="question.marks"
+                                            label="Question Marks"
+                                            required
+                                        ></v-text-field>
+                                        <v-text-field
+                                            v-model="question.name"
+                                            label="Question"
+                                            required
+                                        >  
+                                        </v-text-field>
+                                    </v-card-text>
                                     <v-btn
                                         @click.prevent="deleteQuestion(i,question)"
                                         color="error" 
@@ -150,6 +179,8 @@ export default {
             id: null,
             isLoading: false,
             subjects: [],
+            semesters: [],
+            types: [],
             // testForm: {
             //     name: '',
             //     start_time: '',
@@ -174,9 +205,15 @@ export default {
         let ID = parseInt(params.test)
         response = await app.$axios.$get(`/test/${ID}`)
         const test = response
+        response = await app.$axios.$get('/all-semesters')
+        const semesters = response.semesters
+        response = await app.$axios.$get('/all-question-types')
+        const types = response.types
         return {
             subjects,
-            test
+            test,
+            semesters,
+            types
         }
     },
     
@@ -187,7 +224,21 @@ export default {
                 s.value = s.id;
             })
             return this.subjects
-        }
+        },
+        computedBranches() {
+            this.semesters.forEach((s, i) => {
+                s.text = s.name;
+                s.value = s.id;
+            })
+            return this.semesters
+        },
+        computedQuestionType() {
+            this.types.forEach((s,i) => {
+                s.text = s.name;
+                s.value = s.id;
+            })
+            return this.types
+        },
     },
     created() {
         this.id = parseInt(this.$route.params.test)
@@ -196,9 +247,9 @@ export default {
     methods: {
         
         async submitTest() {
-            this.isLoading = true
-            //console.log(this.test[0])
-            await this.$axios.post('/auth/tests/create', this.test[0])
+            //this.isLoading = true
+            console.log(this.test[0])
+            await this.$axios.put(`/test/${this.test[0].id}`, this.test[0])
                 .then((response) => {
                     this.isLoading = false
                     this.$store.dispatch('notification/setNotification', {

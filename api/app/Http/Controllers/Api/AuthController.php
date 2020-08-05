@@ -187,14 +187,17 @@ class AuthController extends Controller
     public function createTest(Request $request) {
         $user = User::findOrFail($request->user()->id);
         $test = $user->tests()->create($request->except('testQuestions'));
+        // $total = 0;
         foreach ($request->testQuestions as $testQuestion) {
             $test->questions()->create($testQuestion);
+            // $total += $testQuestion->marks;
         }
-
-        $tests = Test::with('subject')->where('user_id', $request->user()->id)->get();
+        // update total_marks in tests table
+        // $user->tests()
+        // $tests = ;
 
         return response()->json([
-            'tests' => $tests
+            'tests' => Test::with('subject')->where('user_id', $request->user()->id)->get()
         ]);
     }
     public function allProfiles() {
@@ -250,7 +253,15 @@ class AuthController extends Controller
     }
     public function editTest(Request $request, $id)
     {
-
+        $user = User::findOrFail($request->user()->id);
+        $test = Test::findOrFail($id);
+        $test->update($request->except(['questions', 'total_marks']));
+        foreach ($request->questions as $question) {
+            Question::findOrFail($question['id'])->update($question);
+        }
+        return response()->json([
+            'message' => 'Test ' . $id . ' edited successfully!'
+        ]);
     }
     public function deleteTest($id)
     {
