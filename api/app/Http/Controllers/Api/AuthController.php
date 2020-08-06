@@ -22,48 +22,43 @@ use GuzzleHttp\Client;
 class AuthController extends Controller
 {
     public function register(Request $request) {
-
+        //dd($request->all());
     	$request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'phone' => ['required', 'numeric', 'digits:10', 'unique:users'],
             'role' => ['required', 'numeric', 'gt:0']
-            
     	]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'institution' => $request->institution,
             'password' => Hash::make($request->password),
-            'skills' => $request->skills,
             'role_id' => $request->role,
-            'trade_lic_no' => $request->trade_lic_no,
-            'ugc_no' => $request->ugc_no,
-            'qualification' => $request->qualification,
-            'address' => $request->address,
+            'semester_id' => $request->semester_id,
+            'dob' => $request->dob
         ]);
+        //dd($user);
+        // if ($request->role == 4 && $request->interests) {
+        //     foreach ($request->interests as $interest) 
+        //         $user->interests()->attach($interest);
 
-        if ($request->role == 4 && $request->interests) {
-            foreach ($request->interests as $interest) 
-                $user->interests()->attach($interest);
 
+        //     $http = new Client;
 
-            $http = new Client;
+        //     $response = $http->post("http://192.168.0.5:8000/youth/", [
+        //         'form_params' => [
+        //             "interests"    => $request->interests
+        //         ]
+        //     ]);
 
-            $response = $http->post("http://192.168.0.5:8000/youth/", [
-                'form_params' => [
-                    "interests"    => $request->interests
-                ]
-            ]);
+        //     $decoded = json_decode((string) $response->getBody(), true);
 
-            $decoded = json_decode((string) $response->getBody(), true);
-
-            $user->update(['profession_id' => $decoded['suggested_profession']]);
+        //     $user->update(['profession_id' => $decoded['suggested_profession']]);
             
-        }
+        // }
 
         $token = $user->createToken('password')->accessToken;
         $user->token = $token;

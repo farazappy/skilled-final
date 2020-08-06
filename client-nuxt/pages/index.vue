@@ -104,31 +104,37 @@
                                                     name="phone"
                                                     label="Phone number"
                                                 ></v-text-field>
-                                                <v-text-field
-                                                    type="text"
-                                                    v-model="registerForm.institution"
-                                                    v-if="registerForm.role == 1"
-                                                    prepend-icon="school"
-                                                    name="institution"
-                                                    label="Institution"
-                                                ></v-text-field>
-                                                <v-text-field
+                                                <v-flex xs12 md12 v-if="registerForm.role === 1">
+                                                 <v-date-picker 
+                                                    v-model="registerForm.dob"
+                                                >
+                                                    </v-date-picker>
+                                                </v-flex>
+                                                <v-flex xs12 md12 v-if="registerForm.role === 1">
+                                                    <v-select
+                                                        :items="computedBranches"
+                                                        prepend-icon="school"
+                                                        label="Semester"
+                                                        v-model="registerForm.semester_id"
+                                                    ></v-select>
+                                                </v-flex>
+                                                <!-- <v-text-field
                                                     type="text"
                                                     v-model="registerForm.skills"
                                                     v-if="registerForm.role == 1 || registerForm.role == 4"
                                                     prepend-icon="lightbulb"
                                                     name="skills"
                                                     label="Skills"
-                                                ></v-text-field>
-                                                <v-text-field
+                                                ></v-text-field> -->
+                                                <!-- <v-text-field
                                                     type="text"
                                                     v-model="registerForm.qualification"
                                                     v-if="registerForm.role == 4"
                                                     prepend-icon="list"
                                                     name="qualification"
                                                     label="Qualifications"
-                                                ></v-text-field>
-                                                <div v-if="registerForm.role == 4">
+                                                ></v-text-field> -->
+                                                <!-- <div v-if="registerForm.role == 4">
                                                     <label>Tick the things that you think you can</label>
                                                     <v-checkbox
                                                         v-for="(interest, index) in interests"
@@ -137,8 +143,8 @@
                                                         :value="interest.id"
                                                         :key="index"
                                                     ></v-checkbox>
-                                                </div>
-                                                <v-text-field
+                                                </div> -->
+                                                <!-- <v-text-field
                                                     type="text"
                                                     v-model="registerForm.trade_lic_no"
                                                     v-if="registerForm.role == 3"
@@ -155,22 +161,22 @@
                                                     name="technologies_used"
                                                     label="Technologies used in your company"
                                                 >
-                                                </v-text-field>
-                                                <v-text-field
+                                                </v-text-field> -->
+                                                <!-- <v-text-field
                                                     type="text"
                                                     v-model="registerForm.ugc_no"
                                                     v-if="registerForm.role == 2"
                                                     prepend-icon="verified_user"
                                                     name="ugc_no"
                                                     label="UGC Number"
-                                                ></v-text-field>
-                                                <v-textarea
+                                                ></v-text-field> -->
+                                                <!-- <v-textarea
                                                     v-model="registerForm.address"
                                                     prepend-icon="person_pin"
                                                     name="address"
                                                     label="Address"
                                                 >
-                                                </v-textarea>
+                                                </v-textarea> -->
                                                 <v-text-field
                                                     type="password"
                                                     v-model="registerForm.password"
@@ -265,6 +271,7 @@ export default {
     },
     data () {
         return {
+            semesters: [],
             isLoading: false,
             successSnackbar: false,
             errorSnackbar: false,
@@ -273,14 +280,9 @@ export default {
                 role: null,
                 name: null,
                 email: null,
+                dob: new Date().toISOString().substr(0, 10),
                 phone: null,
-                institution: null,
-                skills: null,
-                qualification: null,
-                interests: [],
-                trade_lic_no: null,
-                ugc_no: null,
-                address: null,
+                semester_id: null,
                 password: null,
                 password_confirmation: null
             },
@@ -288,7 +290,7 @@ export default {
                 email: null,
                 password: null,
             },
-            interests: [],
+            
             tab: null,
         }
     },
@@ -303,6 +305,7 @@ export default {
         },
         async registerSubmit () {
             this.isLoading = true
+            console.log(this.registerForm)
             await this.$axios
                 .post('auth/register', this.registerForm)
                 .then((res) => {
@@ -352,13 +355,22 @@ export default {
                 r.value = r.id;
             })
             return this.roles
-        }
+        },
+        computedBranches() {
+            this.semesters.forEach((s, i) => {
+                s.text = s.name;
+                s.value = s.id;
+            })
+            return this.semesters
+        },
     },
     async asyncData ({ params, app }) {
         const response = await app.$axios.$get('auth/register/generic');
+        let response2 = await app.$axios.$get('/all-semesters')
+        const semesters = response2.semesters
         return {
-            interests: response.interests,
-            roles: response.roles
+            roles: response.roles,
+            semesters
         }
     }
 }

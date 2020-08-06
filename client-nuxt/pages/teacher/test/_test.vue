@@ -7,7 +7,7 @@
                 lg12
                 v-if="user.role.id === 3"
             >
-            {{test[0]}}
+            <!-- {{test[0]}} -->
                 <material-card
                     color="green"
                     title="Edit Test"
@@ -247,8 +247,8 @@ export default {
     methods: {
         
         async submitTest() {
-            //this.isLoading = true
-            console.log(this.test[0])
+            this.isLoading = true
+            //console.log(this.test[0])
             await this.$axios.put(`/test/${this.test[0].id}`, this.test[0])
                 .then((response) => {
                     this.isLoading = false
