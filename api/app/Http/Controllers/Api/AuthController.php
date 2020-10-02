@@ -251,8 +251,12 @@ class AuthController extends Controller
         $user = User::findOrFail($request->user()->id);
         $test = Test::findOrFail($id);
         $test->update($request->except(['questions', 'total_marks']));
-        foreach ($request->questions as $question) {
-            Question::findOrFail($question['id'])->update($question);
+
+
+        $test->questions()->delete();
+
+        foreach($request->questions as $question) {
+            $test->questions()->create($question);
         }
         return response()->json([
             'message' => 'Test ' . $id . ' edited successfully!'
@@ -278,6 +282,13 @@ class AuthController extends Controller
         $question_types = DB::table('question_type')->get();
         return response()->json([
             'types' => $question_types
+        ]);
+    }
+    public function allTests()
+    {
+        $tests = Test::with(['createdBy', 'semester', 'subject'])->get();
+        return response()->json([
+            'tests' => $tests
         ]);
     }
 }

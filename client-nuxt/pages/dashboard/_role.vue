@@ -15,8 +15,8 @@
                 <material-stats-card
                     color="green"
                     icon="verified_user"
-                    title="Level"
-                    :value="user.level"
+                    title="Semester"
+                    :value="user.semester_id"
                 />
             </v-flex>
             <v-flex
@@ -29,8 +29,8 @@
                 <material-stats-card
                     color="orange"
                     icon="assignment_ind"
-                    title="Jobs applied for"
-                    value="2"
+                    title="Tests given"
+                    value="2staic"
                 />
             </v-flex>
             <v-flex
@@ -62,7 +62,10 @@
                     color="red"
                     icon="assignment_turned_in"
                     title="Tests taken"
-                    value="75"
+                    buttonDegaBC="true"
+                    btnText="View Tests"
+                    :value="tests.length.toString()"
+                    @click.prevent="viewTests()"
                 />
             </v-flex>
 
@@ -96,20 +99,39 @@
                     </v-data-table>
                 </material-card>
 
-            <!-- <v-flex
-                sm6
-                xs12
-                md6
-                lg4
-                v-if="user.role.id === 3"
-            >
-                <material-stats-card
-                    color="green"
-                    icon="verified_user"
-                    title="Jobs posted"
-                    :value="4"
-                />
-            </v-flex> -->
+                <material-card v-if="user.role.id === 2 && showTestsTable"
+                    color="orange"
+                    title="Test Stats"
+                    text="Viewing all tests"
+                >
+                    <v-data-table
+                        :headers="headers3"
+                        :items="tests"
+                        hide-actions
+                    >
+                        <template
+                            slot="headerCell"
+                            slot-scope="{ header }"
+                        >
+                            <span
+                                class="font-weight-light text-warning text--darken-3"
+                                v-text="header.text"
+                            />
+                        </template>
+                        <template
+                            slot="items"
+                            slot-scope="{ index, item }"
+                        >
+                            <td>{{ item.name }}</td>
+                            <td class="text-xs-right">{{ item.semester.name }}</td>
+                            <td class="text-xs-right">{{ item.subject.name }}</td>
+                            <td class="text-xs-right">{{ item.created_by.name }}</td>
+                            <td class="text-xs-right">{{ item.students_attempted }}</td>
+                        </template>
+                    </v-data-table>
+                </material-card>
+
+            
             <v-flex
                 sm6
                 xs12
@@ -159,34 +181,7 @@
                 preview
                 </span>View Test</v-btn>
             </v-flex>
-            <!-- <v-flex
-                sm6
-                xs12
-                md6
-                lg6
-                v-if="user.role.id === 4"
-            >
-                <material-stats-card
-                    color="green"
-                    icon="verified_user"
-                    title="Suggested crareer path"
-                    :value="user.profession.name"
-                />
-            </v-flex> -->
-            <!-- <v-flex
-                sm6
-                xs12
-                md6
-                lg6
-                v-if="user.role.id === 4"
-            >
-                <material-stats-card
-                    color="orange"
-                    icon="tv"
-                    title="Lectures Watched"
-                    value="3"
-                />
-            </v-flex> -->
+            
             <v-flex
                 md12
                 lg12
@@ -194,11 +189,11 @@
             >
                 <material-card
                     color="purple"
-                    title="Test Stats"
+                    title="Upcoming Tests for You"
                     text="Last test given on 23rd January, 2020"
                 >
                     <v-data-table
-                        :headers="headers"
+                        :headers="headers4"
                         :items="items"
                         hide-actions
                     >
@@ -231,7 +226,6 @@
 import materialCard from '~/components/material/AppCard'
 import materialChartCard from '~/components/material/AppChartCard'
 import materialStatsCard from '~/components/material/AppStatsCard'
-
 export default {
     layout: 'dashboard',
     components: {
@@ -242,74 +236,9 @@ export default {
     data () {
         return {
             teachers: [],
+            tests: [],
             showTeachersTable: false,
-            dailySalesChart: {
-                data: {
-                    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-                    series: [
-                        [12, 17, 7, 17, 23, 18, 38]
-                    ]
-                },
-                options: {
-                    low: 0,
-                    high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-                    chartPadding: {
-                        top: 0,
-                        right: 0,
-                        bottom: 0,
-                        left: 0
-                    }
-                }
-            },
-            dataCompletedTasksChart: {
-                data: {
-                    labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-                    series: [
-                        [230, 750, 450, 300, 280, 240, 200, 190]
-                    ]
-                },
-                options: {
-                    low: 0,
-                    high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-                    chartPadding: {
-                        top: 0,
-                        right: 0,
-                        bottom: 0,
-                        left: 0
-                    }
-                }
-            },
-            emailsSubscriptionChart: {
-                data: {
-                    labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
-                    series: [
-                        [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
-                    ]
-                },
-                options: {
-                    axisX: {
-                        showGrid: false
-                    },
-                    low: 0,
-                    high: 1000,
-                    chartPadding: {
-                        top: 0,
-                        right: 5,
-                        bottom: 0,
-                        left: 0
-                    }
-                },
-                responsiveOptions: [
-                    ['screen and (max-width: 640px)', {
-                        seriesBarDistance: 5,
-                        axisX: {
-                            labelInterpolationFnc: function (value) {
-                                return value[0]
-                            }
-                        }
-                    }]
-                ]
-            },
+            showTestsTable: false,
             headers: [
                 {
                     sortable: false,
@@ -335,20 +264,7 @@ export default {
                     align: 'right'
                 }
             ],
-            items: [
-                {
-                    name: 'Dakota Rice',
-                    country: 'Niger',
-                    city: 'Oud-Tunrhout',
-                    salary: '$35,738'
-                },
-                {
-                    name: 'Minerva Hooper',
-                    country: 'Curaçao',
-                    city: 'Sinaai-Waas',
-                    salary: '$23,738'
-                }
-            ],
+            
             headers2: [
                 {
                     sortable: false,
@@ -368,16 +284,73 @@ export default {
                     align: 'right'
                 }
             ],
-            items2: [
+            
+            headers3: [
                 {
-                    name: 'Cool cool',
-                    phone: 'cool_ka_phone',
-                    email: 'cool_ka_email'
+                    sortable: false,
+                    text: 'Test name',
+                    value: 'name'
                 },
                 {
-                    name: 'Cool 2',
-                    phone: 'cool2_ka_phone',
-                    email: 'cool2_ka_email'
+                    sortable: false,
+                    text: 'Semester',
+                    value: 'performance',
+                    align: 'right'
+                },
+                {
+                    sortable: false,
+                    text: 'Subject',
+                    value: 'Time taken',
+                    align: 'right'
+                },
+                {
+                    sortable: false,
+                    text: 'Created By',
+                    value: 'Time taken',
+                    align: 'right'
+                },
+                {
+                    sortable: false,
+                    text: 'Students attempted',
+                    value: 'Time taken',
+                    align: 'right'
+                }
+            ],
+            headers4: [
+                {
+                    sortable: false,
+                    text: 'Test name',
+                    value: 'name'
+                },
+                {
+                    sortable: false,
+                    text: 'Semester',
+                    value: 'performance',
+                    align: 'right'
+                },
+                {
+                    sortable: false,
+                    text: 'Subject',
+                    value: 'Time taken',
+                    align: 'right'
+                },
+                {
+                    sortable: false,
+                    text: 'Start Time',
+                    value: 'Time taken',
+                    align: 'right'
+                },
+                {
+                    sortable: false,
+                    text: 'Subject',
+                    value: 'End Time',
+                    align: 'right'
+                },
+                {
+                    sortable: false,
+                    text: 'Action',
+                    value: 'Time taken',
+                    align: 'right'
                 }
             ],
             tabs: 0,
@@ -390,9 +363,11 @@ export default {
     },
     async asyncData ({ app, params }) {
         let response = await app.$axios.$get('/company/hire/profiles')
-        //console.log(response.teachers)
+        let response2 = await app.$axios.$get('/all-tests')
+        console.log(response2.tests)
         return {
-            teachers: response.teachers
+            teachers: response.teachers,
+            tests: response2.tests
         }
     },
     methods: {
@@ -403,46 +378,25 @@ export default {
             this.list[index] = !this.list[index]
         },
         viewTeachers() {
-            console.log("view teachers")
+            //console.log("view teachers")
             this.showTeachersTable = true
+        },
+        viewTests() {
+            console.log('clicked')
+            this.showTestsTable = true
         },
         createTest() {
             this.$router.push('/teacher/create')
         }
     },
     created() {
-        console.log("_role.vue me aaya")
+        //console.log("_role.vue me aaya")
     },
     mounted () {
-        console.log(this.teachers)
+        //console.log(this.teachers)
         
         this.$nextTick(() => {
-            /*this.dailySalesChart.options = {
-              lineSmooth: this.$chartist.Interpolation.cardinal({
-                tension: 0
-              }),
-              low: 0,
-              high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-              chartPadding: {
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0
-              }
-            };
-            this.dataCompletedTasksChart.options = {
-              lineSmooth: this.$chartist.Interpolation.cardinal({
-                tension: 0
-              }),
-              low: 0,
-              high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-              chartPadding: {
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0
-              }
-            };*/
+            
         });
     }
 }

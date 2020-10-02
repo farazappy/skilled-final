@@ -43,7 +43,8 @@
                             </v-flex>
                             <v-flex xs12 md6 style="margin-bottom: 10px; margin-top: 10px">
                                 <h2>Start:</h2>
-                                <v-time-picker v-model="testForm.start_time" :max="testForm.end_time"></v-time-picker>
+                                <!-- <v-time-picker v-model="testForm.start_time" :max="testForm.end_time"></v-time-picker> -->
+                                <VueMaterialDateTimePicker v-model="testForm.start_time" :is-date-only="true" />
                             </v-flex>
                             <v-flex xs12 md6 style="margin-bottom: 10px; margin-top: 10px">
                                 <h2>End:</h2>
@@ -162,12 +163,14 @@
 import materialCard from '~/components/material/AppCard'
 import materialChartCard from '~/components/material/AppChartCard'
 import materialStatsCard from '~/components/material/AppStatsCard'
+import VueMaterialDateTimePicker from 'vue-material-date-time-picker'
 export default {
     layout: 'dashboard',
     components: {
         materialCard,
         materialChartCard,
-        materialStatsCard
+        materialStatsCard,
+        VueMaterialDateTimePicker
     },
     data(){
         return {
